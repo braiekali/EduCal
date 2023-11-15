@@ -1,0 +1,22 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Add Role</h1>
+<div mat-dialog-content>
+    <div class="contact__form">
+        <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                    <div class="contact__form-input">
+                        <label class="contact__form-input-label" for="nom">Nom</label>
+                        <input type="text" placeholder="Nom" id="nom" name="name" ngModel
+                            [(ngModel)]="role.name" required />
+                        <div *ngIf="f.controls['name'] && f.controls['name'].hasError('required')">
+                            Le nom est requis.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top: 1rem">
+                    <button type="submit" mat-flat-button color="primary">Ajouter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
