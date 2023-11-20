@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
@@ -20,8 +20,8 @@ export class UserService {
 }
 
 // Get user by ID
-getUserById(userId: number): Observable<any> {
-  return this.http.get(`${this.baseUrl}/admin/users/${userId}`);
+getUserById(idUser: number): Observable<any> {
+  return this.http.get(`${this.baseUrl}/admin/user/${idUser}`);
 }
 
 // Get all users
@@ -30,13 +30,34 @@ getAllUsers(): Observable<User[]> {
 }
 
 // Update user details
-updateUser(userDetails: any): Observable<any> {
-  return this.http.put(`${this.baseUrl}/admin/updateuser`, userDetails);
-}
 
+updateUser(data:any){
+  return this.http.put<User>((`${this.baseUrl}/admin/updateuser`),data);
+}
 // Delete user by ID
 deleteUser(userId: number): Observable<any> {
   return this.http.delete(`${this.baseUrl}/admin/deleteuser/${userId}`);
+}
+
+findByCin(cin: number): Observable<User> {
+  const url = `${this.baseUrl}/admin/user/cin/${cin}`;
+  return this.http.get<User>(url)
+    .pipe(
+      catchError((error: any) => {
+        console.error('Erreur de recherche par CIN :', error);
+        // Traitez l'erreur ici (affichage d'un message d'erreur, etc.)
+        return throwError(error);
+      })
+    );
+}
+checkEmailExists(email: string): Observable<boolean> {
+  const url = `${this.baseUrl}/admin/checkEmailExists?email=${email}`;
+  return this.http.get<boolean>(url);
+}
+
+checkCinExists(cin: string): Observable<boolean> {
+  const url = `${this.baseUrl}/admin/checkCinExists?cin=${cin}`;
+  return this.http.get<boolean>(url);
 }
 
 // Request password reset

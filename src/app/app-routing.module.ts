@@ -8,7 +8,7 @@ import { AppSideLoginComponent } from './pages/authentication/login/login.compon
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-
+import {RoleListDashComponent} from './manage-user/role-list-dash/role-list-dash.component' ;
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -28,6 +28,12 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () =>
           import('./manage-user/user.module').then((m) => m.UserModule),
+      },
+      
+      //ajout user chaima 
+      {
+        path: 'roles',
+        component: RoleListDashComponent,
       },
       {
         path: 'universities',

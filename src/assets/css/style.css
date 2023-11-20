@@ -7563,9 +7563,8 @@ p.checkout-coupon input[type="text"]:focus {
 }
 .contact__form-input input:focus,
 .contact__form-input textarea:focus {
-  border-color: #2b4eff;
   outline: none;
-  background: #ffffff;
+  background: #f6f6f7;
 }
 .contact__form-input textarea {
   height: 180px;
@@ -7584,7 +7583,7 @@ p.checkout-coupon input[type="text"]:focus {
   display: block;
   width: 14px;
   height: 14px;
-  background: #ffffff;
+  background: #f6f6f7;
   border: 1px solid #b9bac1;
   outline: none;
   -webkit-border-radius: 4px;
@@ -8333,8 +8332,8 @@ p.checkout-coupon input[type="text"]:focus {
 }
 .sign__input input:focus {
   outline: none;
-  background: #ffffff;
-  border-color: #2b4eff;
+  background: #f6f6f7;
+  
   -webkit-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
   -moz-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
   box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);

@@ -7,15 +7,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { AuthenticationRoutes } from './authentication.routing';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppSideLoginComponent } from './login/login.component';
 import { AppSideRegisterComponent } from './register/register.component';
+import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
+import { ResetPasswordConfirmDialogComponent } from './reset-password-confirm-dialog/reset-password-confirm-dialog.component';
+import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   imports: [
@@ -25,7 +29,10 @@ import { AppSideRegisterComponent } from './register/register.component';
     MatCardModule,
     MatInputModule,
     MatCheckboxModule,
+    RecaptchaModule,
     MatButtonModule,
+    MatDialogModule,
+    NgxCaptchaModule,
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
@@ -33,6 +40,9 @@ import { AppSideRegisterComponent } from './register/register.component';
   declarations: [
     AppSideLoginComponent,
     AppSideRegisterComponent,
+    ResetPasswordDialogComponent,
+    ResetPasswordConfirmDialogComponent,
+    ChangePasswordDialogComponent,
   ],
 })
 export class AuthenticationModule {}

@@ -1,94 +1,131 @@
-<h1 mat-dialog-title style="margin-bottom: 1rem">Add User</h1>
-<!-- <div class="section__title-wrapper">
-  <h2 mat-dialog-title class="section__title">
-    Get in<span class="yellow-bg yellow-bg-big"
-      >touch<img src="./assets/images/shape/yellow-bg.png" alt=""
-    /></span>
-  </h2>
-</div> -->
-<div mat-dialog-content>
-    <!-- Your form or content for adding a user goes here -->
-    <div class="contact__form">
-        <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
-            <div class="row">
-                <div class="col-12 m-b-30">
-                    <div class="contact__form-input__image__container">
-                        <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview" />
-                    </div>
-                    <div class="contact__form-input contact__form-input__image__btns">
-                        <input type="file" accept="image/*" id="Image" name="userImage" ngModel #fileInput
-                            style="display: none;" (change)="onFileSelected($event)" />
-                        <!-- Button to trigger file input click -->
-                        <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Select Image</span>
-                            </span>
-                        </button>
+<h1 mat-dialog-title class="text-center" style="margin-bottom: 1rem">Add User</h1>
 
-                        <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
-                            (click)="resetAvatarImage()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Reset Image</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                    <div class="contact__form-input">
-                        <label class="contact__form-input-label" for="nom">Nom</label>
-                        <input type="text" placeholder="Your Name" id="nom" name="name" ngModel />
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                    <div class="contact__form-input">
-                        <label for="Prenom">Prenom</label>
-                        <input type="email" placeholder="Prenom" id="Prenom" name="prenom" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Date">Date</label>
-                        <div style="display: flex;">
-                            <input type="text" placeholder="YYYY-MM-DD" id="Date" name="Date" matInput
-                                [matDatepicker]="picker" ngModel />
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"
-                                style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Email">Email</label>
-                        <input type="email" placeholder="example@gmail.com" id="Email" name="email" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Tel">Tel</label>
-                        <input type="text" placeholder="num tel" id="Tel" name="tel" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Description">Description</label>
-                        <textarea placeholder="Enter Your Description" id="Description" name="description"
-                            ngModel></textarea>
-                    </div>
-                </div>
-                <div class="col-12" style="margin-top: 1rem">
-                    <button type="submit" mat-flat-button color="primary">
-                        Add
-                    </button>
-                </div>
+<div mat-dialog-content class="text-center">
+  <div class="contact__form">
+    <form #f="ngForm" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="col-12 m-b-30">
+          <div class="contact__form-input__image__container">
+            <img class="contact__form-input__image" [src]="imageUrl" alt="Avatar">
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+            <input type="file" accept="image/*" id="avatar" name="avatar" ngModel #fileInput style="display: none;" (change)="onFileSelected($event)">
+            <button type="button" mat-flat-button class="Extended-Fab">
+              <span class="Extended-Fab__container">
+                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
+                <span class="Extended-Fab__text">Select Image</span>
+              </span>
+            </button>
+            <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16">
+              <span class="Extended-Fab__container">
+                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel" matListItemIcon></i-tabler>
+                <span class="Extended-Fab__text">Reset Image</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto" >
+            <div class="contact__form-input" >
+              <label class="contact__form-input-label" for="lastName" ></label>
+              <input type="text" placeholder="lastName" id="lastName" name="lastName" ngModel
+                [(ngModel)]="user.lastName" required [ngClass]="{'error': formSubmitted && f.controls['lastName']?.hasError('required')}"/>
+          
             </div>
-        </form>
+          </div>
+        </div>
+      <div class="d-flex justify-content-center">
+        <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto">
+            <div class="contact__form-input">
+                <label class="contact__form-input-label" for="firstName"></label>
+                <input type="text" placeholder="firstName" id="firstName" name="firstName" ngModel
+                    [(ngModel)]="user.firstName" required  [ngClass]="{'error': formSubmitted && f.controls['firstName']?.hasError('required')}"/>
+            
+            </div>
+        </div>
     </div>
+    <div class="d-flex justify-content-center">
+      <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto">
+        <div class="contact__form-input">
+          <label class="contact__form-input-label" for="phone"></label>
+          <input
+            type="number"
+            pattern="[0-9]{8}"
+            placeholder="Phone"
+            id="phone"
+            name="phone"
+            [(ngModel)]="user.phone"
+            required
+            [ngClass]="{
+              'error': formSubmitted && (
+                (f.controls['phone']?.hasError('required') || (!user.phone || user.phone.toString().length !== 8))
+              )
+            }"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="d-flex justify-content-center">
+      <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto">
+        <div class="contact__form-input">
+          <label class="contact__form-input-label" for="cin"></label>
+          <input
+            type="number"
+            pattern="[0-9]{8}"
+            placeholder="CIN"
+            id="cin"
+            name="cin"
+            [(ngModel)]="user.cin"
+            required
+            [ngClass]="{
+              'error': formSubmitted && (
+                (f.controls['cin']?.hasError('required') || (!user.cin || user.cin.toString().length !== 8))
+              )
+            }"
+          />
+        </div>
+      </div>
+    </div>
+    
+    
+
+
+
+<div class="d-flex justify-content-center">
+  <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto">
+      <div class="contact__form-input"  >
+          <label class="contact__form-input-label" for="email"></label>
+          <input type="email" placeholder="abidi@abidi.com" id="email" name="email" ngModel
+              [(ngModel)]="user.email" required [ngClass]="{'error': formSubmitted && f.controls['email']?.hasError('required')}" />
+          <!-- Utilisation de la variable formSubmitted pour conditionner l'affichage des messages d'erreur -->
+         
+      </div>
+  </div>
 </div>
-<!-- <div mat-dialog-actions>
-  <button mat-flat-button color="primary" (click)="closeDialog()"></button>
-</div> -->
+<div class="d-flex justify-content-center">
+  <div class="col-xxl-6 col-xl-6 col-md-6 mx-auto">
+      <div class="contact__form-input" >
+          <label class="contact__form-input-label" for="password"></label>
+          <input type="password" placeholder="password" id="password" name="password" ngModel
+              [(ngModel)]="user.password" required  [ngClass]="{'error': formSubmitted && f.controls['password']?.hasError('required')}"/>
+        
+      </div>
+  </div>
+</div>
+<div class="col-12 text-center">
+  <div class="contact__form-input"  >
+    <label class="contact__form-input-label" for="roles"></label>
+    <div class="select-wrapper" style="width: 200px; height: 50px; margin: 0 auto; border-color: transparent;">
+      <select id="roles" name="role" [(ngModel)]="user.roles" required>
+        <option *ngFor="let role of allRoles" [value]="role.idRole" >{{ role.name }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary" (click)="formSubmitted = true">Add</button>
+        </div>
+      </div>
+
+    </form>

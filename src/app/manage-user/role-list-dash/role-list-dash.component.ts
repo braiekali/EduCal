@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { RoleService } from '../service/role.service'; // Replace with the actual path
 import { Role } from 'app/manage-user/model/role';
 import { AddRoleDialogDashComponent } from '../add-role-dialog-dash/add-role-dialog-dash.component';
+import { Router } from '@angular/router';
+import { EditRoleDialogDashComponent } from '../edit-role-dialog-dash/edit-role-dialog-dash.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-role-list-dash',
@@ -15,81 +18,92 @@ import { AddRoleDialogDashComponent } from '../add-role-dialog-dash/add-role-dia
 })
 export class RoleListDashComponent {
 
-displayedColumns: string[] = ['id', 'name', 'action'];
-dataSource: MatTableDataSource<Role>;
-loading = false;
-roles: Role[];
-@ViewChild(MatPaginator) paginator!: MatPaginator;
-
-constructor(private addRoleDialog: MatDialog, private roleService: RoleService) {
-  this.dataSource = new MatTableDataSource<Role>();
+constructor(private addRoleDialog: MatDialog, private updateRoleDialog: MatDialog, private serviceRole: RoleService) {
 }
 
+dataSource: any;
+displayedColumns: string[] = ['id', 'name', 'action'];
+@ViewChild(MatPaginator) paginator!: MatPaginator;
+
 ngOnInit(): void {
-  // Remove this.userService.getAllUsers() from here
-  this.loadRoles();
+  this.serviceRole.getAllRoles().subscribe(
+    (data: any) => {
+      this.dataSource = data;
+      this.dataSource = new MatTableDataSource(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource)
+    },
+    (error) => {
+      console.error('Une erreur est survenue :', error);
+    }
+  );
+  //this.dataSource = new MatTableDataSource(this.dataSource);
+  //this.dataSource.paginator = this.paginator;
+}
+
+refreshData() {
+  this.serviceRole.getAllRoles().subscribe(
+    (data: any) => {
+      this.dataSource = data;
+      this.dataSource = new MatTableDataSource(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+      console.log(this.dataSource)
+    },
+  )
 }
 
 ngAfterViewInit(): void {
   this.dataSource.paginator = this.paginator;
 }
 
-deleteRoleById(idRole: number): void {
-  if (!idRole) {
-    console.error('User ID is undefined or null.');
-    // Ajoutez une gestion d'erreur ici si nécessaire
-    return;
-  }
 
-  if (window.confirm('Are you sure you want to delete this user?')) {
-    this.roleService.deleteRole(idRole).subscribe(
-      () => {
-        console.log(`User with ID ${idRole} deleted successfully.`);
-        // Mettez à jour la liste des utilisateurs ou rafraîchissez la page ici si nécessaire
-      },
-      (error) => {
-        console.error('Error deleting user:', error);
-        // Affichez un message d'erreur à l'utilisateur ici si nécessaire
-      }
-    );
-  }
+deleteRole(idRole: number) {
+  Swal.fire({
+    title: 'Êtes-vous sûr?',
+    text: 'Vous ne pourrez pas récupérer ces données après suppression!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Oui, supprimer!',
+    cancelButtonText: 'Annuler'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.serviceRole.deleteRole(idRole).subscribe(
+        (data: any) => {
+
+          this.refreshData();
+        },
+      );
+    }
+  });
+
 }
 
 openAddRoleDialog(): void {
   const dialogRef = this.addRoleDialog.open(
     AddRoleDialogDashComponent,
     {
-      width: '550px', // Set the width as per your design
+      width: '500px', // Set the width as per your design
       // Add any other dialog configuration options here
     }
   );
 
-  dialogRef.afterClosed().subscribe((result) => {
-    // Handle the result after the dialog is closed (if needed)
-    if (result) {
-      console.log('The dialog save pressed', result);
-    } else {
-      console.log('The dialog was closed', result);
-    }
-  });
 }
 
-loadRoles(): void {
-  console.log('Fetching roles...');
-  this.loading = true;
+openRoleUpdate(role: any) {
+  const dialogRef = this.updateRoleDialog.open(EditRoleDialogDashComponent, {
+    width: '500px',
+    data: role,
+  });
 
-  this.roleService.getAllRoles().subscribe(
-    (roles) => {
-      console.log('Roles fetched successfully:', roles);
-      this.dataSource.data = roles;
-    },
-    (error) => {
-      console.error('Error loading roles:', error);
-      // Handle error, e.g., show a user-friendly message
-    },
-    () => {
-      console.log('Request completed.');
-      this.loading = false;
+
+  dialogRef.afterClosed().subscribe((result) => {
+    // Gérer le résultat après la fermeture du dialogue (si nécessaire)
+    if (result) {
+      console.log('Le dialogue a été fermé avec succès', result);
+    } else {
+      console.log('Le dialogue a été fermé', result);
     }
-  );
-}}
+  });
+
+}
+}

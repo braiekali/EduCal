@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,11 @@ import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.comp
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
 import { FrontComponent } from './layouts/front/front.component';
+import {RecaptchaModule} from 'ng-recaptcha'
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,12 @@ import { FrontComponent } from './layouts/front/front.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    RecaptchaModule,
+    MatCardModule,
+    NgxCaptchaModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
@@ -68,6 +79,7 @@ import { FrontComponent } from './layouts/front/front.component';
     RestoModule,
     ClubModule,
   ],
+
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
 })

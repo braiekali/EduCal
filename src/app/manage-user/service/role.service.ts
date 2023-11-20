@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { Role } from '../model/role';
 
 @Injectable({
@@ -27,9 +27,11 @@ export class RoleService {
     return this.http.delete<void>(`${this.baseUrl}/admin/deleterole/${id}`);
   }
 
-  updateRole(role: Role): Observable<Role> {
-    return this.http.put<Role>(`${this.baseUrl}/admin/updaterole`, role);
+  updateRole(data:any){
+    return this.http.put<Role>(`${this.baseUrl}/admin/updaterole`,data);
   }
+  
+
 
   findRoleByName(name: string): Observable<Role> {
     return this.http.get<Role>(`${this.baseUrl}/admin/role/${name}`);

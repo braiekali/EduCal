@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../service/user.service';
 import { RoleService } from '../service/role.service';
 import { Role } from "../model/role";
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-role-dialog-dash',
   templateUrl: './add-role-dialog-dash.component.html',
@@ -19,6 +21,7 @@ export class AddRoleDialogDashComponent {
   @ViewChild('fileInput') fileInput: any;
 
   constructor(public addDialogRef: MatDialogRef<AddRoleDialogDashComponent>, private userService: UserService , private roleService: RoleService) {}
+  formSubmitted = false;
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -54,8 +57,13 @@ export class AddRoleDialogDashComponent {
   
     this.roleService.addRole(role).subscribe(
       (response) => {
-        console.log('User added successfully:', response);
+        console.log('Role added successfully:', response);
         this.addDialogRef.close();
+        Swal.fire({
+          title: 'Ajout réussi!',
+          text: 'Votre rôle est ajoute avec succes !',
+          icon: 'success',
+        });
       },
       (error) => {
         console.error('Error adding user:', error);

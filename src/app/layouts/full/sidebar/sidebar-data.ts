@@ -15,6 +15,11 @@ export const navItems: NavItem[] = [
     route: '/dashboard/users',
   },
   {
+    displayName: 'Roles',
+    iconName: 'discount-check-filled',
+    route: '/dashboard/roles',
+  },
+  {
     displayName: 'Universités',
     iconName: 'school',
     route: '/dashboard/universities/admin',

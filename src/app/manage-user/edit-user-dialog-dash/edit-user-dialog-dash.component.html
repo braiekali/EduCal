@@ -1,0 +1,99 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem" class="text-center mx-auto">Modifier User</h1>
+<div mat-dialog-content>
+  <div class="contact__form">
+    <form [formGroup]="frombuil">
+
+      <div class="row"class="text-center mx-auto">
+        <div class="col-12 m-b-30">
+
+          <div class="row">
+            <div class="col-12 m-b-30">
+                <div class="contact__form-input__image__container">
+                  <img class="contact__form-input__image" [src]="imageUrl" alt="Avatar">
+                </div>
+                <div class="contact__form-input contact__form-input__image__btns">
+                  <input type="file" accept="image/*" id="avatar" name="avatar" ngModel #fileInput style="display: none;">
+
+                    <button type="button" mat-flat-button class="Extended-Fab" >
+                        <span class="Extended-Fab__container">
+                            <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
+                                matListItemIcon></i-tabler>
+                            <span class="Extended-Fab__text">Select Image</span>
+                        </span>
+                    </button>
+
+                    <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
+                        >
+                        <span class="Extended-Fab__container">
+                            <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
+                                matListItemIcon></i-tabler>
+                            <span class="Extended-Fab__text">Reset Image</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="firstName"> </label>
+            <input type="text" placeholder="First Name" id="firstName" formControlName="firstName" [ngClass]="{'error': formSubmitted && frombuil.get('firstName')?.hasError('required')}"/>
+            <div *ngIf="formSubmitted && frombuil.get('firstName')?.hasError('required')">
+            </div>
+          </div>
+        </div>
+       
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="lastName"></label>
+            <input type="text" placeholder="Last Name" id="lastName" formControlName="lastName" [ngClass]="{'error': formSubmitted && frombuil.get('lastName')?.hasError('required')}"/>
+            <div *ngIf="formSubmitted && frombuil.get('lastName')?.hasError('required')">
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="email"></label>
+            <input type="email" placeholder="example@gmail.com" id="email" formControlName="email" [readonly]="true" [ngClass]="{'error': formSubmitted && frombuil.get('email')?.hasError('required')}"/>
+            <div *ngIf="formSubmitted && frombuil.get('email')?.hasError('required')">
+              <div class="error-message">Email is required</div>
+            </div>
+          </div>
+        </div>
+        
+          
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="cin"></label>
+            <input type="number" placeholder="CIN" id="cin" formControlName="cin" [readonly]="true" [ngClass]="{'error': formSubmitted && (frombuil.get('cin')?.hasError('required') || frombuil.get('cin')?.hasError('invalidLength'))}"/>
+            <div *ngIf="formSubmitted && frombuil.get('cin')?.hasError('required')">
+            </div>
+
+          </div>
+        </div>
+        
+
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="phone"></label>
+            <input type="number" placeholder="Phone" id="phone" formControlName="phone" [ngClass]="{'error': formSubmitted && (frombuil.get('phone')?.hasError('required') || frombuil.get('phone')?.hasError('invalidLength'))}"/>
+            <div *ngIf="formSubmitted && frombuil.get('phone')?.hasError('required')">
+            </div>
+
+          </div>
+        </div>
+        
+
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary" (click)="updateUser(frombuil)">
+            Enregistrer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    </form>
+  </div>
+</div>
+
+
