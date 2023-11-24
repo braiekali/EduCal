@@ -8,6 +8,7 @@ export class User {
   phone: number;
   email: string;
   cin: number;
+
   active: boolean;
   enabled: boolean; 
   roles: Role[]; 

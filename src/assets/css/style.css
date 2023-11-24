@@ -7639,6 +7639,19 @@ p.checkout-coupon input[type="text"]:focus {
   position: relative;
   z-index: 1;
 }
+
+.error-border {
+  border: 2px solid red;
+  border-radius: 4px;
+  outline: none;
+  background: #f6f6f7;  
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
+  -moz-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
+
+
+   /* Adjust this value to match the border-radius of your input */
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .contact__info-inner {
     margin-top: 50px;

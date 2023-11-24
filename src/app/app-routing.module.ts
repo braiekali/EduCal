@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
 import { FrontComponent } from './layouts/front/front.component';
-
-import { AppSideLoginComponent } from './pages/authentication/login/login.component';
-import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import {RoleListDashComponent} from './manage-user/role-list-dash/role-list-dash.component' ;
@@ -85,7 +82,7 @@ const routes: Routes = [
             (m) => m.AuthenticationModule
           ),
       },
-    ],
+    ]
   },
   {
     path: '**',

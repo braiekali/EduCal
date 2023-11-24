@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Role } from '../model/role';
 import { RoleService } from '../service/role.service';
 import Swal from 'sweetalert2';
 
@@ -13,50 +12,42 @@ import Swal from 'sweetalert2';
 export class EditRoleDialogDashComponent {
   idRole: number;
   imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg';
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  formSubmitted = false;
 
   constructor(
-    public updateDialogRef: MatDialogRef<EditRoleDialogDashComponent>,private serviceRole:RoleService,private fb:FormBuilder,
+    public updateDialogRef: MatDialogRef<EditRoleDialogDashComponent>,
+    private serviceRole: RoleService,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.frombuil.patchValue({
-      ...data,
+      ...(data || {}),
     });
   }
-  frombuil=this.fb.group({
-    idRole:['',[Validators.required]],
-    name:['',[Validators.required]],
-   
 
-
+  frombuil = this.fb.group({
+    idRole : [''],
+    name: [''],
   });
 
-  updateRole(form: any) {
-    // Vérifier si le champ du nom existe et n'est pas nul
-    const nameControl = this.frombuil.get('name');
-    if (nameControl && nameControl.value) {
+  get form() {
+    return this.frombuil.controls;
+  }
+
+  updateRole(form: FormGroup) {
+    this.formSubmitted = true;
+  
+    if (form.valid) {
       const formData = {
-        ...this.frombuil.value,
+        ...form.value,
       };
+  
+      console.log('Updating role with data:', formData); // Ajoutez cette ligne pour vérifier les données
   
       this.serviceRole.updateRole(formData).subscribe(
         () => {
-          // Réinitialiser le formulaire
-          this.frombuil.reset();
-  
-          // Fermer la boîte de dialogue
+          form.reset();
           this.updateDialogRef.close();
-  
-          // Afficher l'alerte de mise à jour réussie uniquement si elle est réussie
           Swal.fire({
             title: 'Mise à jour réussie!',
             text: 'Votre rôle est mis à jour !',
@@ -67,20 +58,14 @@ export class EditRoleDialogDashComponent {
           console.error('Erreur lors de la mise à jour :', error);
         }
       );
-    } else {
-      // Si le champ du nom est nul ou vide, afficher un message d'erreur ou prendre une autre action nécessaire
-      console.error('Le nom est requis.');
     }
   }
-  
 
   closeDialog(): void {
     this.updateDialogRef.close();
   }
 
   submitForm(formData: any): void {
-
     this.updateDialogRef.close(formData);
   }
-
 }

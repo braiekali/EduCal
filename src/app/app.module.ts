@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +69,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatDialogModule,
     MatButtonModule,
     FormsModule,
+
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
@@ -80,7 +82,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ClubModule,
   ],
 
-  exports: [TablerIconsModule],
+  exports: [TablerIconsModule ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

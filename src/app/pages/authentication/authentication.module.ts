@@ -17,9 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppSideLoginComponent } from './login/login.component';
 import { AppSideRegisterComponent } from './register/register.component';
 import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
-import { ResetPasswordConfirmDialogComponent } from './reset-password-confirm-dialog/reset-password-confirm-dialog.component';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { AppErrorModule } from 'app/app-error.module';
 
 @NgModule({
   imports: [
@@ -36,13 +36,17 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
+    AppErrorModule,
+    
   ],
   declarations: [
     AppSideLoginComponent,
     AppSideRegisterComponent,
     ResetPasswordDialogComponent,
-    ResetPasswordConfirmDialogComponent,
     ChangePasswordDialogComponent,
+
+
   ],
+  
 })
 export class AuthenticationModule {}

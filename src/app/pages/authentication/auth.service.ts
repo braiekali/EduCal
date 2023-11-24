@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode';
+import { environment } from 'app/environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private BaseUrl = 'http://localhost:8082';
   private tokenStorageKey = 'authToken';
 
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
@@ -21,22 +20,17 @@ export class AuthService {
   register(firstName: string, lastName: string, cin: number , phone: number ,email: string, password: string, role?: string): Observable<any> {
     const body = { firstName, lastName,cin ,phone, email, password, ...(role && { role }) };
 
-    return this.http.post<any>(`${this.BaseUrl}/register`, body)
+    return this.http.post<any>(environment.url +`/register`, body)
       .pipe(
         tap(response => this.handleAuthentication(response)),
         catchError(error => throwError(error))
       );
   }
 
-   
-
-
-
-//////////////////
 login(email: string, password: string): Observable<any> {
   const body = { email, password };
 
-  return this.http.post<string>(`${this.BaseUrl}/authenticate`, body, { responseType: 'text' as 'json' })
+  return this.http.post<string>(environment.url +`/authenticate`, body, { responseType: 'text' as 'json' })
     .pipe(
       tap(token => this.handleAuthentication(token)),
       catchError(error => throwError(error))
@@ -60,7 +54,7 @@ logout(): void {
 }
 
 resetPasswordRequest(email: string): Observable<string> {
-  const url = `${this.BaseUrl}/register/password-reset-request`;
+  const url = environment.url +`/register/password-reset-request`;
   const passwordRequestUtil = { email };
   return this.http.post<string>(url, passwordRequestUtil)
     .pipe(
@@ -71,13 +65,19 @@ resetPasswordRequest(email: string): Observable<string> {
     );
 }
 resetPassword(passwordRequestUtil: any, token: string): Observable<string> {
-  const url = `${this.BaseUrl}/register/reset-password?token=${token}`;
+  const url = environment.url +`/register/reset-password?token=${token}`;
   return this.http.post<string>(url, passwordRequestUtil);
 }
 
-changePassword(requestUtil: any): Observable<string> {
-  const url = `${this.BaseUrl}/register/change-password`;
-  return this.http.post<string>(url, requestUtil);
+
+changePassword(newPassword: string, token: string) {
+  const resetPasswordUrl = environment.url + `/register/reset-password`;
+  const tokenQueryParam = `?token=${token}`;
+
+  const headers = new HttpHeaders().set('Content-Type', 'application/json'); // Set the Content-Type header
+
+  return this.http.post(resetPasswordUrl + tokenQueryParam, { newPassword }, { headers, responseType: 'text' as 'json' });
 }
+
 
 }

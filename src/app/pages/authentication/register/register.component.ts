@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { AuthService } from '../auth.service';
 import { User } from '../../../manage-user/model/user';
 import Swal from 'sweetalert2';
@@ -33,50 +32,55 @@ export class AppSideRegisterComponent {
   ) {
 
       this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      cin: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      phone: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: [''],
+      lastName: [''],
+      email: [''],
+      cin: [''],
+      phone: [''],
+      password: [''],
       agreeTerms: [false, Validators.requiredTrue],
-      recaptcha: ['', Validators.required],
+      recaptcha: ['',],
 
     });
   }
 
-  get f() {
+  get form() {
     return this.registerForm.controls;
   }
 
-  submitForm() {
+  onSubmit() {
     this.formSubmitted = true;
-
+  
     if (this.registerForm.invalid) {
       this.formError = true;
       return;
     }
-
-    if (this.registerForm.valid) {
-      const { firstName, lastName, email, cin, phone, password } = this.registerForm.value;
-      const role = 'étudiant';
-
-      this.authService
-        .register(firstName, lastName, cin, phone, email, password, role)
-        .subscribe(
-          () => {
-            console.log('Registration successful!');
-          },
-          (error) => {
-            console.error('Registration failed:', error);
-          }
-        );
-
-      Swal.fire({
-        title: 'Félicitations !',
-        text: 'Check your email and click on the link !',
-        icon: 'success',
-      });
-    }
+  
+    const { firstName, lastName, email, cin, phone, password } = this.registerForm.value;
+    const role = 'étudiant';
+  
+    this.authService.register(firstName, lastName, cin, phone, email, password, role).subscribe(
+      () => {
+        console.log('Registration successful!');
+        this.registerForm.reset();
+      },
+      (error) => {
+        console.error('Registration failed:', error);
+  
+        // Check if the error is a 200 status (OK)
+        if (error.status === 200) {
+          console.log('Redirecting to login page...');
+          this.router.navigate(['/login']);
+        } else {
+          Swal.fire({
+            title: 'OOPS!',
+            text: 'CHECK YOUR MAIL AND CIN ,THEY SHOULD BE UNIQUE.',
+            icon: 'error',
+          });
+        }
+      }
+    );
   }
+  
+
 }

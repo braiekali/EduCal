@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '../service/user.service';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,23 +25,17 @@ export class EditUserDialogDashComponent {
   }
 
   frombuil = this.fb.group({
-    idUser: ['', [Validators.required]],
-    firstName: ['', [Validators.required]],
-    email: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-    cin: ['', [Validators.required, this.validateLength(8)]],
-    phone: ['', [Validators.required, this.validateLength(8)]],
+    idUser: [''],
+    firstName: [''],
+    email: [''],
+    lastName: [''],
+    cin: [''],
+    phone: [''],
   });
 
-  validateLength(expectedLength: number): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const value = control.value as number;
-      const stringValue = value != null ? value.toString() : '';
-
-      return stringValue.length === expectedLength ? null : { invalidLength: true };
-    };
+  get form() {
+    return this.frombuil.controls;
   }
-
   updateUser(form: FormGroup) {
     this.formSubmitted = true;
 

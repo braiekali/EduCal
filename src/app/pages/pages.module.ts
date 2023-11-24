@@ -11,7 +11,6 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-
 @NgModule({
   declarations: [
     AppDashboardComponent,

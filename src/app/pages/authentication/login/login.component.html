@@ -1,26 +1,4 @@
 <main>
-     
-  <style>
-    .error-message {
-      display: none; /* Hide the error message */
-    }
-
-
-
-.error {
-  border: 2px solid red;
-  border-radius: 4px;
-  outline: none;
-  background: #f6f6f7;  
-  -webkit-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
-  -moz-box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
-  box-shadow: 0px 1px 4px 0px rgba(8, 0, 42, 0.2);
-
-
-   /* Adjust this value to match the border-radius of your input */
-}
-
-  </style>
   <!-- sign up area start -->
   <section class="signup__area po-rel-z1 pt-100 pb-145">
     <div class="sign__shape">
@@ -53,48 +31,52 @@
                 <a href="#" class="sign__social text-start mb-15"><i class="fab fa-facebook-f"></i>Sign in with
                   Facebook</a>
                 <p>
-                  <span></span> Or,
-                  <a href="sign-in.html">sign in</a> with your email<span>
+                  <span>........</span> Or,
+                  <a href="sign-in.html">sign in</a> with your email<span>........
                 </span>
                 </p>
               </div>
             </div>
+            
             <div class="sign__form">
-              <form role="form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-                <div class="sign__input-wrapper mb-25" >
+              <form role="form" (ngSubmit)="onSubmit()" [formGroup]="loginForm" #f="ngForm">
+                <div class="sign__input-wrapper mb-25">
                   <h5></h5>
-                  <div class="sign__input" [ngClass]="{'error': formSubmitted && f['email']?.invalid}">
-                    <input type="email" formControlName="email" placeholder="Email Address" required  />
-                    <div *ngIf="formSubmitted && f['email']?.hasError('required')" class="error-message"></div>
+                  <div class="sign__input" >
+                    <input type="email" formControlName="email" placeholder="Email Address" required />
                     <i class="fal fa-envelope"></i>
                   </div>
-                </div>
-                
-                <div class="sign__input-wrapper mb-25" >
+                  <div *ngIf="formSubmitted && form['email']?.invalid" class="error-message" >
+                    <app-error [err]="form['email']"></app-error>
+                  </div>
+            
+                <div class="sign__input-wrapper mb-25">
                   <h5></h5>
-                  <div class="sign__input" [ngClass]="{'error': formSubmitted && f['password']?.invalid}">
+                  <div class="sign__input">
                     <input type="password" formControlName="password" placeholder="Password" required />
-                    <div *ngIf="formSubmitted && f['password']?.hasError('required')" class="error-message"></div>
                     <i class="fal fa-lock"></i>
                   </div>
-                </div>
-                
-          
+                  <div *ngIf="formSubmitted && form['password']?.invalid" class="error-message">
+                    <app-error [err]="form['password']"></app-error>
+                  </div>
+            
                 <div class="sign__action d-sm-flex justify-content-between mb-30">
                   <div class="sign__agree d-flex align-items-center">
                     <input class="m-check-input" type="checkbox" id="m-agree" />
-                    <label class="m-check-label" for="m-agree">Keep me signed in
-                    </label>
+                    <label class="m-check-label" for="m-agree">Keep me signed in</label>
                   </div>
                   <div class="sign__forgot">
-                    <a href="#">Forgot your password?</a>
+                    <a (click)="showResetPasswordDialog()">Forgot your password?</a>
                   </div>
                 </div>
+            
                 <button class="e-btn w-100"><span></span> Sign In</button>
                 <div class="sign__new text-center mt-20">
                   <p>it you don't have an account <a href="/signup">Sign Up</a></p>
                 </div>
        
+              </div>
+            </div>
 
               </form>
             </div>
