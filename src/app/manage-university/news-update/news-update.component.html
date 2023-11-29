@@ -1,0 +1,60 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Add News</h1>
+<!-- <div class="section__title-wrapper">
+  <h2 mat-dialog-title class="section__title">
+    Get in<span class="yellow-bg yellow-bg-big"
+      >touch<img src="./assets/images/shape/yellow-bg.png" alt=""
+    /></span>
+  </h2>
+</div> -->
+<div mat-dialog-content>
+  <!-- Your form or content for adding a user goes here -->
+  <div class="contact__form">
+    <form [formGroup]="frombuil" >
+      <div class="row">
+
+
+
+
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label for="titreActualite">Titre </label>
+            <input type="text" placeholder="titre Actualite" id="titreActualite" formControlName="titreActualite" />
+          </div>
+        </div>
+        <div *ngIf="frombuil.get('titreActualite')?.invalid  && frombuil.get('titreActualite')?.touched">
+          <app-error [erreur]="frombuil.get('titreActualite')"></app-error>
+        </div>
+        <!--<div class="col-12">
+            <div class="contact__form-input">
+                <label for="dateActualite">Date</label>
+                <div style="display: flex;">
+                    <input type="text" placeholder="YYYY-MM-DD" id="dateActualite" name="dateActualite" matInput
+                        [matDatepicker]="picker" ngModel />
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"
+                        style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+            </div>
+        </div> -->
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="description">Description</label>
+            <input type="text" placeholder="description" id="description" formControlName="description" />
+          </div>
+        </div>
+
+        <div *ngIf="frombuil.get('description')?.invalid  && frombuil.get('description')?.touched">
+          <app-error [erreur]="frombuil.get('description')"></app-error>
+        </div>
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary" (click)="updateNews(frombuil.value)" [disabled]="">
+            Ajouter
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="closeDialog()"></button>
+</div> -->

@@ -8,9 +8,12 @@ import { AppSideLoginComponent } from './pages/authentication/login/login.compon
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import {NewsDetailsComponent} from "./manage-university/news-details/news-details.component";
 
 const routes: Routes = [
-  {
+
+
+{
     path: 'dashboard',
     component: FullComponent,
     children: [

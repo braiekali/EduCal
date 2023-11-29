@@ -3,122 +3,80 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUniversityDialogDashComponent } from '../add-university-dialog-dash/add-university-dialog-dash.component';
+import {UniversiteService} from "../services/universite.service";
+import {Universite} from "../models/Universite";
+import Swal from 'sweetalert2';
+import {UniversityUpdateComponent} from "../university-update/university-update.component";
+import {FoyerService} from "../services/foyer.service";
 
 @Component({
   selector: 'app-university-list-dash',
   templateUrl: './university-list-dash.component.html',
   styleUrls: ['./university-list-dash.component.scss'],
 })
-export class UniversityListDashComponent {
-  ELEMENT_DATA: any = [
-    {
-      id: 1,
-      imagePath: 'assets/images/profile/user-1.jpg',
-      uname: 'Sunil Joshi',
-      email: 'nabil@gmail.com',
-      tel: '41156289',
-      role: 'admin',
-      state: 'active',
-    },
-    {
-      id: 2,
-      imagePath: 'assets/images/profile/user-2.jpg',
-      uname: 'Andrew McDownland',
-      email: 'salah@gmail.com',
-      tel: '56432861',
-      role: 'user',
-      state: 'unactive',
-    },
-    {
-      id: 3,
-      imagePath: 'assets/images/profile/user-3.jpg',
-      uname: 'Christopher Jamil',
-      email: 'foulen@gmail.com',
-      tel: '98432158',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-  ];
+export class UniversityListDashComponent implements AfterViewInit {
 
-  constructor(private addUserDialog: MatDialog) {}
-
+  constructor(private addUniversiteDialog: MatDialog, private updateUniversiteDialog: MatDialog, private serviceUniv: UniversiteService) {
+  }
+  nomFoyer: any;
   dataSource: any;
-  displayedColumns: string[] = ['name', 'email', 'tel', 'state', 'action'];
+  displayedColumns: string[] = ['idUniversite', 'nomUniversite', 'adresseUniversite', 'ville', 'descriptionUniversite', 'telUniversite', 'emailUinversite','Foyer', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
+    this.serviceUniv.getUniversites().subscribe(
+      (data: any) => {
+        this.dataSource = data;
+        console.log("eeeeeeeeeee");
+        this.dataSource = new MatTableDataSource(this.dataSource);
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        console.error('Une erreur est survenue :', error);
+      }
+    );
+
   }
+
+  refreshData() {
+    this.serviceUniv.getUniversites().subscribe(
+      (data: any) => {
+        this.dataSource = data;
+        this.dataSource = new MatTableDataSource(this.dataSource);
+        this.dataSource.paginator = this.paginator;
+        console.log(this.dataSource)
+      },
+    )
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
+
+  deleteUniversite(id: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: 'Vous ne pourrez pas récupérer ces données après suppression!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer!',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.serviceUniv.deleteUniversite(id).subscribe(
+          (data: any) => {
+
+            this.refreshData();
+          },
+        );
+      }
+    });
+
+  }
+
   openAddUniversityDialog(): void {
-    const dialogRef = this.addUserDialog.open(
+    const dialogRef = this.addUniversiteDialog.open(
       AddUniversityDialogDashComponent,
       {
         width: '550px', // Set the width as per your design
@@ -126,13 +84,23 @@ export class UniversityListDashComponent {
       }
     );
 
+  }
+
+  openUniversityUpdate(universite: any) {
+    const dialogRef = this.updateUniversiteDialog.open(UniversityUpdateComponent, {
+      width: '400px',
+      data: universite,
+    });
+
+
     dialogRef.afterClosed().subscribe((result) => {
-      // Handle the result after the dialog is closed (if needed)
+      // Gérer le résultat après la fermeture du dialogue (si nécessaire)
       if (result) {
-        console.log('The dialog save pressed', result);
+        console.log('Le dialogue a été fermé avec succès', result);
       } else {
-        console.log('The dialog was closed', result);
+        console.log('Le dialogue a été fermé', result);
       }
     });
+
   }
 }

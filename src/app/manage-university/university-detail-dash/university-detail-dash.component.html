@@ -40,7 +40,7 @@
                     <div class="teacher__wrapper">
                         <div class="teacher__top d-md-flex align-items-end justify-content-between">
                             <div class="teacher__info">
-                                <h4>ESPRIT</h4>
+                                <h4>{{ universityDetails.nomUniversite }}</h4>
                                 <span>se former autrement</span>
                             </div>
 
@@ -116,11 +116,11 @@
                                         </div>
                                         <div class="col-sm-8 text-right">
                                             <button type="button" mat-flat-button class="Extended-Fab"
-                                                (click)="openAddNewsDialog()">
+                                                (click)="openAddNewsDialog(universityDetails.idUniversite)">
                                                 <span class="Extended-Fab__container">
                                                     <i-tabler class="routeIcon Extended-Fab__icon" name="circle-plus"
                                                         matListItemIcon></i-tabler>
-                                                    <span class="Extended-Fab__text">Add news</span>
+                                                    <span class="Extended-Fab__text">Ajouter Actualite</span>
                                                 </span>
                                             </button>
                                         </div>
@@ -131,69 +131,50 @@
                                             <div class="table-responsive m-t-16">
                                                 <table mat-table [dataSource]="dataSource" class="w-100">
                                                     <!-- Position Column -->
-                                                    <ng-container matColumnDef="name">
-                                                        <th mat-header-cell *matHeaderCellDef
-                                                            class="f-w-600 mat-subtitle-1 f-s-14">
-                                                            Name
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <div class="d-flex align-items-center">
-                                                                <img [src]="element.imagePath" alt="users" width="40"
-                                                                    class="rounded-circle" />
-                                                                <div class="m-l-16">
-                                                                    <h6 class="mat-subtitle-1 f-s-14 f-w-600">
-                                                                        {{ element.uname }}
-                                                                    </h6>
-                                                                    <!-- <span class="mat-body-1 f-s-12">
-                                                                        {{ element.role }}
-                                                                    </span> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </ng-container>
+
 
                                                     <!-- Name Column -->
-                                                    <ng-container matColumnDef="email">
+                                                    <ng-container matColumnDef="idActualite">
                                                         <th mat-header-cell *matHeaderCellDef
                                                             class="f-w-600 mat-subtitle-1 f-s-14">
-                                                            Email
+                                                          idActualite
                                                         </th>
                                                         <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                                            {{ element.email }}
+                                                            {{ element.idActualite }}
                                                         </td>
                                                     </ng-container>
 
-                                                    <ng-container matColumnDef="tel">
+                                                    <ng-container matColumnDef="titreActualite">
                                                         <th mat-header-cell *matHeaderCellDef
                                                             class="f-w-600 mat-subtitle-1 f-s-14">
-                                                            Tel
+                                                           Titre
                                                         </th>
                                                         <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                                            {{ element.tel }}
+                                                            {{ element.titreActualite }}
                                                         </td>
                                                     </ng-container>
+                                                  <ng-container matColumnDef="description">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">
+                                                      description
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element" class="mat-body-1">
+                                                      {{ element.description }}
+                                                    </td>
+                                                  </ng-container>
+
+                                                  <ng-container matColumnDef="dateActualite">
+                                                    <th mat-header-cell *matHeaderCellDef
+                                                        class="f-w-600 mat-subtitle-1 f-s-14">
+                                                      date
+                                                    </th>
+                                                    <td mat-cell *matCellDef="let element" class="mat-body-1">
+                                                      {{ element.dateActualite | date:"fullDate" }}
+                                                    </td>
+                                                  </ng-container>
 
                                                     <!-- Weight Column -->
-                                                    <ng-container matColumnDef="state">
-                                                        <th mat-header-cell *matHeaderCellDef
-                                                            class="f-w-600 mat-subtitle-1 f-s-14">
-                                                            State
-                                                        </th>
-                                                        <td mat-cell *matCellDef="let element">
-                                                            <ng-template [ngIf]="element.state == 'active'">
-                                                                <span
-                                                                    class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                                    {{ element.state | titlecase }}
-                                                                </span>
-                                                            </ng-template>
-                                                            <ng-template [ngIf]="element.state == 'unactive'">
-                                                                <span
-                                                                    class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                                    {{ element.state | titlecase }}
-                                                                </span>
-                                                            </ng-template>
-                                                        </td>
-                                                    </ng-container>
+
 
                                                     <!-- Symbol Column -->
                                                     <ng-container matColumnDef="action">
@@ -206,7 +187,7 @@
                                                             <!-- <a type="button" href="#">
                                                 <i-tabler class="routeIcson" style="color: #87a7ff" name="edit" matListItemIcon></i-tabler></a> -->
 
-                                                            <a [routerLink]="['/dash/universities',element.id]"
+                                                            <a [routerLink]="['/dashboard/universities/admin/news',element.idActualite]"
                                                                 mat-icon-button="" color="primary"
                                                                 class="d-flex mdc-icon-button mat-mdc-icon-button mat-primary mat-mdc-button-base"
                                                                 mat-button-is-fab="false">
@@ -222,7 +203,7 @@
 
                                                             <span class="m-x-1"></span>
 
-                                                            <a href="#" mat-icon-button="" color="primary"
+                                                            <a (click)="openNewsUpdate(element,universityDetails.idUniversite)" mat-icon-button="" color="primary"
                                                                 class="d-flex mdc-icon-button mat-mdc-icon-button mat-primary mat-mdc-button-base"
                                                                 mat-button-is-fab="false">
                                                                 <span
@@ -237,7 +218,7 @@
 
                                                             <span class="m-x-1"></span>
 
-                                                            <a href="#" mat-icon-button="" color="primary"
+                                                            <a (click)="deleteActualite(element.idActualite)" mat-icon-button="" color="primary"
                                                                 class="d-flex mdc-icon-button mat-mdc-icon-button mat-primary mat-mdc-button-base"
                                                                 mat-button-is-fab="false">
                                                                 <span

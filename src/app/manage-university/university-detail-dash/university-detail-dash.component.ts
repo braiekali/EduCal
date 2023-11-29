@@ -3,6 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddNewsDialogDashComponent } from '../add-news-dialog-dash/add-news-dialog-dash.component';
+import {ActivatedRoute} from "@angular/router";
+import {UniversiteService} from "../services/universite.service";
+import {ActualiteService} from "../services/actualite.service";
+import Swal from "sweetalert2";
+import {UniversityUpdateComponent} from "../university-update/university-update.component";
+import {NewsUpdateComponent} from "../news-update/news-update.component";
 
 @Component({
   selector: 'app-university-detail-dash',
@@ -10,117 +16,84 @@ import { AddNewsDialogDashComponent } from '../add-news-dialog-dash/add-news-dia
   styleUrls: ['./university-detail-dash.component.scss'],
 })
 export class UniversityDetailDashComponent implements AfterViewInit {
-  ELEMENT_DATA: any = [
-    {
-      id: 1,
-      imagePath: 'assets/images/profile/user-1.jpg',
-      uname: 'Sunil Joshi',
-      email: 'nabil@gmail.com',
-      tel: '41156289',
-      role: 'admin',
-      state: 'active',
-    },
-    {
-      id: 2,
-      imagePath: 'assets/images/profile/user-2.jpg',
-      uname: 'Andrew McDownland',
-      email: 'salah@gmail.com',
-      tel: '56432861',
-      role: 'user',
-      state: 'unactive',
-    },
-    {
-      id: 3,
-      imagePath: 'assets/images/profile/user-3.jpg',
-      uname: 'Christopher Jamil',
-      email: 'foulen@gmail.com',
-      tel: '98432158',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-  ];
-
-  constructor(private addUserDialog: MatDialog) {}
+  universityDetails: any;
+  idUniversite: number;
+    constructor(private addNewsDialog: MatDialog, private updateNewsDialog: MatDialog,private route: ActivatedRoute,private serviceUniv:UniversiteService,private serviceAct: ActualiteService) {}
 
   dataSource: any;
-  displayedColumns: string[] = ['name', 'email', 'tel', 'state', 'action'];
+  displayedColumns: string[] = ['idActualite', 'titreActualite', 'description', 'dateActualite', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const idString = params.get('id');
+      if (idString != null) {
+        this.idUniversite = parseInt(idString, 10);
+      }
+
+      // Utiliser le service pour récupérer les détails de l'université
+      this.serviceUniv.getUniversiteById(this.idUniversite).subscribe(
+        details => {
+          this.universityDetails = details;
+          // Vous pouvez également faire d'autres opérations avec les données ici
+        },
+        error => {
+          console.error('Erreur lors de la récupération des détails de l\'université', error);
+        }
+      );
+    });
+    this.serviceAct.getActualiteByUniversiteId(this.idUniversite).subscribe(
+
+        (data: any) => {
+
+
+          console.log(data);
+          this.dataSource = data;
+          this.dataSource = new MatTableDataSource(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+      }
+
+    )
+
+  }
+
+  deleteActualite(id: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: 'Vous ne pourrez pas récupérer ces données après suppression!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer!',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.serviceAct.deleteActualite(id).subscribe(
+          (data: any) => {
+
+            this.refreshData();
+          },
+        );
+      }
+    });
+
+  }
+  refreshData() {
+    this.serviceAct.getActualites().subscribe(
+      (data: any) => {
+        this.dataSource = data;
+        this.dataSource = new MatTableDataSource(this.dataSource);
+        this.dataSource.paginator = this.paginator;
+      },
+    )
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  openAddNewsDialog(): void {
-    const dialogRef = this.addUserDialog.open(AddNewsDialogDashComponent, {
-      width: '550px', // Set the width as per your design
-      // Add any other dialog configuration options here
+  openAddNewsDialog(id:number): void {
+    const dialogRef = this.addNewsDialog.open(AddNewsDialogDashComponent, {
+      width: '550px',
+      data: { idUniversite: id }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -131,5 +104,22 @@ export class UniversityDetailDashComponent implements AfterViewInit {
         console.log('The dialog was closed', result);
       }
     });
+  }
+  openNewsUpdate(news: any,id:any) {
+    const dialogRef = this.updateNewsDialog.open(NewsUpdateComponent, {
+      width: '400px',
+      data: { news: news, id: id }
+    });
+
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // Gérer le résultat après la fermeture du dialogue (si nécessaire)
+      if (result) {
+        console.log('Le dialogue a été fermé avec succès', result);
+      } else {
+        console.log('Le dialogue a été fermé', result);
+      }
+    });
+
   }
 }

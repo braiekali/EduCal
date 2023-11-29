@@ -9,79 +9,76 @@
 <div mat-dialog-content>
     <!-- Your form or content for adding a user goes here -->
     <div class="contact__form">
-        <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
-            <div class="row">
-                <div class="col-12 m-b-30">
-                    <div class="contact__form-input__image__container">
-                        <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview" />
-                    </div>
-                    <div class="contact__form-input contact__form-input__image__btns">
-                        <input type="file" accept="image/*" id="Image" name="userImage" ngModel #fileInput
-                            style="display: none;" (change)="onFileSelected($event)" />
-                        <!-- Button to trigger file input click -->
-                        <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Select Image</span>
-                            </span>
-                        </button>
+        <form [formGroup]="frombuil">
+          <div class="row">
+            <div class="col-12 m-b-30">
+            </div>
+            <div class="col-xxl-6 col-xl-6 col-md-6">
+              <div class="contact__form-input">
+                <label class="contact__form-input-label" for="nomUniversite">Nom Universite</label>
+                <input type="text" placeholder="Nom Universite" id="nomUniversite" formControlName="nomUniversite" />
+              </div>
+            </div>
+            <div *ngIf="frombuil.get('nomUniversite')?.invalid  && frombuil.get('nomUniversite')?.touched">
+              <app-error [erreur]="frombuil.get('nomUniversite')"></app-error>
+            </div>
 
-                        <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
-                            (click)="resetAvatarImage()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Reset Image</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                    <div class="contact__form-input">
-                        <label class="contact__form-input-label" for="nom">Nom</label>
-                        <input type="text" placeholder="Your Name" id="nom" name="name" ngModel />
-                    </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-md-6">
-                    <div class="contact__form-input">
-                        <label for="Prenom">Prenom</label>
-                        <input type="email" placeholder="Prenom" id="Prenom" name="prenom" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Date">Date</label>
-                        <div style="display: flex;">
-                            <input type="text" placeholder="YYYY-MM-DD" id="Date" name="Date" matInput
-                                [matDatepicker]="picker" ngModel />
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"
-                                style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Email">Email</label>
-                        <input type="email" placeholder="example@gmail.com" id="Email" name="email" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Tel">Tel</label>
-                        <input type="text" placeholder="num tel" id="Tel" name="tel" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Description">Description</label>
-                        <textarea placeholder="Enter Your Description" id="Description" name="description"
-                            ngModel></textarea>
-                    </div>
-                </div>
+            <div class="col-xxl-6 col-xl-6 col-md-6">
+              <div class="contact__form-input">
+                <label for="adresseUniversite">Adresse Universite</label>
+                <input type="email" placeholder="Adresse Universite" id="adresseUniversite" formControlName="adresseUniversite"/>
+              </div>
+            </div>
+            <div *ngIf="frombuil.get('adresseUniversite')?.invalid && frombuil.get('adresseUniversite')?.touched">
+              <app-error [erreur]="frombuil.get('adresseUniversite')"></app-error>
+            </div>
+            <div class="col-12">
+              <div class="contact__form-input">
+                <label for="ville">Ville</label>
+                <input type="text" placeholder="ville" id="ville" formControlName="ville" />
+              </div>
+            </div>
+
+            <div *ngIf="frombuil.get('ville')?.invalid && frombuil.get('ville')?.touched">
+              <app-error [erreur]="frombuil.get('ville')"></app-error>
+            </div>
+            <div class="col-12">
+              <div class="contact__form-input">
+                <label for="telUniversite">Telephone Universite</label>
+                <input type="text" placeholder="num tel" id="telUniversite" formControlName="telUniversite" />
+              </div>
+            </div>
+            <div *ngIf="frombuil.get('telUniversite')?.invalid && frombuil.get('telUniversite')?.touched">
+              <app-error [erreur]="frombuil.get('telUniversite')"></app-error>
+            </div>
+            <div class="col-12">
+              <div class="contact__form-input">
+                <label for="descriptionUniversite">Description</label>
+                <textarea placeholder="Entrer la Description" id="descriptionUniversite" formControlName="descriptionUniversite"></textarea>
+              </div>
+            </div>
+            <div *ngIf="frombuil.get('descriptionUniversite')?.invalid && frombuil.get('descriptionUniversite')?.touched">
+              <app-error [erreur]="frombuil.get('descriptionUniversite')"></app-error>
+            </div>
+            <div class="col-12">
+              <div class="contact__form-input">
+                <label for="emailUinversite">Email</label>
+                <input type="email" placeholder="example@gmail.com" id="emailUinversite" formControlName="emailUinversite" />
+              </div>
+            </div>
+            <div *ngIf="frombuil.get('emailUinversite')?.invalid && frombuil.get('emailUinversite')?.touched">
+              <app-error [erreur]="frombuil.get('emailUinversite')"></app-error>
+            </div>
+            <div class="col-12">
+              <div class="contact__form-input">
+                <label for="foyer">Foyer</label>
+                <select  id="foyer" formControlName="idFoyer" >
+                <option *ngFor="let foyer of foyers " [value]="foyer.idFoyer" >{{foyer.nomFoyer}}</option>
+                </select>
+              </div>
+            </div>
                 <div class="col-12" style="margin-top: 1rem">
-                    <button type="submit" mat-flat-button color="primary">
+                    <button type="submit" mat-flat-button color="primary" (click)="addUniversiteWithFoyer(frombuil.value)" [disabled]="frombuil.invalid">
                         Add
                     </button>
                 </div>
