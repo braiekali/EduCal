@@ -7,23 +7,11 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
 
-  token!:any
   constructor(private authService: AuthService, private router: Router) {
 
   }
 //Elle est appelée lorsqu'une tentative de navigation vers une route protégée est effectuée.
-canActivate(): Observable<boolean> {
-  return this.authService.currentUser$.pipe(
-    filter((currentUser) => currentUser !== undefined),
-    map((currentUser) => {
-      if (!currentUser) {
-        this.router.navigateByUrl('/login');
-        return false;
-      }
-      return true;
-    })
-  );
-}
+
 }

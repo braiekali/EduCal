@@ -2,15 +2,15 @@
 
 <div mat-dialog-content class="text-center">
   <div class="contact__form">
-    <form  [formGroup]="addUserForm" #f="ngForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="addUserForm" #f="ngForm" (ngSubmit)="submitForm()">
       <div class="row">
         <div class="col-12 m-b-30">
           <div class="contact__form-input__image__container">
             <img class="contact__form-input__image" [src]="imageUrl" alt="Avatar">
           </div>
           <div class="contact__form-input contact__form-input__image__btns">
-            <input type="file" accept="image/*" id="avatar" name="avatar" ngModel #fileInput style="display: none;">
-            <button type="button" mat-flat-button class="Extended-Fab">
+            <input type="file" accept="image/*" id="avatar" name="avatar" (change)="onFileSelected($event)" style="display: none;" #fileInput>
+            <button type="button" mat-flat-button class="Extended-Fab" (click)="selectImage()">
               <span class="Extended-Fab__container">
                 <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
                 <span class="Extended-Fab__text">Select Image</span>
@@ -94,7 +94,7 @@
           <div class="contact__form-input">
             <label class="contact__form-input-label" for="roles"></label>
             <div class="select-wrapper" style="width: 200px; height: 50px; margin: 0 auto; border-color: transparent;">
-              <select id="roles" name="role" [(ngModel)]="user.roles" required>
+              <select id="roles" formControlName="roles" required>
                 <option *ngFor="let role of allRoles" [value]="role.idRole">{{ role.name }}</option>
               </select>
             </div>

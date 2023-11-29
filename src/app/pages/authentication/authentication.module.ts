@@ -20,6 +20,8 @@ import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-pass
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { AppErrorModule } from 'app/app-error.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   imports: [
@@ -47,6 +49,6 @@ import { AppErrorModule } from 'app/app-error.module';
 
 
   ],
-  
+ 
 })
 export class AuthenticationModule {}

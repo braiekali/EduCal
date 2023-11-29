@@ -8,7 +8,7 @@ export class User {
   phone: number;
   email: string;
   cin: number;
-
+  imageUrl: string;
   active: boolean;
   enabled: boolean; 
   roles: Role[]; 

@@ -67,7 +67,9 @@ export class AppSideLoginComponent {
   
     const dialogRef = this.dialog.open(ResetPasswordDialogComponent, {
       width: '500px',
-    }); 
+    });
+
+ 
   }
 
 }

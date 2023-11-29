@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AppSideLoginComponent } from './login/login.component';
 import { AppSideRegisterComponent } from './register/register.component';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
+import { ProfileComponent } from 'app/manage-user/profile/profile.component';
 
 export const AuthenticationRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ export const AuthenticationRoutes: Routes = [
     component: AppSideRegisterComponent,
   },
   { path: 'register/reset-password', component: ChangePasswordDialogComponent },
+  { path: 'profile', component:ProfileComponent },
 
 
 ];

@@ -1,38 +1,33 @@
 <h1 mat-dialog-title style="margin-bottom: 1rem" class="text-center mx-auto">Modifier User</h1>
 <div mat-dialog-content>
   <div class="contact__form">
+    
       <form [formGroup]="frombuil" #f="ngForm">
 
       <div class="row"class="text-center mx-auto">
         <div class="col-12 m-b-30">
 
-          <div class="row">
-            <div class="col-12 m-b-30">
-                <div class="contact__form-input__image__container">
-                  <img class="contact__form-input__image" [src]="imageUrl" alt="Avatar">
-                </div>
-                <div class="contact__form-input contact__form-input__image__btns">
-                  <input type="file" accept="image/*" id="avatar" name="avatar"  #fileInput style="display: none;">
-
-                    <button type="button" mat-flat-button class="Extended-Fab" >
-                        <span class="Extended-Fab__container">
-                            <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
-                                matListItemIcon></i-tabler>
-                            <span class="Extended-Fab__text">Select Image</span>
-                        </span>
-                    </button>
-
-                    <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
-                        >
-                        <span class="Extended-Fab__container">
-                            <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
-                                matListItemIcon></i-tabler>
-                            <span class="Extended-Fab__text">Reset Image</span>
-                        </span>
-                    </button>
-                </div>
+          <div class="col-12 m-b-30">
+            <div class="contact__form-input__image__container">
+              <img class="contact__form-input__image" [src]="imageUrl" alt="Avatar">
             </div>
-        </div>
+            <div class="contact__form-input contact__form-input__image__btns">
+              <input type="file" accept="image/*" id="avatar" name="avatar" (change)="onFileSelected($event)" style="display: none;" #fileInput>
+              <button type="button" mat-flat-button class="Extended-Fab" (click)="selectImage()">
+                <span class="Extended-Fab__container">
+                  <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
+                  <span class="Extended-Fab__text">Select Image</span>
+                </span>
+              </button>
+          
+              <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16" (click)="resetImage()">
+                <span class="Extended-Fab__container">
+                  <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel" matListItemIcon></i-tabler>
+                  <span class="Extended-Fab__text">Reset Image</span>
+                </span>
+              </button>
+            </div>
+          </div>
         <div class="col-12">
           <div class="contact__form-input">
             <label for="firstName"> </label>

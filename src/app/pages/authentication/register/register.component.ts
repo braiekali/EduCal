@@ -39,7 +39,7 @@ export class AppSideRegisterComponent {
       phone: [''],
       password: [''],
       agreeTerms: [false, Validators.requiredTrue],
-      recaptcha: ['',],
+      recaptcha: [''],
 
     });
   }
@@ -59,7 +59,7 @@ export class AppSideRegisterComponent {
     const { firstName, lastName, email, cin, phone, password } = this.registerForm.value;
     const role = 'étudiant';
   
-    this.authService.register(firstName, lastName, cin, phone, email, password, role).subscribe(
+    this.authService.register(firstName, lastName, cin, phone, email, password, role ).subscribe(
       () => {
         console.log('Registration successful!');
         this.registerForm.reset();

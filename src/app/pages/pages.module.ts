@@ -11,6 +11,8 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './authentication/auth.interceptor';
 @NgModule({
   declarations: [
     AppDashboardComponent,
@@ -25,6 +27,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
   ],
+
   exports: [TablerIconsModule],
 })
 export class PagesModule {}

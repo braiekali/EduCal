@@ -18,6 +18,9 @@ import { EditRoleDialogDashComponent } from './edit-role-dialog-dash/edit-role-d
 import { EditUserDialogDashComponent } from './edit-user-dialog-dash/edit-user-dialog-dash.component';
 import {  AppErrorModule } from 'app/app-error.module';
 import { AuthenticationModule } from 'app/pages/authentication/authentication.module';
+import { ProfileComponent } from './profile/profile.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'app/pages/authentication/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { AuthenticationModule } from 'app/pages/authentication/authentication.mo
     RoleListDashComponent,
     EditRoleDialogDashComponent,
     EditUserDialogDashComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,7 @@ import { AuthenticationModule } from 'app/pages/authentication/authentication.mo
 
 
   ],
+  
   exports: [TablerIconsModule]
 })
 export class UserModule {}

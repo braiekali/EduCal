@@ -12,6 +12,7 @@ import { EditUserDialogDashComponent } from '../edit-user-dialog-dash/edit-user-
 // Import statements...
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from 'app/pages/authentication/auth.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredData: any[] = [];
   searchText = '';
-  constructor(private addUserDialog: MatDialog, private userService: UserService, private dialog: MatDialog , private router: Router , ) {
+  constructor(private addUserDialog: MatDialog ,private userService: UserService, private dialog: MatDialog , private router: Router , ) {
    
   }
 
@@ -174,5 +175,7 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource(users);
     this.dataSource.paginator = this.paginator;
   }
+
+
 
 }

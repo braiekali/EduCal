@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../service/user.service';
 import { RoleService } from '../service/role.service';
@@ -13,27 +13,31 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
   styleUrls: ['./add-user-dialog-dash.component.scss'],
 })
 export class AddUserDialogDashComponent {
-  user: User = new User();
+ 
   allRoles: Role[] = [];
   selectedUser: number = 1;
   imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg';
-  @ViewChild('fileInput') fileInput: any;
+    @ViewChild('fileInput') fileInput: ElementRef;
   selectedRole: Role;
   addUserForm: FormGroup;
-
+  imageFile: File;
+  user: User = new User();
   constructor(
     public addDialogRef: MatDialogRef<AddUserDialogDashComponent>,
     private fb: FormBuilder,
     private userService: UserService,
-    private roleService: RoleService
+    private roleService: RoleService,   private cdr: ChangeDetectorRef // Ajoutez cette ligne
+
   ) {
     this.addUserForm = this.fb.group({
       lastName: [''],
       firstName: [''],
       email: [''],
-      cin: [''],
-      phone: [''],
+      cin: 0,
+      phone:0,
       password: [''],
+      roles: ['', Validators.required], // Add this line to include 'roles' control
+
       // ... add other form controls as needed
     });
   }
@@ -56,17 +60,15 @@ export class AddUserDialogDashComponent {
 
   submitForm(): void {
     this.formSubmitted = true;
-
-
+  
     if (this.addUserForm.invalid) {
-
       console.log('Form validation failed');
       return;
     }
-
+  
     const user = this.addUserForm.value;
-
-    this.userService.addUser(user).subscribe(
+  
+    this.userService.addUser(user, this.imageFile).subscribe(
       (response) => {
         console.log('User added successfully:', response);
         this.addDialogRef.close();
@@ -78,25 +80,36 @@ export class AddUserDialogDashComponent {
       },
       (error) => {
         console.error('Error adding user:', error);
-        // Check if the error is a 200 status (OK)
         if (error.status === 200) {
-          console.log('yooo..');
+          console.log('User added successfully.');
           this.addDialogRef.close();
           Swal.fire({
-            title: 'felicitation!',
-            text: 'USER ADDED.',
+            title: 'Félicitations!',
+            text: 'Utilisateur ajouté avec succès.',
             icon: 'success',
           });
-        
         } else {
           Swal.fire({
             title: 'OOPS!',
-            text: 'CHECK YOUR MAIL AND CIN ,THEY SHOULD BE UNIQUE.',
+            text: 'Vérifiez votre e-mail et le numéro CIN, ils doivent être uniques.',
             icon: 'error',
           });
         }
       }
     );
   }
-      }
-    
+  onFileSelected(event: any) {
+    this.imageFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result;
+      this.cdr.detectChanges();
+    };
+    reader.readAsDataURL(this.imageFile);
+  }
+  
+
+  selectImage(): void {
+    this.fileInput.nativeElement.click();
+  }
+}

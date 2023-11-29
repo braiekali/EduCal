@@ -1,57 +1,92 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError, map, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'app/environment/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from '../../manage-user/model/user';
+import { Role } from 'app/manage-user/model/role';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  [x: string]: any;
   private tokenStorageKey = 'authToken';
+  jwtService: JwtHelperService = new JwtHelperService();
 
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  constructor(private http: HttpClient) {
-    const storedToken = localStorage.getItem(this.tokenStorageKey);
-    if (storedToken) {
-      this.userSubject.next(storedToken);
-    }
+  constructor(private http: HttpClient , private router:Router ) {
+   
   }
-  register(firstName: string, lastName: string, cin: number , phone: number ,email: string, password: string, role?: string): Observable<any> {
-    const body = { firstName, lastName,cin ,phone, email, password, ...(role && { role }) };
+  register(firstName: string, lastName: string, cin: number , phone: number ,email: string, password: string, role?: string ): Observable<any> {
+    const body = { firstName, lastName,cin ,phone, email, password, ...(role && { role })  };
 
     return this.http.post<any>(environment.url +`/register`, body)
+     
+  }
+
+  login(email: string, password: string): Observable<any> {
+    const body = { email, password };
+  
+    return this.http.post<string>(environment.url +`/authenticate`, body, { responseType: 'text' as 'json' })
       .pipe(
-        tap(response => this.handleAuthentication(response)),
+        tap(token => this.handleAuthentication(token)),
         catchError(error => throwError(error))
       );
   }
+  
+  private handleAuthentication(token: string): void {
+    if (token) {
+      // Save the token in session storage
+      localStorage.setItem('authToken', token);
+      const userInfo = this.jwtService.decodeToken(token);
+      console.log('Decoded Token:', userInfo);
+      if (userInfo) {
+        // Créer le profil utilisateur à partir des informations extraites du jeton
+        const userProfile: User = {
+          idUser: userInfo.idUser,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
+          password: userInfo.password,
+          phone: userInfo.phone,
+          email:userInfo.email,
+          cin: userInfo.cin,
+          active: userInfo.active,
+          enabled: userInfo.enabled,
+          imageUrl: userInfo.imageUrl,
+          roles:userInfo.roles
+        };
+  
+        // Stocker le profil utilisateur dans le stockage local
+        localStorage.setItem('userProfile', JSON.stringify(userProfile));
+  
+        // Autres opérations si nécessaire
 
-login(email: string, password: string): Observable<any> {
-  const body = { email, password };
-
-  return this.http.post<string>(environment.url +`/authenticate`, body, { responseType: 'text' as 'json' })
-    .pipe(
-      tap(token => this.handleAuthentication(token)),
-      catchError(error => throwError(error))
-    );
-}
-private handleAuthentication(token: string): void {
-  if (token) {
-    // Save the token in session storage
-    sessionStorage.setItem('authToken', token);
-
-    // Other handling logic if needed
-  } else {
-    // Handle authentication failure, e.g., display an error message
-    console.error('Authentication failed');
+  
+      // Other handling logic if needed
+    } else {
+      // Handle authentication failure, e.g., display an error message
+      console.error('Authentication failed');
+    }
   }
-}
 
-logout(): void {
-  localStorage.removeItem(this.tokenStorageKey);
-  this.userSubject.next(null);
-}
+  }
+
+
+
+  logout(): void {
+    // Remove the authentication token from session storage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userProfile');
+    this.router.navigate(['/login']);
+
+
+  }
+
+
+
 
 resetPasswordRequest(email: string): Observable<string> {
   const url = environment.url +`/register/password-reset-request`;

@@ -12,28 +12,28 @@ export class RoleService {
   constructor(private http: HttpClient) {}
 
   addRole(role: Role): Observable<Role> {
-    return this.http.post<Role>(environment.url +`/admin/addrole`, role);
+    return this.http.post<Role>(environment.url +`/user/addrole`, role);
   }
 
   getRole(id: number): Observable<Role> {
-    return this.http.get<Role>(environment.url +`/admin/role/${id}`);
+    return this.http.get<Role>(environment.url +`/user/role/${id}`);
   }
 
   getAllRoles(): Observable<Role[]> {
-    return this.http.get<Role[]>(environment.url +`/admin/roles`);
+    return this.http.get<Role[]>(environment.url +`/user/roles`);
   }
 
   deleteRole(id: number): Observable<void> {
-    return this.http.delete<void>(environment.url +`/admin/deleterole/${id}`);
+    return this.http.delete<void>(environment.url +`/user/deleterole/${id}`);
   }
 
   updateRole(role : Role){
-    return this.http.put<any>(environment.url +`/admin/updaterole`,role);
+    return this.http.put<any>(environment.url +`/user/updaterole`,role);
   }
   
 
 
   findRoleByName(name: string): Observable<Role> {
-    return this.http.get<Role>(environment.url +`/admin/role/${name}`);
+    return this.http.get<Role>(environment.url +`/user/role/${name}`);
   }
 }
