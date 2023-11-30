@@ -36,6 +36,11 @@ const routes: Routes = [
             (m) => m.UniversityModule
           ),
       },
+      {
+        path: 'restaurants',
+        loadChildren: () =>
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
+      },
     ],
   },
 
@@ -66,6 +71,11 @@ const routes: Routes = [
           import('./manage-specialite/specialite.module').then(
             (m) => m.SpecialiteModule
           ),
+      },
+      {
+        path: 'restaurants',
+        loadChildren: () =>
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
       },
       {
         path: 'events',

@@ -50,6 +50,7 @@ import { FrontComponent } from './layouts/front/front.component';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -67,6 +68,7 @@ import { FrontComponent } from './layouts/front/front.component';
     ChambreModule,
     RestoModule,
     ClubModule,
+    ReactiveFormsModule,
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
