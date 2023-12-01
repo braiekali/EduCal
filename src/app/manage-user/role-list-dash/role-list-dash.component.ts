@@ -10,6 +10,7 @@ import { AddRoleDialogDashComponent } from '../add-role-dialog-dash/add-role-dia
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditRoleDialogDashComponent } from '../edit-role-dialog-dash/edit-role-dialog-dash.component';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-role-list-dash',
@@ -62,13 +63,23 @@ deleteRole(idRole: number) {
     if (result.isConfirmed) {
       this.serviceRole.deleteRole(idRole).subscribe(
         (data: any) => {
-
           this.refreshData();
+          // Show success message if needed
+          Swal.fire('Supprimé!', 'Le rôle a été supprimé.', 'success');
         },
+        (error: any) => {
+          // Check if the error status is 403 (Forbidden)
+          if (error instanceof HttpErrorResponse && error.status === 403) {
+            // Show Swal error message for forbidden operation
+            Swal.fire('Erreur!', 'Vous ne pouvez pas supprimer ce rôle. Il est utilisé.', 'error');
+          } else {
+            // Show a generic error message for other errors
+            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la suppression du rôle.', 'error');
+          }
+        }
       );
     }
   });
-
 }
 
 openAddRoleDialog(): void {

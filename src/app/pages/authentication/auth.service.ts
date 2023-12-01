@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 export class AuthService {
   [x: string]: any;
   private tokenStorageKey = 'authToken';
+   defaultImageUrl = `img.png`;
+
   jwtService: JwtHelperService = new JwtHelperService();
 
   private userSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
@@ -36,7 +38,7 @@ export class AuthService {
         catchError(error => throwError(error))
       );
   }
-  
+
   private handleAuthentication(token: string): void {
     if (token) {
       // Save the token in session storage
@@ -59,7 +61,7 @@ export class AuthService {
           cin: userInfo.cin,
           active: userInfo.active,
           enabled: userInfo.enabled,
-          imageUrl: userInfo.imageUrl,
+          imageUrl: userInfo.imageUrl || this.defaultImageUrl, // Utilisez l'image par défaut si imageUrl est indéfini
           
           roles:userInfo.roles
         };
