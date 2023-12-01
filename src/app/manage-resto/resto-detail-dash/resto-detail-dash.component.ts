@@ -22,8 +22,8 @@ export class RestoDetailDashComponent implements OnInit{
               private restoService: RestoServiceService) {}
 
   dataSource: any;
-  displayedColumns: string[] = ['nomPlat', 'prixPlat', 'description', 'action',];
-
+  displayedColumns: string[] = ['Image','nomPlat', 'prixPlat', 'description', 'action',];
+  test = "http://localhost:8082/upload-directory/";
   platsDataSource: MatTableDataSource<Plat> = new MatTableDataSource<Plat>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -107,17 +107,7 @@ export class RestoDetailDashComponent implements OnInit{
       }
     });
   }
-  private refreshPlatsList(): void {
-    const restaurantId = this.ELEMENT_DATA.idRestaurant;
-    this.restoService.findByRestaurant_IdRestaurant(restaurantId).subscribe(
-      (plats: Plat[]) => {
-        this.platsDataSource.data = plats;
-      },
-      (error) => {
-        console.error('Error fetching plats:', error);
-      }
-    );
-  }
+
 
 
   openUpdatePlatDialog(plat:any): void {

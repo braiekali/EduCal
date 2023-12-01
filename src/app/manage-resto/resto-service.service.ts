@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Restaurant} from "./Model/Restaurant";
-import {Observable} from "rxjs";
+import {forkJoin, Observable} from "rxjs";
 import {Plat} from "./Model/Plat";
 
 @Injectable({
@@ -45,40 +45,6 @@ export class RestoServiceService {
   }
 
 
-  /*updateRestaurant(restaurant: any): Observable<any> {
-    // Assuming that restaurant.id is the identifier for the restaurant
-    const url = `http://localhost:8082/EduCal/admin/Restaurantupdate/${restaurant.id}`;
-    return this.http.put(url, restaurant);
-  }*/
-  updateRestaurant(restaurant: any, imageFile: File): Observable<any> {
-    const formData = new FormData();
-
-    // Ajoutez chaque champ du modèle utilisateur individuellement
-    formData.append('idRestaurant', restaurant.idRestaurant);
-    formData.append('nomRestaurant', restaurant.nomRestaurant);
-    formData.append('dateOuverture', restaurant.dateOuverture);
-    formData.append('dateFermeture', restaurant.dateFermeture);
-
-
-    // Assurez-vous que l'image est définie avant de l'ajouter au FormData
-    if (imageFile) {
-      formData.append('file', imageFile);
-    }
-
-    // Utilisez l'opérateur de concaténation de chaînes pour construire l'URL
-    const url = `http://localhost:8082/admin/Restaurantupdate`;
-
-    return this.http.put<any>(url, formData);
-  }
-  updateRestaurantImage(file: any, restaurantId: number): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('fileImage', file);
-
-    const updateImageUrl = `http://localhost:8082/updateImage/${restaurantId}`;
-
-    // Assuming the backend expects a POST request to the updateImage endpoint
-    return this.http.post(updateImageUrl, formData);
-  }
   findByRestaurant_IdRestaurant(restaurantId: number): Observable<Plat[]> {
     const url = `http://localhost:8082/PlatsByRestaurant/${restaurantId}`;
     return this.http.get<Plat[]>(url);
@@ -108,6 +74,14 @@ export class RestoServiceService {
     return this.http.post(uploadUrl, formData);
   }
 
+  uploadImagePlat(file: any, idPlat: any): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('fileImage', file);
+    const uploadUrl = `http://localhost:8082/uploadImagePlat/${idPlat}`;
+
+    // Assuming the backend expects a POST request to the uploadImage endpoint
+    return this.http.post(uploadUrl, formData);
+  }
 
 
 
@@ -117,4 +91,29 @@ export class RestoServiceService {
     return this.http.put<Restaurant>('http://localhost:8082/admin/Restaurantupdate', data);
   }
 
+
+
+  getTotalDishes(): Observable<number> {
+    return this.http.get<number>('http://localhost:8082/api/statistics/total-dishes');
+  }
+
+  getAverageDishPrice(): Observable<number> {
+    return this.http.get<number>('http://localhost:8082/api/statistics/average-dish-price');
+  }
+
+  getTotalRestaurants(): Observable<number> {
+    return this.http.get<number>('http://localhost:8082/api/statistics/total-restaurants');
+  }
+  getSalesOverviewData(): Observable<any> {
+    const totalDishes$ = this.getTotalDishes();
+    const averageDishPrice$ = this.getAverageDishPrice();
+    const totalRestaurants$ = this.getTotalRestaurants();
+
+    // Combine multiple observables into one observable
+    return forkJoin({
+      totalDishes: totalDishes$,
+      averageDishPrice: averageDishPrice$,
+      totalRestaurants: totalRestaurants$
+    });
+  }
 }

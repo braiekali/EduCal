@@ -10,7 +10,7 @@ import {RestoServiceService} from "../resto-service.service";
 export class RestoDetailsComponent implements OnInit{
   platId: number;
   platDetails: any; // Replace 'any' with the actual type of your Plat entity
-
+  test = "http://localhost:8082/upload-directory/";
   constructor(private route: ActivatedRoute, private platService: RestoServiceService) {}
 
   ngOnInit(): void {

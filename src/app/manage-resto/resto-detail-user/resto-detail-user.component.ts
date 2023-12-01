@@ -11,6 +11,7 @@ export class RestoDetailUserComponent implements OnInit{
   idRestaurant: number;
   ELEMENT_DATA: any;
   plats: any[];
+  test = "http://localhost:8082/upload-directory/";
   constructor( private restoService:RestoServiceService, private route: ActivatedRoute) {
   }
   ngOnInit(): void {

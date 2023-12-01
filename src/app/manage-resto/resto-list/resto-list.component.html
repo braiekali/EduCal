@@ -68,7 +68,7 @@
                     <div class="course__item white-bg mb-30 fix">
                       <div class="course__thumb w-img p-relative fix">
                         <a  (click)="navigateToDetail(restaurants.idRestaurant)" class="link-btn">
-                          <img src="../../../../assets/front/img/course/resto.jpg"
+                          <img [src]="test + restaurants.imageRestaurant"
                                alt="" />
                         </a>
                         <div class="course__tag" >
@@ -82,8 +82,8 @@
                             <span><i class="icon_star"></i>4.5 (44)</span>
                           </div>
                         </div>
-                        <h3 class="course__title">
-                          <a  (click)="navigateToDetail(restaurants.idRestaurant)" class="link-btn">{{restaurants.nomRestaurant}}</a>
+                        <h3 class="course__title ">
+                          <a  (click)="navigateToDetail(restaurants.idRestaurant)" class="link-btn titles">{{restaurants.nomRestaurant}}</a>
 
                         </h3>
 
@@ -133,7 +133,7 @@
                                   <span><i class="icon_star"></i>4.5 (44)</span>
                                 </div>
                               </div>
-                              <h3 class="course__title">
+                              <h3 class="course__title ">
                                 <a href="course-details.html">Become a product Manager
                                   learn the skills &
                                   job.</a>

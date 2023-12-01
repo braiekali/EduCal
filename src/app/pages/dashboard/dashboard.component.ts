@@ -15,6 +15,7 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
+import {RestoServiceService} from "../../manage-resto/resto-service.service";
 
 interface month {
   value: string;
@@ -221,34 +222,29 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor() {
+  constructor(private restoService: RestoServiceService) {
+
     // sales overview chart
     this.salesOverviewChart = {
       series: [
         {
-          name: 'Eanings this month',
-          data: [355, 390, 300, 350, 390, 180, 355, 390],
+          name: 'Total plats',
+          data: [],
           color: '#5D87FF',
         },
         {
-          name: 'Expense this month',
-          data: [280, 250, 325, 215, 250, 310, 280, 250],
+          name: 'Prix Moyen des Plats',
+          data: [],
           color: '#49BEFF',
         },
-      ],
-
-      grid: {
-        borderColor: 'rgba(0,0,0,0.1)',
-        strokeDashArray: 3,
-        xaxis: {
-          lines: {
-            show: false,
-          },
+        {
+          name: 'Total Restaurant',
+          data: [],
+          color: '#adb0bb',
         },
-      },
-      plotOptions: {
-        bar: { horizontal: false, columnWidth: '35%', borderRadius: [4] },
-      },
+      ],
+      // ... other properties ...
+
       chart: {
         type: 'bar',
         height: 390,
@@ -312,7 +308,7 @@ export class AppDashboardComponent {
 
     // yearly breakup chart
     this.yearlyChart = {
-      series: [38, 40, 25],
+      series: [],
 
       chart: {
         type: 'donut',
@@ -400,5 +396,31 @@ export class AppDashboardComponent {
         },
       },
     };
+
+  }
+
+
+
+
+
+  ngOnInit(): void {
+    this.restoService.getSalesOverviewData().subscribe(
+      (salesOverviewData) => {
+        console.log('Sales Overview Data:', salesOverviewData);
+
+        // Update the salesOverviewChart series data
+        this.salesOverviewChart.series[0].data = [salesOverviewData.totalDishes];
+        this.salesOverviewChart.series[1].data = [salesOverviewData.averageDishPrice];
+        this.salesOverviewChart.series[2].data = [salesOverviewData.totalRestaurants];
+        // Update other series data if needed
+
+        this.salesOverviewChart.chart.title.text = `Average Dish Price: ${salesOverviewData.averageDishPrice}`;
+        this.salesOverviewChart.chart.subtitle.text = `Total Restaurants: ${salesOverviewData.totalRestaurants}`;
+      },
+      (error) => {
+        console.error('Error fetching sales overview data:', error);
+      });
   }
 }
+
+

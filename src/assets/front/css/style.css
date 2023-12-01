@@ -511,6 +511,12 @@ p {
   padding-right: 21px;
   display: inline-block;
 }
+/*things i aded in css are NEEDED (sarra)*/
+.titles{
+  font-size: 20px;
+  color: #4d60e4;
+  font-weight: 700;
+}
 
 .link-btn i {
   font-size: 14px;

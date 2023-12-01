@@ -27,7 +27,7 @@ export class AddPlatsDialogDashComponent {
   }
   imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg'; // To store the URL of the selected image
   @ViewChild('fileInput') fileInput: any;
-
+  addedPlat:any;
   // @Output() addFormSubmit: EventEmitter<any> = new EventEmitter<any>();
 
   onFileSelected(event: any): void {
@@ -58,25 +58,45 @@ export class AddPlatsDialogDashComponent {
     nomPlat: '',
     description: '',
     prixPlat: 0,
+    imagePlat: '',
     restaurant: {
       idRestaurant: 0, // Initialize with a default value or adjust accordingly
     },
   };
+
+  imageFile: File | undefined;
+  onImageFileSelected(event: any): void {
+    this.imageFile = event.target.files[0];
+
+  }
   submitForm(formData: any): void {
     this.plat.nomPlat = formData.nomPlat;
     this.plat.prixPlat = formData.prixPlat;
+    this.plat.imagePlat = formData.imagePlat;
     this.plat.description = formData.description;
     // Ensure that the restaurant field is correctly populated in the plat object
     this.plat.restaurant.idRestaurant = this.data?.restaurantId;
 
     // Call your platService method to add the plat
     this.platService.addPlat(this.plat).subscribe(response => {
+      this.addedPlat = response;
       console.log('Response after adding plat:', response);
-      window.location.reload();
+      //window.location.reload();
       // Other handling code...
 
-    });
+    }, error => {
+      console.error('Error adding restaurant:', error);
+      alert('Error adding restaurant. Check console for details.');
+      // Handle the error as needed
+    },()=>{
+      this.restoService.uploadImagePlat(this.imageFile,this.addedPlat.idPlat).subscribe(
+        {next:()=>{},
+          error:(err)=>{console.log(err)}
+        })
+    }
+  );
   }
+
   // console.log('Form Data:', formData);
   // Emit the form data when the form is submitted
   // this.addFormSubmit.emit(formData);

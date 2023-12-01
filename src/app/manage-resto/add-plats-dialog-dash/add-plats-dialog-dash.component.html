@@ -65,6 +65,8 @@
             <textarea placeholder="Enter Your Description" id="description" name="description" [(ngModel)]="plat.description"></textarea>
           </div>
         </div>
+        <input type="file" accept="image/*" id="Image" name="imageUrl" ngModel #fileInput
+               (change)="onImageFileSelected($event)" />
 
         <div class="col-12" style="margin-top: 1rem">
           <!-- Submit Button -->

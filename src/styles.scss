@@ -135,7 +135,21 @@ body {
     align-items: center;
   }
 }
+/*OTHER NEEDED CSS (sarra)*/
+.imageplat{
+  width: 50%;
+  height: 50%;
+  border-radius: 200rem;
+  position: relative;
+  object-fit: cover;
+}
+.containerplat{
 
+  width: 10rem;
+  height: 4rem;
+
+
+}
 .Extended-Fab {
   background-color: #5280ff !important;
   border-radius: 0.8rem !important;
@@ -161,4 +175,6 @@ body {
     width: 1.3rem !important;
     height: 1.3rem !important;
   }
+
+
 }

@@ -42,7 +42,12 @@
           <div class="contact__form-input">
             <label class="contact__form-input-label" for="nomRestaurant">Nom du Restaurant</label>
 
-            <input type="text" placeholder="Nom du Restaurant" id="nomRestaurant" name="nomRestaurant" ngModel />
+            <input type="text" placeholder="Nom du Restaurant" id="nomRestaurant" name="nomRestaurant" #t="ngModel" ngModel
+                   required
+                  />
+            <div *ngIf="t.invalid">
+              <app-error [err]="t"></app-error>
+            </div>
           </div>
         </div>
 
@@ -50,25 +55,36 @@
           <div class="contact__form-input">
             <label for="dateOuverture">Date d'Ouverture</label>
             <div style="display: flex;">
-            <input type="text" placeholder="YYYY-MM-DD" id="dateOuverture" name="dateOuverture" matInput
-                     [matDatepicker]="pickerOuverture" ngModel /> <!-- HNE 5demet Ajout b template driven-->
+            <input type="text" placeholder="MM-DD-YYYY" id="dateOuverture" name="dateOuverture"  matInput
+                     [matDatepicker]="pickerOuverture" #t="ngModel" ngModel required /> <!-- HNE 5demet Ajout b template driven-->
 
               <mat-datepicker-toggle matIconSuffix [for]="pickerOuverture"
                                      style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
               <mat-datepicker #pickerOuverture></mat-datepicker>
+
+            </div>
+            <div *ngIf="t.invalid">
+              <app-error [err]="t"></app-error>
             </div>
           </div>
         </div>
+
+
+
+
 
         <div class="col-12">
           <div class="contact__form-input">
             <label for="dateFermeture">Date de Fermeture</label>
             <div style="display: flex;">
-              <input type="text" placeholder="YYYY-MM-DD" id="dateFermeture" name="dateFermeture" matInput
-                     [matDatepicker]="pickerFermeture" ngModel />
+              <input type="text" placeholder="MM-DD-YYYY" id="dateFermeture" name="dateFermeture" matInput
+                     [matDatepicker]="pickerFermeture" #t="ngModel" ngModel required />
               <mat-datepicker-toggle matIconSuffix [for]="pickerFermeture"
                                      style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
               <mat-datepicker #pickerFermeture></mat-datepicker>
+            </div>
+            <div *ngIf="t.invalid">
+              <app-error [err]="t"></app-error>
             </div>
           </div>
         </div>

@@ -3,6 +3,7 @@ export interface Plat {
   nomPlat: string;
   description: string;
   prixPlat: number;
+  imagePlat:string;
   restaurant: {
     idRestaurant: number;
   };

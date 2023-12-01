@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class RestoListComponent implements OnInit{
   restaurants: Restaurant[] = [];
   plats: any[];
+  test = "http://localhost:8082/upload-directory/";
   constructor(private restoService: RestoServiceService,private router: Router) {}
 
   ngOnInit() {

@@ -13,19 +13,13 @@
             <input type="file" accept="image/*" id="Image" name="platImage" ngModel #fileInput
                    style="display: none;" (change)="onFileSelected($event)" />
             <!-- Button to trigger file input click -->
-            <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
               <span class="Extended-Fab__container">
                 <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
                 <span class="Extended-Fab__text">Select Image</span>
               </span>
-            </button>
 
-            <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16" (click)="resetAvatarImage()">
-              <span class="Extended-Fab__container">
-                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel" matListItemIcon></i-tabler>
-                <span class="Extended-Fab__text">Reset Image</span>
-              </span>
-            </button>
+
+
           </div>
         </div>
 
@@ -63,7 +57,8 @@
         <div class="col-12">
           <!-- Add other form controls as needed -->
         </div>
-
+        <input type="file" accept="image/*" id="Image" name="imageUrl" ngModel #fileInput
+               (change)="onImageFileSelected($event)" />
         <!-- Submit button -->
         <div class="col-12" style="margin-top: 1rem">
           <button type="submit" mat-flat-button color="primary" (click)="updatePlat(data.idPlat, createPlatObject())">

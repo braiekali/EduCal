@@ -23,6 +23,9 @@ import {MatInputModule} from "@angular/material/input";
 import { UpdateRestauComponent } from './update-restau/update-restau.component';
 import { UpdatePlatDashComponent } from './update-plat-dash/update-plat-dash.component';
 import { RestoDetailUserComponent } from './resto-detail-user/resto-detail-user.component';
+import {AppErrorModule} from "../app-error/app-error.module";
+import {ErrorComponent} from "../error/error.component";
+import { StatisticsComponentComponent } from './statistics-component/statistics-component.component';
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { RestoDetailUserComponent } from './resto-detail-user/resto-detail-user.
     UpdateRestauComponent,
     UpdatePlatDashComponent,
     RestoDetailUserComponent,
+    ErrorComponent,
+    StatisticsComponentComponent,
 
   ],
   imports: [
@@ -54,7 +59,8 @@ import { RestoDetailUserComponent } from './resto-detail-user/resto-detail-user.
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppErrorModule,
   ]
 })
 export class RestoModule { }

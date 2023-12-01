@@ -44,7 +44,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: 'plats',
     children: [
       {
         path: '',
