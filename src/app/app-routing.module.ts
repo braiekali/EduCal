@@ -10,6 +10,7 @@ import {AuthentificationGuard} from '../app/pages/authentication/auth.guard';
 import {roleGuard} from '../app/pages/authentication/role.guard';
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { AppSideLoginComponent } from './pages/authentication/login/login.component';
+import { resolverResolver } from './resolver.resolver';
 
 const routes: Routes = [
   {
@@ -37,6 +38,9 @@ const routes: Routes = [
       {
         path: 'roles',
         component: RoleListDashComponent,
+        resolve: {
+          roles: resolverResolver,
+        },
       },
       {
         path: 'universities',

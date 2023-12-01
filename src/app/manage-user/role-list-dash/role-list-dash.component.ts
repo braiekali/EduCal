@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RoleService } from '../service/role.service'; // Replace with the actual path
 import { Role } from 'app/manage-user/model/role';
 import { AddRoleDialogDashComponent } from '../add-role-dialog-dash/add-role-dialog-dash.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EditRoleDialogDashComponent } from '../edit-role-dialog-dash/edit-role-dialog-dash.component';
 import Swal from 'sweetalert2';
 
@@ -18,7 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class RoleListDashComponent {
 
-constructor(private addRoleDialog: MatDialog, private updateRoleDialog: MatDialog, private serviceRole: RoleService) {
+constructor(private addRoleDialog: MatDialog, private updateRoleDialog: MatDialog, private serviceRole: RoleService , private route: ActivatedRoute, // Inject ActivatedRoute to access resolved data
+) {
 }
 
 dataSource: any;
@@ -26,19 +27,11 @@ displayedColumns: string[] = ['id', 'name', 'action'];
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 ngOnInit(): void {
-  this.serviceRole.getAllRoles().subscribe(
-    (data: any) => {
-      this.dataSource = data;
-      this.dataSource = new MatTableDataSource(this.dataSource);
-      this.dataSource.paginator = this.paginator;
-      console.log(this.dataSource)
-    },
-    (error) => {
-      console.error('Une erreur est survenue :', error);
-    }
-  );
-  //this.dataSource = new MatTableDataSource(this.dataSource);
-  //this.dataSource.paginator = this.paginator;
+  // Access resolved roles from the route
+  const resolvedRoles: Role[] = this.route.snapshot.data['roles'];
+  
+  this.dataSource = new MatTableDataSource(resolvedRoles);
+  this.dataSource.paginator = this.paginator;
 }
 
 refreshData() {
