@@ -21,7 +21,7 @@ export class AuthService {
    
   }
   register(firstName: string, lastName: string, cin: number , phone: number ,email: string, password: string, role?: string ): Observable<any> {
-    const body = { firstName, lastName,cin ,phone, email, password, ...(role && { role })  };
+    const body = { firstName, lastName,cin ,phone, email, password, role: role || 'ETUDIANT'   };
 
     return this.http.post<any>(environment.url +`/register`, body)
      
@@ -44,6 +44,10 @@ export class AuthService {
       const userInfo = this.jwtService.decodeToken(token);
       console.log('Decoded Token:', userInfo);
       if (userInfo) {
+        const userRole = userInfo.roles.name;
+
+        // Stocker le rôle dans le localStorage
+        localStorage.setItem('role', userRole);
         // Créer le profil utilisateur à partir des informations extraites du jeton
         const userProfile: User = {
           idUser: userInfo.idUser,
@@ -56,6 +60,7 @@ export class AuthService {
           active: userInfo.active,
           enabled: userInfo.enabled,
           imageUrl: userInfo.imageUrl,
+          
           roles:userInfo.roles
         };
   
@@ -74,13 +79,21 @@ export class AuthService {
 
   }
 
+  isUserLoggedIn(): boolean {
+    // Vérifiez si un utilisateur est présent dans le stockage local
+    const user = localStorage.getItem('authToken');
+    return !!user; // Renvoie `true` si un utilisateur est présent, sinon `false`
+  }
 
+ 
+  
 
   logout(): void {
     // Remove the authentication token from session storage
     localStorage.removeItem('authToken');
     localStorage.removeItem('userProfile');
-    this.router.navigate(['/login']);
+    localStorage.removeItem('role');
+    this.router.navigate(['/home']);
 
 
   }
@@ -115,4 +128,16 @@ changePassword(newPassword: string, token: string) {
 }
 
 
+//guard 
+is_logged(): boolean {
+  return !!localStorage.getItem('authToken');
+  }
+
+  getRole(role: string): boolean {
+    const userRole = localStorage.getItem('role');
+    return userRole === role;
+  }
+
+  
 }
+

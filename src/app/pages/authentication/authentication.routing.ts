@@ -6,6 +6,7 @@ import { ProfileComponent } from 'app/manage-user/profile/profile.component';
 
 export const AuthenticationRoutes: Routes = [
   {
+    // une route qui n'utilise pas de paramètres dynamiques et dont l'URL ne change pas en fonction des données spécifiques de la requête    path: 'login',
     path: 'login',
     component: AppSideLoginComponent,
   },

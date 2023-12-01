@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { environment } from 'app/environment/environment';
 import { User } from '../model/user';
 import { Observable } from 'rxjs';
+import { Role } from '../model/role';
+import { RoleService } from '../service/role.service';
 
 @Component({
   selector: 'app-edit-user-dialog-dash',
@@ -18,16 +20,18 @@ export class EditUserDialogDashComponent {
   imageFile: File;
   
   @ViewChild('fileInput') fileInput: ElementRef;
-
+  allRoles: Role[] = [];
   constructor(
     public updateDialogRef: MatDialogRef<EditUserDialogDashComponent>,
-    private serviceUser: UserService,
+    private serviceUser: UserService, private roleService :RoleService ,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef ,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.frombuil.patchValue({
       ...(data || {}),
+      roles: this.data && this.data.roles ? this.data.roles.idRole : null
+
     });
   
     // Mettez à jour l'URL de l'image si l'utilisateur a une image, sinon utilisez l'image par défaut
@@ -45,7 +49,21 @@ export class EditUserDialogDashComponent {
     lastName: [''],
     cin: [''],
     phone: [''],
+    password: [''],
+    enabled: [''],
+    roles: [''],
+
   });
+  ngOnInit(): void {
+    this.roleService.getAllRoles().subscribe(
+      (roles) => {
+        this.allRoles = roles;
+      },
+      (error) => {
+        console.error('Error retrieving roles:', error);
+      }
+    );
+  }
 
   get form() {
     return this.frombuil.controls;
@@ -115,4 +133,8 @@ export class EditUserDialogDashComponent {
       ? `${environment.url}/upload-directory/${this.data.imageUrl}`
       : './assets/images/profile/user-1.jpg';
   }
+
+  dataSource: any;
+
+
 }

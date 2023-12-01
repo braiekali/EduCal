@@ -4,9 +4,12 @@ import { UserListDashComponent } from './user-list-dash/user-list-dash.component
 import { EditRoleDialogDashComponent } from './edit-role-dialog-dash/edit-role-dialog-dash.component';
 import { EditUserDialogDashComponent } from './edit-user-dialog-dash/edit-user-dialog-dash.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AppSideRegisterComponent } from 'app/pages/authentication/register/register.component';
+import { AppSideLoginComponent } from 'app/pages/authentication/login/login.component';
 
 const routes: Routes = [
   {
+    //child route 
     path: '',
     children: [
       {
@@ -23,6 +26,7 @@ const routes: Routes = [
       {
         path: 'profile', component: ProfileComponent
       },
+  
       
     ],
   },

@@ -1,17 +1,18 @@
+// auth.guard.ts
+
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, filter, map } from 'rxjs';
-import { UserService } from '../../manage-user/service/user.service';
-import { AuthService } from './auth.service';
-//pour dire que le service est injectable au niveau racine de l'application
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard  {
-
-  constructor(private authService: AuthService, private router: Router) {
-
+export class AuthentificationGuard implements CanActivate {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    // Your guard logic here
+    return true;
   }
-//Elle est appelée lorsqu'une tentative de navigation vers une route protégée est effectuée.
-
 }

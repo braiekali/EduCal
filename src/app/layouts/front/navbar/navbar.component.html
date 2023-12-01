@@ -36,7 +36,7 @@
                     <a href="#">Restaurants</a>
                   </li>
                   <li>
-                    <a href="#">Clubs</a>
+                    <a href="#" style="margin-left: 2rem; margin-right: 2rem;">Clubs</a>
                   </li>
                 </ul>
               </nav>
@@ -47,25 +47,57 @@
                 <button type="submit"><i class="fad fa-search"></i></button>
               </form>
             </div> -->
-            <div class="header__btn ml-20  d-sm-block" style="margin-left: 2rem;">
-              <a routerLink="signup" class="e-btn">Sign up</a>
+            <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block" style="margin-left: 2rem;">
+              <a routerLink="signup" class="e-btn">Sign Up</a>
             </div>
-            <div class="header__btn ml-20  d-sm-block">
-              <a routerLink="login" class="e-btn e-btn-border">Sign in</a>
+            <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block" style="margin-left: 2rem; margin-right: 2rem;">
+              <a routerLink="login" class="e-btn e-btn-border">Sign In</a>
             </div>
-            <div class="sidebar__menu d-xl-none">
-              <div class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-              </div>
+        
+            <button *ngIf="isLoggedIn"
+            mat-icon-button
+            [matMenuTriggerFor]="profilemenu"
+            aria-label="Notifications"
+          >
+            <img
+              src="/assets/images/profile/user.png"
+              class="rounded-circle object-cover"
+              style="width: 50px; height: 50px; transform: translate(-30%, -30%)"
+              alt="avatar"
+            />
+          </button>
+          <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+            <button   mat-menu-item (click)="openProfileDialog()">
+              <mat-icon class="d-flex align-items-center">
+                <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+              My Profile
+            </button>
+            <button mat-menu-item>
+              <mat-icon class="d-flex align-items-center"
+                ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
+              >My Account
+            </button>
+            <button mat-menu-item>
+              <mat-icon class="d-flex align-items-center"
+                ><i-tabler
+                  name="list-check"
+                  class="icon-18 d-flex"
+                ></i-tabler></mat-icon
+              >My Task
+            </button>
+        
+            <div class="p-x-12 m-t-12">
+              <button mat-stroked-button color="primary" class="w-100" (click)="onLogout()">Logout</button>
             </div>
-          </div>
-        </div>
+          </mat-menu>
       </div>
     </div>
   </div>
-</header>
+</div>
+</div>
+
+            </header>
 
 <!-- cart mini area start -->
 <div class="cartmini__area">

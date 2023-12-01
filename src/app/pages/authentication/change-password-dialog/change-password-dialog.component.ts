@@ -18,6 +18,8 @@ export class ChangePasswordDialogComponent {
   newPassword: string = '';
   resetForm: FormGroup;
   formSubmitted = false;
+  //@Output est utilisé pour déclarer un événement émis par le composant.
+
   @Output() formSubmittedEvent = new EventEmitter();
   @Input() token: string;
   constructor(

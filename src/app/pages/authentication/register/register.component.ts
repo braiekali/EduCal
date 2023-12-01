@@ -57,7 +57,7 @@ export class AppSideRegisterComponent {
     }
   
     const { firstName, lastName, email, cin, phone, password } = this.registerForm.value;
-    const role = 'étudiant';
+    const role = 'ETUDIANT';
   
     this.authService.register(firstName, lastName, cin, phone, email, password, role ).subscribe(
       () => {

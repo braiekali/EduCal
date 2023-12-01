@@ -22,49 +22,46 @@ import { AuthService } from 'app/pages/authentication/auth.service';
 })
 export class UserListDashComponent implements AfterViewInit, OnInit {
   dataSource: any;
+  
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'phone', 'active', 'isEnabled', 'roles', 'action'];
   imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg';
-  searchTerm: string;
+  searchTerm: '';
+  searchText = '';
 
   user: User | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredData: any[] = [];
-  searchText = '';
+
   constructor(private addUserDialog: MatDialog ,private userService: UserService, private dialog: MatDialog , private router: Router , ) {
    
   }
-
   ngOnInit(): void {
-    
     this.userService.getAllUsers().subscribe(
-      
       (data: any) => {
-        this.dataSource = data;
-        this.dataSource = new MatTableDataSource(this.dataSource);
-        this.dataSource.paginator = this.paginator;
-        console.log(this.dataSource)
+        if (Array.isArray(data)) {
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.paginator = this.paginator;
+        } else {
+          console.error('An error occurred: Data is not in array format.');
+        }
       },
       (error) => {
-        console.error('Une erreur est survenue :', error);
+        console.error('An error occurred:', error);
       }
-      
     );
   }
+
   refreshData() {
-    if (this.searchTerm) {
-      this.userService.findByCin(parseInt(this.searchTerm))
+    if (this.searchText) {
+      this.userService.findByCin(parseInt(this.searchText))
         .subscribe(user => {
-          this.user = user;
-          this.dataSource = new MatTableDataSource([user]); // Mettre à jour la source de données avec le résultat de la recherche
+          this.dataSource.data = [user]; // Update the data source with the search result
         });
     } else {
       this.userService.getAllUsers().subscribe(
         (data: any) => {
-          this.dataSource = data;
-          this.dataSource = new MatTableDataSource(this.dataSource);
-          this.dataSource.paginator = this.paginator;
-          console.log(this.dataSource);
+          this.dataSource.data = data;
         }
       );
     }
@@ -98,15 +95,14 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
 
 
   openAddUserDialog(): void {
-    const dialogRef = this.addUserDialog.open(
-      AddUserDialogDashComponent,
-      {
-        width: '500px', // Set the width as per your design
-        // Add any other dialog configuration options here
-      }
-    );
-
+    const dialogRef = this.addUserDialog.open(AddUserDialogDashComponent, {
+      width: '500px',
+      // Add any other dialog configuration options here
+    });
   }
+
+
+
 
 
   openUserUpdate(user: any) {
@@ -125,57 +121,21 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
     });
   }
 
-  getUserByCin(cin: number): void {
-    this.userService.findByCin(parseInt(this.searchTerm))
-  .subscribe(user => {
-    this.user = user;
-    this.dataSource = new MatTableDataSource([user]); // Mettre à jour la source de données avec le résultat de la recherche
-  });}
-  
-  searchUser(): void {
-    console.log('Numéro de CIN avant l\'appel au service :', this.searchTerm);
-  
-    if (this.searchTerm) {
-      this.userService.findByCin(parseInt(this.searchTerm))
-        .subscribe(user => {
-          this.user = user;
-          this.updateDataSource([user]); // Mise à jour de la source de données
-          console.log('Utilisateur trouvé :', user);
-          this.refreshData(); // Appel à la méthode refreshData() pour mettre à jour la source de données
-        });
-    } else {
-      // Si la recherche est vide, afficher la liste complète
-      this.userService.getAllUsers()
-        .subscribe(users => {
-          this.user = null;
-          this.updateDataSource(users); // Mettre à jour la source de données avec la liste complète
-          this.refreshData(); // Appel à la méthode refreshData() pour mettre à jour la source de données
-        });
-    }
-  }
 
-  onSearchChange() {
-    // Reset the filteredData array
-    this.filteredData = [];
-
-    // Check if the search text is empty
-    if (!this.searchText) {
-      this.filteredData = this.dataSource;
-      return;
-    }
-
-    // Perform the search based on the searchText
-    this.filteredData = this.dataSource.filter((item: { cin: number; firstName: string; email: String; }) => {
-      // Customize the search criteria as per your requirements
-      const fullSearch = `${item.cin} ${item.firstName} ${item.email}`.toLowerCase();
-      return fullSearch.includes(this.searchText.toLowerCase());
-    });
-  }
   updateDataSource(users: User[]) {
     this.dataSource = new MatTableDataSource(users);
     this.dataSource.paginator = this.paginator;
   }
 
+  onSearchChange() {
+    // Check if the search text is empty
+    if (!this.searchText || this.searchText.trim() === '') {
+      this.dataSource.filter = ''; // Clear any existing filter
+      return;
+    }
 
+    // Perform the search based on the searchText
+    this.dataSource.filter = this.searchText.trim().toLowerCase();
+  }
 
 }

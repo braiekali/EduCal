@@ -82,8 +82,22 @@
 
           </div>
         </div>
-        
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="roles"></label>
+            <input type="text" formControlName="roles" placeholder="roles" />
+              <div *ngIf="formSubmitted && form['roles']?.invalid" class="error-message" >
+                <app-error [err]="form['roles']"></app-error>
+              </div>
 
+          </div>
+        </div>
+       
+
+      <!-- Dans votre modèle Angular -->
+
+
+        
         <div class="col-12" style="margin-top: 1rem">
           <button type="submit" mat-flat-button color="primary" (click)="updateUser(frombuil)">
             Enregistrer

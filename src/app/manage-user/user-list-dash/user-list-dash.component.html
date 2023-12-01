@@ -17,8 +17,13 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="contact__form-input" style="display: flex;">
-          <input style="background-color: transparent;" type="text" placeholder="Search by cin" id="search" name="search" [(ngModel)]="searchTerm" (keyup)="searchUser()" />
-          <i-tabler style="margin: 1.5rem 0 0 -2.2rem; color: #cacaca;" class="routeIcon" name="search" matListItemIcon></i-tabler>
+          <input
+          type="search"
+          class="form-control mr-sm-2"
+          placeholder="   Rechercher "
+          [(ngModel)]="searchText"
+          (keyup)="onSearchChange()"/>
+
         </div>
       </div>
       <div class="col-sm-8 text-right">

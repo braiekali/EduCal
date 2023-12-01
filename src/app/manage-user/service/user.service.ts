@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class UserService {
+  role: Role[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -48,6 +49,7 @@ getAllUsers(): Observable<User[]> {
 
 updateUser(user: any, imageFile: File): Observable<any> {
   const formData = new FormData();
+ 
 
   // Ajoutez chaque champ du modèle utilisateur individuellement
   formData.append('idUser', user.idUser);
@@ -56,6 +58,21 @@ updateUser(user: any, imageFile: File): Observable<any> {
   formData.append('email', user.email);
   formData.append('cin', user.cin);
   formData.append('phone', user.phone);
+  formData.append('password', user.password);
+  if (typeof user.enabled !== 'undefined') {
+    formData.append('enabled', user.enabled.toString());
+  }
+
+  if (typeof user.active !== 'undefined') {
+    formData.append('active', user.active.toString());
+  }
+
+  formData.append('roles', user.roles);
+
+
+
+    // Append the role name to the formData
+ 
 
   // Assurez-vous que l'image est définie avant de l'ajouter au FormData
   if (imageFile) {
@@ -65,7 +82,7 @@ updateUser(user: any, imageFile: File): Observable<any> {
   // Utilisez l'opérateur de concaténation de chaînes pour construire l'URL
   const url = `${environment.url}/user/updateuser`;
 
-  return this.http.put<any>(url, formData);
+  return this.http.patch<any>(url, formData);
 }
 
 // Delete user by ID
@@ -76,13 +93,7 @@ deleteUser(userId: number): Observable<any> {
 findByCin(cin: number): Observable<User> {
   const url = environment.url + `/user/cin/${cin}`;
   return this.http.get<User>(url)
-    .pipe(
-      catchError((error: any) => {
-        console.error('Erreur de recherche par CIN :', error);
-        // Traitez l'erreur ici (affichage d'un message d'erreur, etc.)
-        return throwError(error);
-      })
-    );
+   
 }
 checkEmailExists(email: string): Observable<boolean> {
   const url = environment.url +`/user/checkEmailExists?email=${email}`;

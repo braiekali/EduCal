@@ -6,6 +6,11 @@ import { FrontComponent } from './layouts/front/front.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import {RoleListDashComponent} from './manage-user/role-list-dash/role-list-dash.component' ;
+import {AuthentificationGuard} from '../app/pages/authentication/auth.guard';
+import {roleGuard} from '../app/pages/authentication/role.guard';
+import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
+import { AppSideLoginComponent } from './pages/authentication/login/login.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -21,6 +26,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
+      //manière asynchrone seulement lorsque la route /users est activée.(lazy loading)
       {
         path: 'users',
         loadChildren: () =>
@@ -39,7 +45,7 @@ const routes: Routes = [
             (m) => m.UniversityModule
           ),
       },
-    ],
+    ],canActivate: [AuthentificationGuard,roleGuard]
   },
 
   //front-----------------------
@@ -76,6 +82,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
+      //manière asynchrone seulement lorsque la route /'' est activée.(lazy loading)
       {
         path: '',
         loadChildren: () =>
@@ -83,6 +90,7 @@ const routes: Routes = [
             (m) => m.AuthenticationModule
           ),
       },
+  
     ]
   },
   {

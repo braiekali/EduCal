@@ -21,9 +21,7 @@ export class ResetPasswordDialogComponent {
   formSubmitted = false;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService, // Inject your password service
-    public dialogRef: MatDialogRef<ResetPasswordDialogComponent>
+    private fb: FormBuilder,private authService: AuthService, public dialogRef: MatDialogRef<ResetPasswordDialogComponent>
   ) { }
 
   ngOnInit(): void {
@@ -45,23 +43,19 @@ export class ResetPasswordDialogComponent {
 
     const email = this.resetForm.value.email;
 
-    // Call your password service to initiate the reset process
     this.authService.resetPasswordRequest(email).subscribe(
       (response) => {
         console.log('Password reset request successful:', response);
-        // Handle success, maybe show a confirmation message to the user
-        // You may want to close the dialog or navigate the user to another page
         this.dialogRef.close();
       },
       (error) => {
         console.error('Password reset request failed:', error);
-        // Handle error, show an error message to the user
       }
     );
     this.dialogRef.close();
     Swal.fire({
       title: " YOOO!",
-      text: "Merci de verifier votre email et click on the lin to reset your password!",
+      text: "Merci de vérifier votre e-mail et de cliquer sur le lien pour réinitialiser votre mot de passe.",
       icon: "info"
     })
   }
