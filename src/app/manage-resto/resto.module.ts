@@ -26,6 +26,8 @@ import { RestoDetailUserComponent } from './resto-detail-user/resto-detail-user.
 import {AppErrorModule} from "../app-error/app-error.module";
 import {ErrorComponent} from "../error/error.component";
 import { StatisticsComponentComponent } from './statistics-component/statistics-component.component';
+import {HighlightDirective} from "./highlight.directive";
+
 
 
 @NgModule({
@@ -42,10 +44,12 @@ import { StatisticsComponentComponent } from './statistics-component/statistics-
     RestoDetailUserComponent,
     ErrorComponent,
     StatisticsComponentComponent,
+    HighlightDirective,
 
   ],
   imports: [
     CommonModule,
+
     RestoRoutingModule,
     FormsModule,
     MatButtonModule,
@@ -63,4 +67,5 @@ import { StatisticsComponentComponent } from './statistics-component/statistics-
     AppErrorModule,
   ]
 })
-export class RestoModule { }
+export class RestoModule {
+}

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RestoServiceService} from "../resto-service.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-resto-detail-user',
@@ -11,8 +11,10 @@ export class RestoDetailUserComponent implements OnInit{
   idRestaurant: number;
   ELEMENT_DATA: any;
   plats: any[];
+  platDetails: any
+  platId: number;
   test = "http://localhost:8082/upload-directory/";
-  constructor( private restoService:RestoServiceService, private route: ActivatedRoute) {
+  constructor( private platService: RestoServiceService, private restoService:RestoServiceService, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -45,6 +47,26 @@ export class RestoDetailUserComponent implements OnInit{
       },
       error => {
         console.error('Error fetching plats:', error);
+      }
+    );
+  }
+
+  navigateToDetails(id: number): void {
+    if (id !== undefined && id !== null) {
+      this.router.navigate(['/restaurants/Plats-detail', id]);
+    } else {
+      console.error('Invalid id:', id);
+      // Handle the case where id is not valid, e.g., show an error message.
+    }
+  }
+
+  loadPlatDetails() {
+    this.platService.getPlatById(this.platId).subscribe(
+      (data) => {
+        this.platDetails = data;
+      },
+      (error) => {
+        console.error('Error fetching plat details', error);
       }
     );
   }

@@ -28,28 +28,21 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-xxl-10 col-xl-10 col-lg-10">
+        <div  class="col-xxl-10 col-xl-10 col-lg-10">
           <div class="page__title-wrapper mt-110">
-            <span class="page__title-pre">Developmentt</span>
-            <h3 class="page__title-2">
-              The Challenge Of Global Learning In Public Education
+            <span  class="page__title-pre">Notre Plat</span>
+
+            <h3   appHighlight="customHighlightColor" (highlightEvent)="onHighlightEvent($event)" class="page__title-2">
+
+            {{platDetails.nomPlat}}
+
             </h3>
             <div class="blog__meta d-flex align-items-center">
               <div class="blog__author d-flex align-items-center mr-40">
-                <div class="blog__author-thumb mr-10">
-                  <img
-                    src="../../../../assets/front/img/blog/author/author-1.jpg"
-                    alt=""
-                  />
-                </div>
-                <div class="blog__author-info blog__author-info-2">
-                  <h5>Jim Séchen</h5>
-                </div>
+
+
               </div>
-              <div class="blog__date blog__date-2 d-flex align-items-center">
-                <i class="fal fa-clock"></i>
-                <span>April 02, 2022</span>
-              </div>
+
             </div>
           </div>
         </div>
@@ -65,91 +58,48 @@
         <div class="col-xxl-8 col-xl-8 col-lg-8">
           <div class="blog__wrapper">
             <div class="blog__text mb-40">
-              <p>
-                Me old mucker argy-bargy I'm telling pear shaped Jeffrey super
-                brilliant, I excuse my French blatant gormless up the duff, cup
-                of char up the kyver tosser cras happy days. The full monty he
-                nicked it he legged it bum bag burke plastered arse over tit
-                it's your round owt to do with me pardon you, on your bike mate
-                hanky panky mush cuppa only a quid crikey Jeffrey skive off,
-                faff about so I said what a load of rubbish blag David knees up
-                cockup cras. Argy-bargy give us a bell wellies gosh skive off
-                old bodge cheesed off A bit of how's your father off his nut
-                bamboozled, bugger say I'm telling morish bleeding boot up the
-                kyver nice one brilliant, ruddy jolly good fanny around chinwag
-                amongst brown bread arse brolly. Horse play it's all gone to pot
-                codswallop easy peasy mush knees up down the pub jolly good nice
-                one tosser it's your round lurgy, I vagabond barmy off his nut
-                only a quid so I said is gosh Charles blow off, pardon me chip
-                shop Richard spiffing skive off bleeding get stuffed mate
-                porkies amongst the full monty.
-              </p>
+              <div class="blog__link mb-35">
+                <h3>
+                 Description de Plat
+                </h3>
+              </div>
+
             </div>
-            <div class="blog__quote grey-bg mb-45 p-relative fix">
+            <div class="blog__author-content grey-bg mb-45 p-relative fix">
               <img
                 class="quote"
                 src="../../../../assets/front/img/blog/quote-1.png"
                 alt=""
               />
-              <blockquote>
+
                 <p>
-                  After I started learning design with Quillow, I realized that
-                  I had Improved to very advanced levels.
+                  {{platDetails.description}}
                 </p>
-                <h4>Chris Collins</h4>
-              </blockquote>
+
+
             </div>
-            <div class="blog__text mb-30">
-              <p>
-                Horse play it's all gone to pot codswallop easy peasy mush knees
-                up down the pub jolly good nice one tosser it's your round
-                lurgy, I vagabond barmy off his nut only a quid so I said is
-                gosh Charles blow off, pardon me chip shop Richard spiffing
-                skive off bleeding get stuffed mate porkies amongst the full
-                monty. Daft burke you
-              </p>
-            </div>
-            <div class="blog__link mb-35">
-              <p>
-                The little rotter bum bag a blinding shot gosh spifing butty
-                eatonwha load of rubbish bamboozled.
-                <a href="#"> https://educal.com/courses</a>
-              </p>
-            </div>
+
             <div class="blog__img w-img mb-45">
               <img
-                src="../../../../assets/front/img/blog/big/blog-big-1.jpg"
+                [src]="test + platDetails.imagePlat"
                 alt=""
               />
             </div>
             <div class="blog__text mb-40">
-              <h3>Build a beautiful website with Quillow</h3>
+              <h3>{{platDetails.nomPlat}}</h3>
               <p>
-                Some dodgy chav car boot blower starkers bonnet tickety-boo no
-                biggie cheesed off, Oxford bloke fantastic the wireless bevvy
-                cobblers chancer give us a bell, bleeder jolly good hanky panky
-                do one gormless matie boy. Pear shaped my good sir I cobblers at
-                public school quaint tickety-boo crikey bits and bobs, wellies
-                bugger all mate golly gosh brolly matie boy fanny around chimney
-                pot cracking goal my lady, bodge so I said spiffing posh the
-                full monty don't get shirty with me no biggie.
+                {{platDetails.description}}
               </p>
 
-              <p>
-                Brolly grub blimey victoria sponge blag nancy boy don't get
-                shirty with me skive off bobby burke in my flat bog-standard,
-                easy peasy golly gosh up the duff show off show off pick your
-                nose and blow off gosh a brilliant that what a load of rubbish.
-              </p>
             </div>
             <div class="blog__line"></div>
             <div
               class="blog__meta-3 d-sm-flex justify-content-between align-items-center mb-80"
             >
               <div class="blog__tag-2">
-                <a href="#">Art & Design</a>
-                <a href="#">Education</a>
-                <a href="#">App</a>
+                <a href="#">#Food</a>
+                <a href="#">#Universite</a>
+                <a href="#">#Decouvert</a>
               </div>
               <div class="blog__social d-flex align-items-center">
                 <h4>Share:</h4>
@@ -182,111 +132,8 @@
                 </p>
               </div>
             </div>
-            <div class="blog__recent mb-65">
-              <div class="section__title-wrapper mb-40">
-                <h2 class="section__title">
-                  Related
-                  <span class="yellow-bg-sm"
-                  >Post
-                    <img
-                      src="../../../../assets/front/img/shape/yellow-bg-4.png"
-                      alt=""
-                    />
-                  </span>
-                </h2>
-                <p>
-                  You don't have to struggle alone, you've got our assistance
-                  and help.
-                </p>
-              </div>
-              <div class="row">
-                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                  <div class="blog__item white-bg mb-30 transition-3 fix">
-                    <div class="blog__thumb w-img fix">
-                      <a href="blog-details.html">
-                        <img
-                          src="../../../../assets/front/img/blog/blog-1.jpg"
-                          alt=""
-                        />
-                      </a>
-                    </div>
-                    <div class="blog__content">
-                      <div class="blog__tag">
-                        <a href="#">Art & Design</a>
-                      </div>
-                      <h3 class="blog__title">
-                        <a href="blog-details.html"
-                        >The Challenge Of Global Learning In Public
-                          Education</a
-                        >
-                      </h3>
 
-                      <div
-                        class="blog__meta d-flex align-items-center justify-content-between"
-                      >
-                        <div class="blog__author d-flex align-items-center">
-                          <div class="blog__author-thumb mr-10">
-                            <img
-                              src="../../../../assets/front/img/blog/author/author-1.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div class="blog__author-info">
-                            <h5>Jim Séchen</h5>
-                          </div>
-                        </div>
-                        <div class="blog__date d-flex align-items-center">
-                          <i class="fal fa-clock"></i>
-                          <span>April 02, 2022</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                  <div class="blog__item white-bg mb-30 transition-3 fix">
-                    <div class="blog__thumb w-img fix">
-                      <a href="blog-details.html">
-                        <img
-                          src="../../../../assets/front/img/blog/blog-2.jpg"
-                          alt=""
-                        />
-                      </a>
-                    </div>
-                    <div class="blog__content">
-                      <div class="blog__tag">
-                        <a href="#" class="purple">Marketing</a>
-                      </div>
-                      <h3 class="blog__title">
-                        <a href="blog-details.html"
-                        >Exactly How Technology Can Make Reading Better</a
-                        >
-                      </h3>
 
-                      <div
-                        class="blog__meta d-flex align-items-center justify-content-between"
-                      >
-                        <div class="blog__author d-flex align-items-center">
-                          <div class="blog__author-thumb mr-10">
-                            <img
-                              src="../../../../assets/front/img/blog/author/author-2.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div class="blog__author-info">
-                            <h5>Barry Tone</h5>
-                          </div>
-                        </div>
-                        <div class="blog__date d-flex align-items-center">
-                          <i class="fal fa-clock"></i>
-                          <span>July 02, 2022</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="latest-comments mb-95">
               <h3>3 Comments</h3>
               <ul>
@@ -455,69 +302,41 @@
                 </div>
               </div>
             </div>
-            <div class="sidebar__widget mb-55">
+            <div  class="sidebar__widget mb-55">
               <div class="sidebar__widget-head mb-35">
-                <h3 class="sidebar__widget-title">Recent posts</h3>
+                <h3 class="sidebar__widget-title">Plats Recents</h3>
               </div>
-              <div class="sidebar__widget-content">
+              <div *ngFor="let plat of plats" class="sidebar__widget-content">
                 <div class="rc__post-wrapper">
                   <div class="rc__post d-flex align-items-center">
                     <div class="rc__thumb mr-20">
                       <a href="blog-details.html"
                       ><img
-                        src="../../../../assets/front/img/blog/sm/blog-sm-1.jpg"
+                        [src]="test + plat.imagePlat"
                         alt=""
                       /></a>
                     </div>
-                    <div class="rc__content">
+                    <div class="rc__content ">
                       <div class="rc__meta">
-                        <span>October 15, 2021</span>
+                        <span>Decouvrir</span>
                       </div>
                       <h6 class="rc__title">
                         <a href="blog-details.html"
-                        >The Importance Intrinsic Motivation.</a
+                        >{{plat.nomPlat}}</a
+                        >
+                      </h6>
+                    </div>
+                    <div class="rc__content">
+
+                      <h6 class="rc__title">
+                        <a href="blog-details.html"
+                        ></a
                         >
                       </h6>
                     </div>
                   </div>
-                  <div class="rc__post d-flex align-items-center">
-                    <div class="rc__thumb mr-20">
-                      <a href="blog-details.html"
-                      ><img
-                        src="../../../../assets/front/img/blog/sm/blog-sm-2.jpg"
-                        alt=""
-                      /></a>
-                    </div>
-                    <div class="rc__content">
-                      <div class="rc__meta">
-                        <span>March 26, 2021</span>
-                      </div>
-                      <h6 class="rc__title">
-                        <a href="blog-details.html"
-                        >A Better Alternative To Grading Student.</a
-                        >
-                      </h6>
-                    </div>
-                  </div>
-                  <div class="rc__post d-flex align-items-center">
-                    <div class="rc__thumb mr-20">
-                      <a href="blog-details.html"
-                      ><img
-                        src="../../../../assets/front/img/blog/sm/blog-sm-3.jpg"
-                        alt=""
-                      /></a>
-                    </div>
-                    <div class="rc__content">
-                      <div class="rc__meta">
-                        <span>October 15, 2021</span>
-                      </div>
-                      <h6 class="rc__title">
-                        <a href="blog-details.html"
-                        >Strategic Social Media & Evolution of Visual</a
-                        >
-                      </h6>
-                    </div>
-                  </div>
+
+
                 </div>
               </div>
             </div>
