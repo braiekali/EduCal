@@ -1,0 +1,65 @@
+<h1 mat-dialog-title style="margin-bottom: 2rem">Ajouter Bloc</h1>
+
+<div mat-dialog-content>
+    <div class="contact__form">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+            <input type="hidden" name="idFoyer" [ngModel]="idFoyer" />
+
+            <div class="row">
+
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                    <div class="contact__form-input">
+                        <label for="nomBloc">Nom de bloc</label>
+                        <input type="text" placeholder="Nom Bloc" id="nomBloc" name="nomBloc" #n="ngModel"
+                            pattern="[a-zA-Z ]*" ngModel required />
+                        <div *ngIf="n.invalid">
+                            <app-error [err]="n"></app-error>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                    <div class="contact__form-input">
+                        <label class="contact__form-input-label" for="capaciteBloc">Capacite bloc</label>
+                        <input type="number" placeholder="Capacite bloc" id="capaciteBloc" name="capaciteBloc" ngModel
+                            required #c="ngModel" max="300" />
+                        <div *ngIf="c.invalid">
+
+                            <app-error [err]="c"></app-error>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                    <div class="contact__form-input">
+                        <label for="nombreEtage">Nombre d'etage</label>
+                        <input type="number" placeholder="Nombre etage" id="nombreEtage" name="nombreEtage" #e="ngModel"
+                            max="5" ngModel required />
+                        <div *ngIf="e.invalid">
+
+                            <app-error [err]="e"></app-error>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                    <div class="">
+                        <label for="imageBloc">image de bloc</label>
+                        <input type="file" ngModel name="imageBloc" id="imageBloc" required />
+
+                    </div>
+                </div>
+
+                <div class="col-12" style="margin-top: 1rem">
+                    <button type="submit" mat-flat-button color="primary" [disabled]="f.invalid">
+                        Ajouter
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

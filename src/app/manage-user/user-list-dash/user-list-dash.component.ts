@@ -13,6 +13,7 @@ import { EditUserDialogDashComponent } from '../edit-user-dialog-dash/edit-user-
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from 'app/pages/authentication/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -86,7 +87,19 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
         this.userService.deleteUser(idUser).subscribe(
           (data: any) => {
             this.refreshData();
+           // Show success message if needed
+           Swal.fire('Supprimé!', 'Le rôle a été supprimé.', 'success');
           },
+          (error: any) => {
+            // Check if the error status is 403 (Forbidden)
+            if (error instanceof HttpErrorResponse && error.status === 403) {
+              // Show Swal error message for forbidden operation
+              Swal.fire('Erreur!', 'Vous ne pouvez pas supprimer cet utilisateur. Il est utilisé.', 'error');
+            } else {
+              // Show a generic error message for other errors
+              Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la suppression de cet utilisateur.', 'error');
+            }
+          }
         );
       }
     });

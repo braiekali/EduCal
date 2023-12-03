@@ -1,0 +1,128 @@
+<main>
+
+    <section class="teacher__area pt-150 pb-110">
+        <div class="page__title-shape">
+            <img class="page-title-shape-5 d-none d-sm-block" src="assets/images/page-title/page-title-shape-1.png"
+                alt="">
+            <img class="page-title-shape-6" src="assets/images/page-title/page-title-shape-6.png" alt="">
+            <img class="page-title-shape-3" src="assets/images/page-title/page-title-shape-3.png" alt="">
+            <img class="page-title-shape-7" src="assets/images/page-title/page-title-shape-4.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+                    <div class="teacher__details-thumb p-relative w-img pr-30">
+                        <div class="uni__img__container">
+                            <img class="uni__img" [src]="bloc.imageBloc" alt="Image Bloc">
+                        </div>
+                        <div class="teacher__details-shape">
+                            <img class="teacher-details-shape-1" src="assets/images/teacher/details/shape/shape-1.png"
+                                alt="">
+                            <img class="teacher-details-shape-2" src="assets/images/teacher/details/shape/shape-2.png"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-8 col-xl-8 col-lg-8">
+                    <div class="teacher__wrapper">
+                        <div class="teacher__top d-md-flex align-items-end justify-content-between">
+                            <div class="teacher__info">
+                                <h4> {{bloc.nomBloc}}</h4>
+
+                            </div>
+
+                            <div class="teacher__social-2 m-t-32">
+                                <h4>Follow Us</h4>
+                                <ul>
+                                    <li>
+                                        <a href="#" mat-icon-button
+                                            class="d-flex mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base">
+                                            <i-tabler style="color: #3967ff; font-weight: 100;"
+                                                class="routeIcon Extended-Fab__icon" name="brand-facebook"
+                                                matListItemIcon></i-tabler>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" mat-icon-button
+                                            class="d-flex mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base">
+                                            <i-tabler style="color: #292929; font-weight: 100;"
+                                                class="routeIcon Extended-Fab__icon" name="brand-x"
+                                                matListItemIcon></i-tabler>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" mat-icon-button
+                                            class="d-flex mdc-icon-button mat-mdc-icon-button mat-unthemed mat-mdc-button-base">
+                                            <i-tabler style="color: #6f90ff; font-weight: 100;"
+                                                class="routeIcon Extended-Fab__icon" name="brand-linkedin"
+                                                matListItemIcon></i-tabler>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="teacher__bio">
+                            <h4 style="font-weight: normal;">La capacité de bloc est: {{ bloc.capaciteBloc }}</h4>
+                            <h4 style="font-weight: normal;">Le nombre d'etage de bloc est: {{ bloc.nombreEtage }}</h4>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="teacher__courses pt-55">
+                    <div class="section__title-wrapper mb-30">
+                        <h2 class="section__title">Liste des chambres <span class="yellow-bg yellow-bg-big">de bloc<img
+                                    src="assets/images/shape/yellow-bg.png"
+                                    style="margin-bottom: -1.3rem; margin-left: .6rem;" alt=""></span></h2>
+                    </div>
+                    <div class="teacher__course-wrapper">
+                        <div class="teacher__course-wrapper">
+                            <div class="row">
+                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6" *ngFor="let chambre of chambres">
+                                    <div class="course__item white-bg mb-30 fix">
+                                        <div class="course__thumb w-img p-relative fix">
+                                            <a href="course-details.html">
+                                                <img src="assets/front/img/course/course-1.jpg"
+                                                    style="width: 500px; height: 300px;" alt="">
+                                            </a>
+                                            <div class="course__tag">
+                                                <a href="#">{{chambre.numeroChambre}}</a>
+                                            </div>
+                                        </div>
+                                        <div class="course__content">
+                                            <div class="course__meta d-flex align-items-center justify-content-between">
+                                                <div class="course__lesson">
+                                                    <span><i class="far fa-book-alt"></i>{{chambre.nombreEtage}}</span>
+                                                </div>
+                                                <div class="course__rating">
+                                                    <span><i class="icon_star"></i>{{chambre.typeChambre}}</span>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="course__more d-flex justify-content-between align-items-center">
+                                            <div class="course__status">
+                                                <span>Free</span>
+                                            </div>
+                                            <div class="course__btn">
+                                                <a href="course-details.html" class="link-btn">
+                                                    Voir Details
+                                                    <i class="far fa-arrow-right"></i>
+                                                    <i class="far fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,70 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Add Chambre</h1>
+
+<div mat-dialog-content>
+  <!-- Your form or content for adding a user goes here -->
+  <div class="contact__form">
+    <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
+      <div class="row">
+        <div class="col-12 m-b-30">
+          <div class="contact__form-input__image__container">
+            <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview"/>
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+
+            <input type="file" accept="image/*" id="imageUrl" name="imageUrl" ngModel #fileInput
+                   style="display: none;" (change)="onFileSelected($event)" />
+            <!-- Button to trigger file input click -->
+            <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
+                            <span class="Extended-Fab__container">
+                                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
+                                          matListItemIcon></i-tabler>
+                                <span class="Extended-Fab__text">Select Image</span>
+                            </span>
+            </button>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-4 offset-md-4 mb-3">
+            <label class="form-label" for="numero" >Numero</label>
+            <input class="form-control" type="text" placeholder="Numero" id="numero" name="numero" ngModel pattern="[0-9]*" required #numero="ngModel" />
+          </div>
+          <div *ngIf="numero.invalid && (numero.dirty || numero.touched)" class="error-message">
+            <app-error [err]="numero"></app-error>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 offset-md-2 mb-3">
+            <label class="form-label" for="type">Type</label>
+            <select class="form-select" id="type" name="type" ngModel required #t="ngModel">
+              <option *ngFor="let item of type" [value]="item">{{ item }}</option>
+            </select>
+            <div *ngIf="t.invalid && (t.dirty || t.touched)" class="error-message">
+              <app-error [err]="t"></app-error>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-label" for="bloc">Bloc</label>
+            <select class="form-select" id="bloc" name="bloc" ngModel required #b="ngModel">
+              <option *ngFor="let item of bloc" [value]="item.idBloc">{{ item.nomBloc }}</option>
+            </select>
+            <div *ngIf="b.invalid && (b.dirty || b.touched)" class="error-message">
+              <app-error [err]="b"></app-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" style="margin-top: 1rem">
+          <button type="submit" mat-flat-button color="primary" [disabled]="!f.valid">
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

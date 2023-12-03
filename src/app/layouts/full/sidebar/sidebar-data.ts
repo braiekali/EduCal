@@ -32,12 +32,12 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Foyers',
     iconName: 'home',
-    route: '/',
+    route: '/dashboard/foyers/admin',
   },
   {
     displayName: 'Chambre',
     iconName: 'bed',
-    route: '/',
+    route: '/dashboard/chambres/admin',
   },
   // {
   //   displayName: 'Reservations',

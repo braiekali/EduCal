@@ -43,12 +43,26 @@ const routes: Routes = [
         },
       },
       {
+        path: 'foyers',
+        loadChildren: () =>
+          import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
+      },
+    
+      {
         path: 'universities',
         loadChildren: () =>
           import('./manage-university/university.module').then(
             (m) => m.UniversityModule
           ),
       },
+      {
+        path: 'chambres',
+        loadChildren: () =>
+          import('./manage-chambre/chambre.module').then(
+            (m) => m.ChambreModule
+          ),
+      },
+    
     ],canActivate: [AuthentificationGuard,roleGuard]
   },
 
@@ -65,6 +79,11 @@ const routes: Routes = [
       {
         path: 'home',
         component: LandingpageComponent,
+      },
+      {
+        path: 'foyers',
+        loadChildren: () =>
+          import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
       },
     
       {
@@ -85,6 +104,14 @@ const routes: Routes = [
         path: 'events',
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
+      },
+
+      {
+        path: 'chambres',
+        loadChildren: () =>
+          import('./manage-chambre/chambre.module').then(
+            (m) => m.ChambreModule
+          ),
       },
       //manière asynchrone seulement lorsque la route /'' est activée.(lazy loading)
       {
