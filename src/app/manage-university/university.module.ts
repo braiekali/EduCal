@@ -16,26 +16,42 @@ import { AddNewsDialogDashComponent } from './add-news-dialog-dash/add-news-dial
 import { NewsDetailsComponent } from './news-details/news-details.component';
 import { UniversityListComponent } from './university-list/university-list.component';
 import { UniversityDetailComponent } from './university-detail/university-detail.component';
+import { UniversityUpdateComponent } from './university-update/university-update.component';
+import { NewsDetailsDashComponent } from './news-details-dash/news-details-dash.component';
+import { NewsUpdateComponent } from './news-update/news-update.component';
+import { ErrorComponent } from './error/error.component';
+import { CardComponent } from './card/card.component';
+import {ZoomHoverDirective} from "./zoom-hover.directive";
+
+
 
 @NgModule({
-  declarations: [
-    UniversityListDashComponent,
-    AddUniversityDialogDashComponent,
-    UniversityDetailDashComponent,
-    AddNewsDialogDashComponent,
-    NewsDetailsComponent,
-    UniversityListComponent,
-    UniversityDetailComponent,
-  ],
-  imports: [
-    CommonModule,
-    ManageUniversityRoutingModule,
-    MaterialModule,
-    FormsModule,
-    TablerIconsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    declarations: [
+        UniversityListDashComponent,
+        AddUniversityDialogDashComponent,
+        UniversityDetailDashComponent,
+        AddNewsDialogDashComponent,
+        NewsDetailsComponent,
+        UniversityListComponent,
+        UniversityDetailComponent,
+        UniversityUpdateComponent,
+        NewsDetailsDashComponent,
+        NewsUpdateComponent,
+        ErrorComponent,
+        CardComponent,
+      ZoomHoverDirective,
+    ],
+    imports: [
+        CommonModule,
+        ManageUniversityRoutingModule,
+        MaterialModule,
+        FormsModule,
+        TablerIconsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+    ],
+
   exports: [TablerIconsModule],
 })
 export class UniversityModule {}

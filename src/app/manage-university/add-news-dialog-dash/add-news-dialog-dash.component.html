@@ -9,80 +9,47 @@
 <div mat-dialog-content>
     <!-- Your form or content for adding a user goes here -->
     <div class="contact__form">
-        <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
+        <form #f="ngForm" >
             <div class="row">
-                <div class="col-12 m-b-30">
-                    <div class="contact__form-input__image__container">
-                        <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview" />
-                    </div>
-                    <div class="contact__form-input contact__form-input__image__btns">
-                        <input type="file" accept="image/*" id="Image" name="userImage" ngModel #fileInput
-                            style="display: none;" (change)="onFileSelected($event)" />
-                        <!-- Button to trigger file input click -->
-                        <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Select Image</span>
-                            </span>
-                        </button>
 
-                        <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
-                            (click)="resetAvatarImage()">
-                            <span class="Extended-Fab__container">
-                                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
-                                    matListItemIcon></i-tabler>
-                                <span class="Extended-Fab__text">Reset Image</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+
+
+
                 <div class="col-xxl-6 col-xl-6 col-md-6">
                     <div class="contact__form-input">
-                        <label class="contact__form-input-label" for="nom">Nom</label>
-                        <input type="text" placeholder="Your Name" id="nom" name="name" ngModel />
+                        <label for="titreActualite">Titre </label>
+                        <input type="text" placeholder="titre Actualite" id="titreActualite" name="titreActualite"  ngModel #titre="ngModel"  required/>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-6 col-md-6">
+
+              <div *ngIf="titre.invalid && titre.touched">
+                <app-error [err]="titre"></app-error>
+              </div>
+                <!--<div class="col-12">
                     <div class="contact__form-input">
-                        <label for="Prenom">Prenom</label>
-                        <input type="email" placeholder="Prenom" id="Prenom" name="prenom" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Date">Date</label>
+                        <label for="dateActualite">Date</label>
                         <div style="display: flex;">
-                            <input type="text" placeholder="YYYY-MM-DD" id="Date" name="Date" matInput
+                            <input type="text" placeholder="YYYY-MM-DD" id="dateActualite" name="dateActualite" matInput
                                 [matDatepicker]="picker" ngModel />
                             <mat-datepicker-toggle matIconSuffix [for]="picker"
                                 style="margin: .7rem 0 0 -3rem"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12">
                     <div class="contact__form-input">
-                        <label for="Email">Email</label>
-                        <input type="email" placeholder="example@gmail.com" id="Email" name="email" ngModel />
+                        <label for="description">Description</label>
+                        <input type="text" placeholder="description" id="description" name="description" ngModel required #description="ngModel" />
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Tel">Tel</label>
-                        <input type="text" placeholder="num tel" id="Tel" name="tel" ngModel />
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="contact__form-input">
-                        <label for="Description">Description</label>
-                        <textarea placeholder="Enter Your Description" id="Description" name="description"
-                            ngModel></textarea>
-                    </div>
-                </div>
+              <div *ngIf="description.invalid && description.touched">
+                <app-error [err]="description"></app-error>
+              </div>
+
                 <div class="col-12" style="margin-top: 1rem">
-                    <button type="submit" mat-flat-button color="primary">
-                        Add
+                    <button type="submit" mat-flat-button color="primary" (click)="addActualite(f.value)" [disabled]="">
+                       Ajouter
                     </button>
                 </div>
             </div>

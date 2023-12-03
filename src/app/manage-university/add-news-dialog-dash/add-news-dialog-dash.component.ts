@@ -1,5 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {Component, Inject, ViewChild} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {UniversiteService} from "../services/universite.service";
+import {Actualite} from "../models/Actualite";
+import {ActualiteService} from "../services/actualite.service";
 
 @Component({
   selector: 'app-add-news-dialog-dash',
@@ -7,31 +10,34 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-news-dialog-dash.component.scss'],
 })
 export class AddNewsDialogDashComponent {
-  constructor(public addDialogRef: MatDialogRef<AddNewsDialogDashComponent>) {}
+  selectedDate: any=Date.now();
+   dateObject = new Date(this.selectedDate);
 
-  imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg'; // To store the URL of the selected image
-  @ViewChild('fileInput') fileInput: any;
+
+  actualite=new Actualite();
+  constructor(public addDialogRef: MatDialogRef<AddNewsDialogDashComponent>,private serviceAct:ActualiteService,@Inject(MAT_DIALOG_DATA) public data: any)  {
+  //console.log("hhhhhhhhhh",this.data.idUniversite);
+}
+ // imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg'; // To store the URL of the selected image
+  //@ViewChild('fileInput') fileInput: any;
   // @Output() addFormSubmit: EventEmitter<any> = new EventEmitter<any>();
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      // Read the selected image file and update the preview
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+  addActualite(Data:any){
+    Data.dateActualite=this.dateObject;
+    console.log(Data,this.data.idUniversite);
+    this.serviceAct.affecterUniversiteAActualite(this.data.idUniversite,Data).subscribe(
+      () => {
+        console.log(Data,this.data.idUniversite);
+        alert('Added Successfully');
+        //this.frombuil.reset();
+      }
+    );
+    this.addDialogRef.close(Data);
   }
 
-  triggerFileInputClick(): void {
-    this.fileInput.nativeElement.click();
-  }
 
-  resetAvatarImage() {
-    this.imageUrl = './assets/images/profile/user-1.jpg';
-  }
+
+
 
   closeDialog(): void {
     this.addDialogRef.close();
@@ -45,4 +51,6 @@ export class AddNewsDialogDashComponent {
     // formData.userImage = this.imageUrl;
     this.addDialogRef.close(formData);
   }
+
+  protected readonly Actualite = Actualite;
 }

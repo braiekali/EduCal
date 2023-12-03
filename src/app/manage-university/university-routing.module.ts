@@ -5,6 +5,9 @@ import { UniversityDetailDashComponent } from './university-detail-dash/universi
 import { NewsDetailsComponent } from './news-details/news-details.component';
 import { UniversityListComponent } from './university-list/university-list.component';
 import { UniversityDetailComponent } from './university-detail/university-detail.component';
+import {UniversityUpdateComponent} from "./university-update/university-update.component";
+import {NewsDetailsDashComponent} from "./news-details-dash/news-details-dash.component";
+import {UniversityResolver} from "./university-resolver.service";
 
 const routes: Routes = [
   {
@@ -18,7 +21,27 @@ const routes: Routes = [
         path: ':id',
         component: UniversityDetailDashComponent,
       },
+      {
+        path: 'update/:id',
+        component: UniversityUpdateComponent,
+      },
+      {
+        path: 'news/:id',
+        component: NewsDetailsDashComponent,
+      },
+      {
+        path: 'news/update/:id',
+        component: UniversityUpdateComponent,
+      },
+      {
+        path: 'dashboard/universities',
+        component: UniversityListDashComponent,
+        resolve: {
+          universities: UniversityResolver,
+        },
+      }
     ],
+
   },
   {
     path: '',
