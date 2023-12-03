@@ -7,10 +7,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class CardComponent {
   @Input() university: any;
-  @Output()sendmsg=new EventEmitter();
+  isZoomed = false;
 
-
-  sendDataToParent(){
-    this.sendmsg.emit('bonjour');
+  onZoomChange(event: boolean) {
+    this.isZoomed = event;
   }
 }
+

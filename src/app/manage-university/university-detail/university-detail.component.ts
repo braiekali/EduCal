@@ -13,6 +13,8 @@ export class UniversityDetailComponent {
   universityDetails: any;
   idUniversite: number;
   dataSource: any;
+  imageBasePath: string = 'http://localhost:8082/upload-directory/';
+
   constructor(private route: ActivatedRoute,private serviceUniv:UniversiteService,private serviceAct:ActualiteService) {
   }
 ngOnInit(){
@@ -44,5 +46,6 @@ ngOnInit(){
     }
 
   )
+
 }
 }

@@ -2,10 +2,10 @@
   <div class="tab-content" id="courseTabContent">
     <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
 
-          <div class="course__item white-bg mb-30 fix">
+          <div class="course__item white-bg mb-30 fix" appZoomHover (mouseZoom)="onZoomChange($event)">
             <div class="course__thumb w-img p-relative fix">
               <a href="course-details.html">
-                <img src="../../../../assets/front/img/course/course-1.jpg"
+                <img  src="{{ university.image }} " width="200px" height="300px"
                      alt="" />
               </a>
               <div class="course__tag">
@@ -37,6 +37,7 @@
                 <span>{{university.telUniversite}}</span>
               </div>
               <div class="course__btn">
+                <!-- (click)="onMoreInfoClick()" -->
                 <a [routerLink]="['/universities',university.idUniversite]" class="link-btn">
                   Plus d'informations
                   <i class="far fa-arrow-right"></i>

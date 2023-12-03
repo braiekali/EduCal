@@ -23,7 +23,7 @@
                 </div>
 
               <div *ngIf="titre.invalid && titre.touched">
-                <app-error [erreur]="titre"></app-error>
+                <app-error [err]="titre"></app-error>
               </div>
                 <!--<div class="col-12">
                     <div class="contact__form-input">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
               <div *ngIf="description.invalid && description.touched">
-                <app-error [erreur]="description"></app-error>
+                <app-error [err]="description"></app-error>
               </div>
 
                 <div class="col-12" style="margin-top: 1rem">

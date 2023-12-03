@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import {UniversityUpdateComponent} from "../university-update/university-update.component";
 import {NewsUpdateComponent} from "../news-update/news-update.component";
 
+
 @Component({
   selector: 'app-university-detail-dash',
   templateUrl: './university-detail-dash.component.html',
@@ -18,7 +19,9 @@ import {NewsUpdateComponent} from "../news-update/news-update.component";
 export class UniversityDetailDashComponent implements AfterViewInit {
   universityDetails: any;
   idUniversite: number;
-    constructor(private addNewsDialog: MatDialog, private updateNewsDialog: MatDialog,private route: ActivatedRoute,private serviceUniv:UniversiteService,private serviceAct: ActualiteService) {}
+  imageBasePath: string = 'http://localhost:8082/upload-directory/';
+
+  constructor(private addNewsDialog: MatDialog, private updateNewsDialog: MatDialog,private route: ActivatedRoute,private serviceUniv:UniversiteService,private serviceAct: ActualiteService) {}
 
   dataSource: any;
   displayedColumns: string[] = ['idActualite', 'titreActualite', 'description', 'dateActualite', 'action'];

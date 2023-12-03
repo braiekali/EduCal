@@ -21,22 +21,26 @@ import { NewsDetailsDashComponent } from './news-details-dash/news-details-dash.
 import { NewsUpdateComponent } from './news-update/news-update.component';
 import { ErrorComponent } from './error/error.component';
 import { CardComponent } from './card/card.component';
+import {ZoomHoverDirective} from "./zoom-hover.directive";
+
+
 
 @NgModule({
-  declarations: [
-    UniversityListDashComponent,
-    AddUniversityDialogDashComponent,
-    UniversityDetailDashComponent,
-    AddNewsDialogDashComponent,
-    NewsDetailsComponent,
-    UniversityListComponent,
-    UniversityDetailComponent,
-    UniversityUpdateComponent,
-    NewsDetailsDashComponent,
-    NewsUpdateComponent,
-    ErrorComponent,
-    CardComponent,
-  ],
+    declarations: [
+        UniversityListDashComponent,
+        AddUniversityDialogDashComponent,
+        UniversityDetailDashComponent,
+        AddNewsDialogDashComponent,
+        NewsDetailsComponent,
+        UniversityListComponent,
+        UniversityDetailComponent,
+        UniversityUpdateComponent,
+        NewsDetailsDashComponent,
+        NewsUpdateComponent,
+        ErrorComponent,
+        CardComponent,
+      ZoomHoverDirective,
+    ],
     imports: [
         CommonModule,
         ManageUniversityRoutingModule,
@@ -47,6 +51,7 @@ import { CardComponent } from './card/card.component';
         MatNativeDateModule,
         ReactiveFormsModule,
     ],
+
   exports: [TablerIconsModule],
 })
 export class UniversityModule {}

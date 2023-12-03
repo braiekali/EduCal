@@ -1,3 +1,5 @@
+import {Foyer} from "./Foyer";
+
 export class Universite{
   idUniversite!:number;
   nomUniversite!:string;
@@ -6,6 +8,8 @@ export class Universite{
   descriptonUniversite!:string;
   telUniversite!:number;
   emailUinversite!:string;
+  image!:string;
+  foyer: Foyer;
 
 
 

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MatIconModule } from '@angular/material/icon';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -50,7 +51,9 @@ import { FrontComponent } from './layouts/front/front.component';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
-  ],
+
+
+],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -67,6 +70,7 @@ import { FrontComponent } from './layouts/front/front.component';
     ChambreModule,
     RestoModule,
     ClubModule,
+    MatIconModule,
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],

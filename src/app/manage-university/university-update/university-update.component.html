@@ -9,11 +9,33 @@
 <div mat-dialog-content>
   <!-- Your form or content for adding a user goes here -->
   <div class="contact__form">
-    <form [formGroup]="frombuil">
+    <form [formGroup]="frombuil" >
       <div class="row">
         <div class="col-12 m-b-30">
+          <div class="contact__form-input__image__container">
+            <img class="contact__form-input__image" [src]="image" alt="Image Preview" />
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+            <input type="file" accept="image/*" id="Image" name="userImage" #fileInput
+                   style="display: none;" (change)="onFileSelected($event)" />
+            <!-- Button to trigger file input click -->
+            <button type="button" mat-flat-button class="Extended-Fab" (click)="selectImage()">
+                            <span class="Extended-Fab__container">
+                                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload"
+                                          matListItemIcon></i-tabler>
+                                <span class="Extended-Fab__text">Select Image</span>
+                            </span>
+            </button>
 
-
+            <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
+                    (click)="resetAvatarImage()" >
+                            <span class="Extended-Fab__container">
+                                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel"
+                                          matListItemIcon></i-tabler>
+                                <span class="Extended-Fab__text">Reset Image</span>
+                            </span>
+            </button>
+          </div>
         </div>
         <div class="col-xxl-6 col-xl-6 col-md-6">
           <div class="contact__form-input">
@@ -23,7 +45,7 @@
         </div>
 
         <div *ngIf="frombuil.get('nomUniversite')?.invalid  && frombuil.get('nomUniversite')?.touched">
-          <app-error [erreur]="frombuil.get('nomUniversite')"></app-error>
+          <app-error [err]="frombuil.get('nomUniversite')"></app-error>
         </div>
 
 
@@ -34,7 +56,7 @@
           </div>
         </div>
         <div *ngIf="frombuil.get('adresseUniversite')?.invalid && frombuil.get('adresseUniversite')?.touched">
-          <app-error [erreur]="frombuil.get('adresseUniversite')"></app-error>
+          <app-error [err]="frombuil.get('adresseUniversite')"></app-error>
         </div>
         <div class="col-12">
           <div class="contact__form-input">
@@ -43,7 +65,7 @@
           </div>
         </div>
         <div *ngIf="frombuil.get('ville')?.invalid && frombuil.get('ville')?.touched">
-          <app-error [erreur]="frombuil.get('ville')"></app-error>
+          <app-error [err]="frombuil.get('ville')"></app-error>
         </div>
 
         <div class="col-12">
@@ -53,7 +75,7 @@
           </div>
         </div>
         <div *ngIf="frombuil.get('telUniversite')?.invalid && frombuil.get('telUniversite')?.touched">
-          <app-error [erreur]="frombuil.get('telUniversite')"></app-error>
+          <app-error [err]="frombuil.get('telUniversite')"></app-error>
         </div>
         <div class="col-12">
           <div class="contact__form-input">
@@ -63,7 +85,7 @@
         </div>
 
         <div *ngIf="frombuil.get('descriptionUniversite')?.invalid && frombuil.get('descriptionUniversite')?.touched">
-          <app-error [erreur]="frombuil.get('descriptionUniversite')"></app-error>
+          <app-error [err]="frombuil.get('descriptionUniversite')"></app-error>
         </div>
 
         <div class="col-12">
@@ -73,16 +95,9 @@
           </div>
         </div>
         <div *ngIf="frombuil.get('emailUinversite')?.invalid && frombuil.get('emailUinversite')?.touched">
-          <app-error [erreur]="frombuil.get('emailUinversite')"></app-error>
+          <app-error [err]="frombuil.get('emailUinversite')"></app-error>
         </div>
-        <div class="col-12">
-          <div class="contact__form-input">
-            <label for="foyer">Foyer</label>
-            <select  id="foyer" formControlName="idFoyer" >
-              <option *ngFor="let foyer of foyers " [value]="foyer.idFoyer" >{{foyer.nomFoyer}}</option>
-            </select>
-          </div>
-        </div>
+
         <div class="col-12" style="margin-top: 1rem">
           <button type="submit" mat-flat-button color="primary"  (click)="updateUniversite(frombuil.value)" [disabled]="frombuil.invalid">
             Enregistrer

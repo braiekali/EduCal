@@ -3,12 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUniversityDialogDashComponent } from '../add-university-dialog-dash/add-university-dialog-dash.component';
-import {UniversiteService} from "../services/universite.service";
+import { UniversiteService } from '../services/universite.service';
 import {Universite} from "../models/Universite";
 import Swal from 'sweetalert2';
 import {UniversityUpdateComponent} from "../university-update/university-update.component";
 import {FoyerService} from "../services/foyer.service";
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-university-list-dash',
   templateUrl: './university-list-dash.component.html',
@@ -16,29 +16,45 @@ import {FoyerService} from "../services/foyer.service";
 })
 export class UniversityListDashComponent implements AfterViewInit {
 
-  constructor(private addUniversiteDialog: MatDialog, private updateUniversiteDialog: MatDialog, private serviceUniv: UniversiteService) {
+  constructor(private addUniversiteDialog: MatDialog, private updateUniversiteDialog: MatDialog, private serviceUniv: UniversiteService,private route: ActivatedRoute) {
   }
-  nomFoyer: any;
+  nomUniversite: string = '';
+  imageBasePath: string = 'http://localhost:8082/upload-directory/';
   dataSource: any;
-  displayedColumns: string[] = ['idUniversite', 'nomUniversite', 'adresseUniversite', 'ville', 'descriptionUniversite', 'telUniversite', 'emailUinversite','Foyer', 'action'];
+  displayedColumns: string[] = ['image','idUniversite', 'nomUniversite', 'adresseUniversite', 'ville', 'descriptionUniversite', 'telUniversite', 'emailUinversite','Foyer', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+
+
+  search(): void {
+    this.serviceUniv.searchUniversite(this.nomUniversite).subscribe(
+      (data: any) => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+      },
+    );
+  }
   ngOnInit(): void {
+    this.search();
+
     this.serviceUniv.getUniversites().subscribe(
       (data: any) => {
         this.dataSource = data;
-        console.log("eeeeeeeeeee");
+        console.log(this.dataSource.foyer);
         this.dataSource = new MatTableDataSource(this.dataSource);
         this.dataSource.paginator = this.paginator;
       },
-      (error) => {
+      (error: any) => {
         console.error('Une erreur est survenue :', error);
       }
     );
+    this.route.data.subscribe((data) => {
+      this.dataSource = data['universities'];
+    });
 
   }
 
-  refreshData() {
+  refreshDataSource() {
     this.serviceUniv.getUniversites().subscribe(
       (data: any) => {
         this.dataSource = data;
@@ -67,7 +83,7 @@ export class UniversityListDashComponent implements AfterViewInit {
         this.serviceUniv.deleteUniversite(id).subscribe(
           (data: any) => {
 
-            this.refreshData();
+            this.refreshDataSource();
           },
         );
       }

@@ -6,22 +6,22 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit{
-  @Input()erreur:any ;
+  @Input()err:any ;
   ngOnInit(){
-    console.log(this.erreur)
+    console.log(this.err)
   }
   getErrorMessage() {
-    if (this.erreur.errors) {
-      if (this.erreur.errors.required) {
+    if (this.err.errors) {
+      if (this.err.errors.required) {
         return 'Le champ est obligatoire.';
       }
-      if (this.erreur.errors.email) {
+      if (this.err.errors.email) {
         return 'Le champ est de type email.';
       }
-      if (this.erreur.errors.pattern) {
-        if (this.erreur.errors.pattern.requiredPattern === '/^[a-zA-Z]+$/') {
+      if (this.err.errors.pattern) {
+        if (this.err.errors.pattern.requiredPattern === '/^[a-zA-Z]+$/') {
           return 'Le champ doit contenir uniquement des lettres.';
-        } else if (this.erreur.errors.pattern.requiredPattern === '/^[0-9]{8}$/') {
+        } else if (this.err.errors.pattern.requiredPattern === '/^[0-9]{8}$/') {
           return 'Le champ doit contenir exactement 8 chiffres.';
         }
 
