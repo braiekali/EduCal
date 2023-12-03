@@ -7,11 +7,14 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-news-dialog-dash.component.scss'],
 })
 export class AddNewsDialogDashComponent {
-  constructor(public addDialogRef: MatDialogRef<AddNewsDialogDashComponent>) {}
+  constructor(public addDialogRef: MatDialogRef<AddNewsDialogDashComponent>) {
+  }
 
   imageUrl: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg'; // To store the URL of the selected image
   @ViewChild('fileInput') fileInput: any;
+
   // @Output() addFormSubmit: EventEmitter<any> = new EventEmitter<any>();
+
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

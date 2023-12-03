@@ -36,6 +36,13 @@ const routes: Routes = [
             (m) => m.UniversityModule
           ),
       },
+      {
+        path: 'chambres',
+        loadChildren: () =>
+          import('./manage-chambre/chambre.module').then(
+            (m) => m.ChambreModule
+          ),
+      },
     ],
   },
 
@@ -72,6 +79,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
+      {
+        path: 'chambres',
+        loadChildren: () =>
+          import('./manage-chambre/chambre.module').then(
+            (m) => m.ChambreModule
+          ),
+      },
+
       {
         path: '',
         loadChildren: () =>
