@@ -10,6 +10,7 @@ import {
 import {RestoListDashComponent} from "./resto-list-dash/resto-list-dash.component";
 import {RestoDetailDashComponent} from "./resto-detail-dash/resto-detail-dash.component";
 import {RestoDetailUserComponent} from "./resto-detail-user/resto-detail-user.component";
+import {RestaurantListResolverService} from "./restaurant-list-resolver.service";
 
 const routes: Routes = [
 
@@ -18,7 +19,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
+
         component: RestoListDashComponent,
+        resolve:{
+          restaurantlistresolver : RestaurantListResolverService
+        }
       },
       {
         path: ':id',

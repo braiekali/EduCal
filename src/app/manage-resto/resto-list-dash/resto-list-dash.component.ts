@@ -8,6 +8,7 @@ import {Restaurant} from "../Model/Restaurant";
 import {AddRestoDialogDashComponent} from "../add-resto-dialog-dash/add-resto-dialog-dash.component";
 import {UpdateRestauComponent} from "../update-restau/update-restau.component";
 import { DatePipe } from '@angular/common';
+import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: 'app-resto-list-dash',
   templateUrl: './resto-list-dash.component.html',
@@ -18,7 +19,7 @@ export class RestoListDashComponent implements AfterViewInit{
 
   ];
 
-  constructor(private addUniversiteDialog: MatDialog, private updateDialogRef: MatDialog,private addUserDialog: MatDialog, private Rs:RestoServiceService) {}
+  constructor(private route: ActivatedRoute,private addUniversiteDialog: MatDialog, private updateDialogRef: MatDialog,private addUserDialog: MatDialog, private Rs:RestoServiceService) {}
 
   dataSource: any;
   displayedColumns: string[] = ['nomRestaurant', 'dateOuverture', 'dateFerme', 'action'];
@@ -26,12 +27,15 @@ export class RestoListDashComponent implements AfterViewInit{
   test = "http://localhost:8082/upload-directory/";
 
   ngOnInit(): void {
+    this.route.data.subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data.restaurantlistresolver);
+      this.dataSource.paginator = this.paginator;
+    });
     this.Rs.fetchRestaurant().subscribe(
       (data: any) => {
         this.dataSource = data;
 
-        this.dataSource = new MatTableDataSource(this.dataSource);
-        this.dataSource.paginator = this.paginator;
+
         console.log(this.dataSource)
       },
       (error) => {
@@ -45,7 +49,7 @@ export class RestoListDashComponent implements AfterViewInit{
 
   }
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+
   }
 
   formatDate(dateString: string): string {
