@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -41,6 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {AppErrorModule} from "./app-error.module";
 
 
 @NgModule({
@@ -57,6 +57,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -69,6 +70,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatDialogModule,
     MatButtonModule,
     FormsModule,
+    AppErrorModule,
+
 
     ReactiveFormsModule,
     MaterialModule,

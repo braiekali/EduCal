@@ -33,7 +33,7 @@
                     <a href="#">Events</a>
                   </li> -->
                   <li>
-                    <a href="#">Restaurants</a>
+                    <a routerLink="/restaurants/listResto">Restaurants</a>
                   </li>
                   <li>
                     <a href="#">Clubs</a>
@@ -56,7 +56,7 @@
             <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block" style="margin-left: 2rem; margin-right: 2rem;">
               <a routerLink="login" class="e-btn e-btn-border">Sign In</a>
             </div>
-        
+
             <button *ngIf="isLoggedIn"
             mat-icon-button
             [matMenuTriggerFor]="profilemenu"
@@ -89,7 +89,7 @@
                 ></i-tabler></mat-icon
               >My Task
             </button>
-        
+
             <div class="p-x-12 m-t-12">
               <button mat-stroked-button color="primary" class="w-100" (click)="onLogout()">Logout</button>
             </div>

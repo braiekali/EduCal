@@ -33,8 +33,8 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-user/user.module').then((m) => m.UserModule),
       },
-      
-      //ajout user chaima 
+
+      //ajout user chaima
       {
         path: 'roles',
         component: RoleListDashComponent,
@@ -47,7 +47,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
       },
-    
+
       {
         path: 'universities',
         loadChildren: () =>
@@ -56,13 +56,18 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'restaurants',
+        loadChildren: () =>
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
+      },
+      {
         path: 'chambres',
         loadChildren: () =>
           import('./manage-chambre/chambre.module').then(
             (m) => m.ChambreModule
           ),
       },
-    
+
     ],canActivate: [AuthentificationGuard,roleGuard]
   },
 
@@ -85,7 +90,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
       },
-    
+
       {
         path: 'universities',
         loadChildren: () =>
@@ -99,6 +104,11 @@ const routes: Routes = [
           import('./manage-specialite/specialite.module').then(
             (m) => m.SpecialiteModule
           ),
+      },
+      {
+        path: 'restaurants',
+        loadChildren: () =>
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
       },
       {
         path: 'events',
@@ -121,7 +131,7 @@ const routes: Routes = [
             (m) => m.AuthenticationModule
           ),
       },
-  
+
     ]
   },
   {

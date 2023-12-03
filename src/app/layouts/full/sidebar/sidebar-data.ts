@@ -47,7 +47,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Resto',
     iconName: 'grill-fork',
-    route: '/',
+    route: '/dashboard/restaurants/admin',
   },
   {
     displayName: 'Clubs',

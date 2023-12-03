@@ -1,0 +1,92 @@
+<h1 mat-dialog-title style="margin-bottom: 1rem">Add News</h1>
+<!-- <div class="section__title-wrapper">
+  <h2 mat-dialog-title class="section__title">
+    Get in<span class="yellow-bg yellow-bg-big"
+      >touch<img src="./assets/images/shape/yellow-bg.png" alt=""
+    /></span>
+  </h2>
+</div> -->
+<div mat-dialog-content>
+  <!-- Your form or content for adding a user goes here -->
+  <div class="contact__form">
+    <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
+      <div class="row">
+        <div class="col-12 m-b-30">
+          <!-- Image Upload Section -->
+          <div class="contact__form-input__image__container">
+            <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview" />
+          </div>
+          <div class="contact__form-input contact__form-input__image__btns">
+            <input type="file" accept="image/*" id="Image" name="userImage" ngModel #fileInput
+                   style="display: none;" (change)="onFileSelected($event)" />
+
+            <input type="hidden" name="restaurantId" [value]="data?.restaurantId" ngModel />
+
+            <!-- Button to trigger file input click -->
+            <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
+              <span class="Extended-Fab__container">
+                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
+                <span class="Extended-Fab__text">Select Image</span>
+              </span>
+            </button>
+
+            <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
+                    (click)="resetAvatarImage()">
+              <span class="Extended-Fab__container">
+                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel" matListItemIcon></i-tabler>
+                <span class="Extended-Fab__text">Reset Image</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <!-- RestaurantId Input -->
+          <input type="hidden" name="restaurantId" [value]="data?.restaurantId" ngModel />
+
+          <!-- NomPlat Input -->
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="nom">Nom Plat</label>
+            <input type="text" placeholder="Nom Plat" id="nom" name="nomPlat" ngModel required #nomPlat="ngModel"/>
+          </div>
+          <div *ngIf="nomPlat.invalid && nomPlat.touched">
+            <app-error [err]="nomPlat"></app-error>
+          </div>
+        </div>
+
+        <!-- PrixPlat Input -->
+        <div class="col-xxl-6 col-xl-6 col-md-6">
+          <div class="contact__form-input">
+            <label for="prixPlat">Prix Plat</label>
+            <input type="number" placeholder="Prix Plat" id="prixPlat" name="prixPlat" [(ngModel)]="plat.prixPlat" required #prix="ngModel">
+          </div>
+          <div *ngIf="prix.invalid && prix.touched">
+            <app-error [err]="prix"></app-error>
+        </div>
+        </div>
+        <!-- Description Input -->
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label for="description">Description</label>
+            <textarea placeholder="Enter Your Description" id="description" name="description" [(ngModel)]="plat.description" required #description="ngModel"></textarea>
+          </div>
+          <div *ngIf="description.invalid && description.touched">
+            <app-error [err]="description"></app-error>
+          </div>
+        </div>
+        <input type="file" accept="image/*" id="Image" name="imageUrl" ngModel #fileInput
+               (change)="onImageFileSelected($event)" />
+
+        <div class="col-12" style="margin-top: 1rem">
+          <!-- Submit Button -->
+          <button type="submit" mat-flat-button color="primary">
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="closeDialog()"></button>
+</div> -->

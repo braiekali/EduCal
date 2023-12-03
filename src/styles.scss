@@ -8,6 +8,21 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+/*OTHER NEEDED CSS (sarra)*/
+.imageplat{
+  width: 50%;
+  height: 50%;
+  border-radius: 200rem;
+  position: relative;
+  object-fit: cover;
+}
+.containerplat{
+
+  width: 10rem;
+  height: 4rem;
+
+
+}
 .breadcrumb-icon {
   position: absolute;
   top: -20px;
