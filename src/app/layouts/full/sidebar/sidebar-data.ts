@@ -21,14 +21,16 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Spécialités',
-    iconName: 'books',
+    iconName: 'school',
     route: '/',
   },
+  // nawres 
   {
     displayName: 'Foyers',
     iconName: 'home',
-    route: '/',
+    route: '/dashboard/foyers/admin',
   },
+
   {
     displayName: 'Chambre',
     iconName: 'bed',

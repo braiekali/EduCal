@@ -1,0 +1,24 @@
+<div class="error-container">
+    <div *ngIf="err.errors?.['required']">
+        required
+    </div>
+    <div *ngIf="err.errors?.['pattern']">
+        Invalid format
+    </div>
+    <div *ngIf="err.errors?.['minlength']">
+        Minimum length should be 8 characters
+    </div>
+    <div *ngIf="err.errors?.['maxlength']">
+        Maximum length should be 8 characters
+    </div>
+    <div *ngIf="err.errors?.['min']">
+        Minimum erroné
+    </div>
+    <div *ngIf="err.errors?.['max']">
+        Maximum erroné
+    </div>
+    <!-- New condition for email format -->
+
+
+
+</div>

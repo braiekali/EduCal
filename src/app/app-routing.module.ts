@@ -29,6 +29,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-user/user.module').then((m) => m.UserModule),
       },
+      // nawres
+      {
+        path: 'foyers',
+        loadChildren: () =>
+          import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
+      },
+    
       {
         path: 'universities',
         loadChildren: () =>
@@ -72,6 +79,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
+        // nawres
+        {
+          path: 'foyers',
+          loadChildren: () =>
+            import('./manage-foyer/foyer.module').then((m) => m.FoyerModule),
+        },
+     
       {
         path: '',
         loadChildren: () =>
