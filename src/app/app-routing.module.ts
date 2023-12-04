@@ -77,6 +77,11 @@ const routes: Routes = [
           ),
       },
       //nabil_add
+      {
+        path: 'clubs',
+        loadChildren: () =>
+          import('./manage-club/club.module').then((m) => m.ClubModule),
+      },
     ],
     canActivate: [AuthentificationGuard, roleGuard],
   },

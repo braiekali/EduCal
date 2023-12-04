@@ -35,14 +35,14 @@
                     <a href="course-grid.html">Event</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Become a product Manager learn the skills & job.
+                    Details
                   </li>
                 </ol>
               </nav>
             </div>
-            <span class="page__title-pre purple-bg">Art & Design</span>
+
             <h5 class="page__title-3">
-              Become a product manager learn the Skills & job.
+              {{ currentEvent.nomEvent }}
             </h5>
           </div>
           <div class="course__meta-2 d-sm-flex mb-30">
@@ -55,18 +55,19 @@
                   alt=""
                 />
               </div>
-              <div class="course__teacher-info-3">
-                <h5>Teacher</h5>
-                <p><a href="#">Elon Gated</a></p>
-              </div>
+              <div class="course__teacher-info-3"></div>
             </div>
             <div class="course__update mr-80 mb-30">
-              <h5>Last Update:</h5>
-              <p>July 24, 2022</p>
+              <h5>Start Date:</h5>
+              <p>{{ currentEvent.dateDebEvent | date : "yyyy-MM-dd" }}</p>
+            </div>
+            <div class="course__update mr-80 mb-30">
+              <h5>End Date:</h5>
+              <p>{{ currentEvent.dateFinEvent | date : "yyyy-MM-dd" }}</p>
             </div>
             <div class="course__update mb-30">
               <h5>Location:</h5>
-              <p>New York, TX 82760, US:</p>
+              <p>{{ currentEvent.lieuEvent }}</p>
             </div>
           </div>
         </div>
@@ -83,26 +84,17 @@
           <div class="events__wrapper">
             <div class="events__thumb mb-35 w-img">
               <img
-                src="../../../../assets/front/img/events/event-1.jpg"
+                [src]="
+                  'http://localhost:8082/upload-directory/' +
+                  currentEvent.imageEvent
+                "
                 alt=""
               />
             </div>
             <div class="events__details mb-35">
               <h3>Description</h3>
               <p>
-                He legged it up the kyver have it mush super me old mucker
-                cheeky naff that are you taking the piss, blow off down the pub
-                bite your arm off the wireless boot cor blimey guvnor happy days
-                bender what a load of rubbish, say pardon me horse play spiffing
-                Why car boot gosh bubble and squeak. Cheers Richard bugger show
-                off show off pick your nose and blow off get stuffed mate
-                chancer in my flat loo, bevvy amongst hunky-dory bender bubble
-                and squeak me old mucker vagabond, barmy spend a penny chimney
-                pot young delinquent bum bag the bee's knees chap, gosh nice one
-                knees up the wireless Charles such a fibber. Mush barmy bleeding
-                Jeffrey pardon me barney grub loo cup of tea bubble and squeak
-                bugger all mate say, I bloke matie boy tickety-boo give us a
-                bell up the duff bugger lurgy wind up I don't want no agro.
+                {{ currentEvent.descriptionEvent }}
               </p>
             </div>
             <div class="events__allow mb-40">
@@ -147,15 +139,7 @@
               <div class="events__info">
                 <div
                   class="events__info-meta mb-25 d-flex align-items-center justify-content-between"
-                >
-                  <div class="events__info-price">
-                    <h5>$76.<span>00</span></h5>
-                    <h5 class="old-price">$142.00</h5>
-                  </div>
-                  <div class="events__info-discount">
-                    <span>68% OFF</span>
-                  </div>
-                </div>
+                ></div>
                 <div class="events__info-content mb-35">
                   <ul>
                     <li class="d-flex align-items-center">
@@ -181,7 +165,10 @@
                         </svg>
                       </div>
                       <div class="events__info-item">
-                        <h5><span>End: </span> July 26, 2022 12:30 am</h5>
+                        <h5>
+                          <span>Start: </span>
+                          {{ currentEvent.dateDebEvent | date : "yyyy-MM-dd" }}
+                        </h5>
                       </div>
                     </li>
                     <li class="d-flex align-items-center">
@@ -207,7 +194,10 @@
                         </svg>
                       </div>
                       <div class="events__info-item">
-                        <h5><span>Time:</span> 10:45 AM-01:30 PM</h5>
+                        <h5>
+                          <span>End Date:</span>
+                          {{ currentEvent.dateFinEvent | date : "yyyy-MM-dd" }}
+                        </h5>
                       </div>
                     </li>
                     <li class="d-flex align-items-center">
@@ -233,16 +223,18 @@
                         </svg>
                       </div>
                       <div class="events__info-item">
-                        <h5><span>Venue: </span> New York, TX 82760, US</h5>
+                        <h5>
+                          <span>Location: </span> {{ currentEvent.lieuEvent }}
+                        </h5>
                       </div>
                     </li>
                   </ul>
                 </div>
-                <div class="events__join-btn">
+                <!-- <div class="events__join-btn">
                   <a href="contact.html" class="e-btn e-btn-7 w-100"
                     >Enroll <i class="far fa-arrow-right"></i
                   ></a>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="events__sidebar-widget white-bg">
@@ -261,18 +253,8 @@
                     <h4>Share:</h4>
                     <ul>
                       <li>
-                        <a href="#" class="fb"
+                        <a (click)="shareFb(currentEvent.idEvent)" class="fb"
                           ><i class="social_facebook"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" class="tw"
-                          ><i class="social_twitter"></i
-                        ></a>
-                      </li>
-                      <li>
-                        <a href="#" class="pin"
-                          ><i class="social_pinterest"></i
                         ></a>
                       </li>
                     </ul>
