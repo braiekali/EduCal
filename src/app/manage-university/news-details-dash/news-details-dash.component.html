@@ -14,7 +14,7 @@
 
           <div class="teacher__bio">
 
-            <h4>{{ newsDetails.dateActualite }}</h4>
+            <h4>{{ newsDetails.dateActualite| date : "yyyy-MM-dd" }}</h4>
             <p>{{ newsDetails.description}}.</p>
           </div>
 

@@ -12,7 +12,7 @@ import { Foyer } from '../models/Foyer';
 })
 export class AddUniversityDialogDashComponent implements OnInit {
   foyers: Foyer[] = [];
-  image: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg';
+  image: string | ArrayBuffer | null = './assets/images/profile/specDefaultImg.png';
   @ViewChild('fileInput') fileInput: any;
   imageFile: File;
 universites:any;
@@ -81,7 +81,7 @@ universites:any;
     reader.readAsDataURL(this.imageFile);
   }
   resetAvatarImage() {
-    this.image = './assets/images/profile/user-1.jpg';
+    this.image = './assets/images/profile/specDefaultImg.png';
   }
 
   selectImage(): void {

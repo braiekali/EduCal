@@ -11,7 +11,7 @@ import {Foyer} from "../models/Foyer";
 })
 export class UniversityUpdateComponent {
   idUniversite: number;
-  image: string | ArrayBuffer | null = './assets/images/profile/notfoud.jpg';
+  image: string | ArrayBuffer | null = './assets/images/profile/specDefaultImg.png';
   @ViewChild('fileInput') fileInput: any;
   imageFile: File;
 
@@ -27,7 +27,7 @@ export class UniversityUpdateComponent {
     if (data && data.image) {
       this.image = `http://localhost:8082/upload-directory/${data.image}`;
     } else {
-      this.image = './assets/images/profile/notfoud.jpg';
+      this.image = './assets/images/profile/specDefaultImg.png';
     }
   }
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class UniversityUpdateComponent {
     this.updateDialogRef.close();
   }
   resetAvatarImage() {
-    this.image = './assets/images/profile/notfound.jpg';
+    this.image = './assets/images/profile/specDefaultImg.png';
   }
   submitForm(formData: any): void {
     // console.log('Form Data:', formData);
