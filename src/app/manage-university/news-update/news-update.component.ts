@@ -54,5 +54,6 @@ export class NewsUpdateComponent {
       }
     );
     this.updateDialogRef.close();
+
   }
 }

@@ -86,17 +86,8 @@
                                             <div class="course__more d-flex justify-content-between align-items-center">
 
                                                 <div class="course__btn">
-                                                    <button (click)="likeFoyer(foyer)" class="like-btn mx-2"
-                                                        [ngStyle]="{'background-color': isLiked ? '#9bb6c7' : 'initial', 'color': isLiked ? 'white' : 'initial'}">
-                                                        Like <i class="fas fa-thumbs-up"></i>
-                                                        {{ foyer.likeFoyer }}
-                                                    </button>
-                                                    <button (click)="dislikeFoyer(foyer)" class="dislike-btn"
-                                                        [ngStyle]="{'background-color': !isLiked ? '#ed8680' : 'initial', 'color': !isLiked ? 'white' : 'initial'}">
-                                                        Dislike <i class="fas fa-thumbs-down"></i>
-                                                        {{ foyer.dislikeFoyer }}
-                                                    </button>
-
+                                                    
+                                                
                                                     <a [routerLink]="'' + foyer.idFoyer" class="link-btn mx-2">
                                                         Voir Details
                                                         <i class="far fa-arrow-right"></i>

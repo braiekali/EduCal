@@ -34,8 +34,9 @@ export class UniversityListDashComponent implements AfterViewInit {
       },
     );
   }
-  ngOnInit(): void {
+  /**ngOnInit(): void {
     this.search();
+
     this.serviceUniv.getUniversites().subscribe(
       (data: any) => {
         this.dataSource = data;
@@ -50,8 +51,14 @@ export class UniversityListDashComponent implements AfterViewInit {
     this.route.data.subscribe((data) => {
       this.dataSource = data['universities'];
     });
-  }
+  }**/
+ ngOnInit(): void {
+   this.route.data.subscribe((data) => {
 
+     this.dataSource = new MatTableDataSource(data['universitere']);
+     this.dataSource.paginator = this.paginator;
+   });
+ }
   refreshDataSource() {
     this.serviceUniv.getUniversites().subscribe(
       (data: any) => {

@@ -38,6 +38,12 @@
             </div>
         </div>
 
+
+        <p [ngClass]="{'couleur-rouge': sommeCapaciteTousLesFoyers > 1000, 'couleur-verte': sommeCapaciteTousLesFoyers <= 1000}">
+            La somme des capacités de tous les foyers est : {{ sommeCapaciteTousLesFoyers }}
+          </p>
+
+          
         <div class="col" style="margin-top: 2rem">
             <mat-card class="cardWithShadow">
                 <div class="table-responsive m-t-16">

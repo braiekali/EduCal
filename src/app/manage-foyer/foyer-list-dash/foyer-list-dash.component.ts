@@ -7,6 +7,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { AddFoyerDialogDashComponent } from '../add-foyer-dialog-dash/add-foyer-dialog-dash.component';
 import { UpdateFoyerDashComponent } from '../update-foyer-dash/update-foyer.component';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-foyer-list-dash',
@@ -14,7 +16,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./foyer-list-dash.component.scss']
 })
 export class FoyerListDashComponent implements AfterViewInit {
-
+  sommeCapaciteTousLesFoyers: number;
   capaciteFoyer: number;
   dataSource: any;
   displayedColumns: string[] = [ 'nomFoyer', 'capaciteFoyer', 'superficie', 'action'];
@@ -37,20 +39,35 @@ export class FoyerListDashComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource(data.foyerList);
       this.dataSource.paginator = this.paginator;
     });
+    this.foyerService.getSommeCapaciteTousLesFoyers().subscribe(
+      (sommeCapacite: number) => {
+        this.sommeCapaciteTousLesFoyers = sommeCapacite;
+      },
+      (error) => {
+        console.error('Une erreur de la récupération de la somme des capacités des foyers:', error);
+      }
+    );
   }
-
   deleteFoyer(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce foyer ?')) {
       this.foyerService.deleteFoyer(id).subscribe(
         (data: any) => {
           this.refreshData();
         },
-        (error) => {
-          console.error('Error deleting foyer:', error);
+        (error: any) => {
+          // Check if the error status is 403 (Forbidden)
+          if (error instanceof HttpErrorResponse && error.status === 403) {
+            // Show Swal error message for forbidden operation
+            Swal.fire('Erreur!', 'Vous ne pouvez pas supprimer ce foyer. Il est utilisé.', 'error');
+          } else {
+            // Show a generic error message for other errors
+            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la suppression de ce foyer.', 'error');
+          }
         }
       );
     }
   }
+
 
   refreshData(): void {
     this.foyerService.getListFoyer().subscribe(

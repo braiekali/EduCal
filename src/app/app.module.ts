@@ -38,7 +38,6 @@ import { FrontComponent } from './layouts/front/front.component';
 import {RecaptchaModule} from 'ng-recaptcha'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxCaptchaModule } from 'ngx-captcha';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {AppErrorModule} from "./app-error.module";
 
@@ -65,7 +64,6 @@ import {AppErrorModule} from "./app-error.module";
     HttpClientModule,
     RecaptchaModule,
     MatCardModule,
-    NgxCaptchaModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,

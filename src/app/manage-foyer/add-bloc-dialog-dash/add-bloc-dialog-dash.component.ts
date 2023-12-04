@@ -82,8 +82,8 @@ export default class AddBlocDialogDashComponent {
     this.blocservice.ajouterBlocAuFoyer(this.idFoyer, bloc).subscribe(
       () => {
         console.log('Bloc ajouté avec succès !');
-        window.location.reload()
         this.closeDialog();
+        window.location.reload()
 
       },
       (error) => {

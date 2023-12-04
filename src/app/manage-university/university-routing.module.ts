@@ -7,12 +7,22 @@ import { UniversityListComponent } from './university-list/university-list.compo
 import { UniversityDetailComponent } from './university-detail/university-detail.component';
 import {UniversityUpdateComponent} from "./university-update/university-update.component";
 import {NewsDetailsDashComponent} from "./news-details-dash/news-details-dash.component";
-import {UniversityResolver} from "./university-resolver.service";
+
+import {ResolverUnivService} from "./resolver-univ.service";
+import {FoyerListDashComponent} from "../manage-foyer/foyer-list-dash/foyer-list-dash.component";
+import {FoyerListResolverService} from "../manage-foyer/service/foyer-list-resolver.service";
 
 const routes: Routes = [
   {
     path: 'admin',
     children: [
+      {
+        path: '',
+        component: UniversityListDashComponent,
+        resolve: {
+          universitere: ResolverUnivService
+        }
+      },
       {
         path: '',
         component: UniversityListDashComponent,
@@ -33,13 +43,7 @@ const routes: Routes = [
         path: 'news/update/:id',
         component: UniversityUpdateComponent,
       },
-      {
-        path: 'dashboard/universities',
-        component: UniversityListDashComponent,
-        resolve: {
-          universities: UniversityResolver,
-        },
-      }
+
     ],
 
   },

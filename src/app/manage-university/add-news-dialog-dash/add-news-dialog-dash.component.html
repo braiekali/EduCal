@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-              <div *ngIf="titre.invalid && titre.touched">
+              <div *ngIf="titre.invalid && titre.touched" class="alert-danger">
                 <app-error [err]="titre"></app-error>
               </div>
                 <!--<div class="col-12">
@@ -43,7 +43,7 @@
                         <input type="text" placeholder="description" id="description" name="description" ngModel required #description="ngModel" />
                     </div>
                 </div>
-              <div *ngIf="description.invalid && description.touched">
+              <div *ngIf="description.invalid && description.touched" class="alert-danger">
                 <app-error [err]="description"></app-error>
               </div>
 

@@ -83,6 +83,7 @@ export class AddUserDialogDashComponent {
         if (error.status === 200) {
           console.log('User added successfully.');
           this.addDialogRef.close();
+       
           Swal.fire({
             title: 'Félicitations!',
             text: 'Utilisateur ajouté avec succès.',
@@ -97,6 +98,7 @@ export class AddUserDialogDashComponent {
         }
       }
     );
+    window.location.reload();
   }
   onFileSelected(event: any) {
     this.imageFile = event.target.files[0];

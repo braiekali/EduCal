@@ -12,7 +12,7 @@ import { Foyer } from '../models/Foyer';
 })
 export class AddUniversityDialogDashComponent implements OnInit {
   foyers: Foyer[] = [];
-  image: string | ArrayBuffer | null = './assets/images/profile/notfound.jpg';
+  image: string | ArrayBuffer | null = './assets/images/profile/user-1.jpg';
   @ViewChild('fileInput') fileInput: any;
   imageFile: File;
 universites:any;
@@ -25,7 +25,7 @@ universites:any;
   ngOnInit(): void {
     this.serviceUniv.getUniversites().subscribe(
       (data)=>{
-this.universites=data;
+        this.universites=data;
       }
     )
     this.serviceUniv.getFoyers().subscribe(
@@ -50,7 +50,7 @@ this.universites=data;
     telUniversite: ['', [Validators.required, Validators.pattern(/^[0-9]{8}$/)]],
     emailUinversite: ['', [Validators.required, Validators.email]],
     idFoyer: ['', [Validators.required]],
-    image: [''],
+    image: ['', [Validators.required]],
   });
 
 
@@ -67,6 +67,8 @@ this.universites=data;
     );
 
     this.addDialogRef.close();
+    window.location.reload();
+
   }
 
   onFileSelected(event: any) {
@@ -79,7 +81,7 @@ this.universites=data;
     reader.readAsDataURL(this.imageFile);
   }
   resetAvatarImage() {
-    this.image = './assets/images/profile/notfound.jpg';
+    this.image = './assets/images/profile/user-1.jpg';
   }
 
   selectImage(): void {

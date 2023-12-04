@@ -6,7 +6,6 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { AddUserDialogDashComponent } from '../add-user-dialog-dash/add-user-dialog-dash.component';
 import { UserService } from '../service/user.service';
 import { User } from '../model/user'; // Update the path
-import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { EditUserDialogDashComponent } from '../edit-user-dialog-dash/edit-user-dialog-dash.component';
 // Import statements...
@@ -150,5 +149,11 @@ export class UserListDashComponent implements AfterViewInit, OnInit {
     // Perform the search based on the searchText
     this.dataSource.filter = this.searchText.trim().toLowerCase();
   }
+// Couleur de fond initiale
+backgroundColor = '#FFFFFF'; 
 
+onColorChanged(newColor: string) {
+  console.log(`Nouvelle couleur : ${newColor}`);
+  this.backgroundColor = newColor;
+}
 }

@@ -33,6 +33,7 @@ export class AddNewsDialogDashComponent {
       }
     );
     this.addDialogRef.close(Data);
+
   }
 
 

@@ -47,7 +47,7 @@ getAllUsers(): Observable<User[]> {
 
 
 
-updateUser(user: any, imageFile: File): Observable<any> {
+updateUser(user: any, imageFile: File | null): Observable<any> {
   const formData = new FormData();
  
 

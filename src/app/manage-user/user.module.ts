@@ -21,6 +21,7 @@ import { AuthenticationModule } from 'app/pages/authentication/authentication.mo
 import { ProfileComponent } from './profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'app/pages/authentication/auth.interceptor';
+import { ChangeColorDirective } from './change-color.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { AuthInterceptor } from 'app/pages/authentication/auth.interceptor';
     EditRoleDialogDashComponent,
     EditUserDialogDashComponent,
     ProfileComponent,
+    ChangeColorDirective,
+
   ],
   imports: [
     CommonModule,

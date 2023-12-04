@@ -73,22 +73,14 @@ export class UniversityDetailDashComponent implements AfterViewInit {
         this.serviceAct.deleteActualite(id).subscribe(
           (data: any) => {
 
-            this.refreshData();
+            
           },
         );
       }
     });
 
   }
-  refreshData() {
-    this.serviceAct.getActualites().subscribe(
-      (data: any) => {
-        this.dataSource = data;
-        this.dataSource = new MatTableDataSource(this.dataSource);
-        this.dataSource.paginator = this.paginator;
-      },
-    )
-  }
+ 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }

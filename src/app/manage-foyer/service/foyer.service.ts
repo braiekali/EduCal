@@ -54,6 +54,8 @@ export class FoyerService {
     return this.http.post<Foyer>(`${this.baseUrl}/dislike/${foyerId}`, {});
   }
 
-
+  getSommeCapaciteTousLesFoyers(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/sommeCapaciteTousLesFoyers`);
+  }
 
 }

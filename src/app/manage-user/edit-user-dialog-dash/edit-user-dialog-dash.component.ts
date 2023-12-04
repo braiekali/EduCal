@@ -37,9 +37,7 @@ export class EditUserDialogDashComponent {
     // Mettez à jour l'URL de l'image si l'utilisateur a une image, sinon utilisez l'image par défaut
     if (data && data.imageUrl) {
       this.imageUrl = `${environment.url}/upload-directory/${data.imageUrl}`;
-    } else {
-      this.imageUrl = './assets/images/profile/user-1.jpg';
-    }
+    } 
   }
   
   frombuil = this.fb.group({
@@ -52,7 +50,7 @@ export class EditUserDialogDashComponent {
     password: [''],
     enabled: [''],
     roles: [''],
-
+    imageUrl: [''],
   });
   ngOnInit(): void {
     this.roleService.getAllRoles().subscribe(
@@ -87,6 +85,7 @@ export class EditUserDialogDashComponent {
       );
 
       this.updateDialogRef.close();
+    
 
       Swal.fire({
         title: 'Update',
@@ -94,6 +93,7 @@ export class EditUserDialogDashComponent {
         icon: 'success',
       });
     }
+    window.location.reload();
   }
 
   closeDialog(): void {

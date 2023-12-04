@@ -6,8 +6,6 @@ export interface Foyer {
     capaciteFoyer: number;
     superficie: number
     imageFoyer: string;
-    likeFoyer: number;
-    dislikeFoyer: number;
     blocs: Bloc[];
 }
 

@@ -45,7 +45,7 @@ export class UniversiteService {
    formData.append('file', imageFile, imageFile.name);
    return this.http.put<Universite>(url,formData);
    }**/
-  updateUniversite(universite: any, imageFile: File): Observable<any> {
+  updateUniversite(universite: any, imageFile: File | null): Observable<any> {
 
     const formData = new FormData();
     formData.append('idUniversite', universite.idUniversite);

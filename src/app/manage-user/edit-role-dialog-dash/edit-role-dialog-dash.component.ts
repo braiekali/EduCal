@@ -48,6 +48,7 @@ export class EditRoleDialogDashComponent {
         () => {
           form.reset();
           this.updateDialogRef.close();
+          
           Swal.fire({
             title: 'Mise à jour réussie!',
             text: 'Votre rôle est mis à jour !',
@@ -59,6 +60,8 @@ export class EditRoleDialogDashComponent {
         }
       );
     }
+    window.location.reload();
+
   }
 
   closeDialog(): void {

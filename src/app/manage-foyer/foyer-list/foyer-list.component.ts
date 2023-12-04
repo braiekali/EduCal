@@ -22,29 +22,6 @@ export class FoyerListComponent implements AfterViewInit {
 
   constructor( private foyerService: FoyerService ) { }
   
-  likeFoyer(foyer: Foyer): void {
-    this.foyerService.likeFoyer(foyer.idFoyer).subscribe(
-      (like) => {
-        foyer.likeFoyer = like.likeFoyer;
-        this.isLiked = true;
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour du like :', error);
-      }
-    );
-  }
-
-  dislikeFoyer(foyer: Foyer): void {
-    this.foyerService.dislikeFoyer(foyer.idFoyer).subscribe(
-      (dislike) => {
-        foyer.dislikeFoyer = dislike.dislikeFoyer;
-        this.isLiked = false;
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour du dislike :', error);
-      }
-    );
-  }
 
   ngOnInit(): void { 
  

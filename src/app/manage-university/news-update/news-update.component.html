@@ -21,7 +21,7 @@
             <input type="text" placeholder="titre Actualite" id="titreActualite" formControlName="titreActualite" />
           </div>
         </div>
-        <div *ngIf="frombuil.get('titreActualite')?.invalid  && frombuil.get('titreActualite')?.touched">
+        <div *ngIf="frombuil.get('titreActualite')?.invalid  && frombuil.get('titreActualite')?.touched" class="alert-danger">
           <app-error [err]="frombuil.get('titreActualite')"></app-error>
         </div>
         <!--<div class="col-12">
@@ -43,7 +43,7 @@
           </div>
         </div>
 
-        <div *ngIf="frombuil.get('description')?.invalid  && frombuil.get('description')?.touched">
+        <div *ngIf="frombuil.get('description')?.invalid  && frombuil.get('description')?.touched" class="alert-danger">
           <app-error [err]="frombuil.get('description')"></app-error>
         </div>
         <div class="col-12" style="margin-top: 1rem">

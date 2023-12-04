@@ -50,6 +50,8 @@ export class AddRoleDialogDashComponent {
         // Handle errors here, for example, display a message to the user
       }
     );
+    window.location.reload();
+
   }
 
   private validateForm(role: any): boolean {

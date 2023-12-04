@@ -41,6 +41,7 @@ export class UniversityUpdateComponent {
     descriptionUniversite:['',[Validators.required]],
     telUniversite: ['', [Validators.required, Validators.pattern(/^[0-9]{8}$/)]],
     emailUinversite:['', [Validators.required,Validators.email]],
+    image: ['', [Validators.required]],
 
   });
   updateUniversite(frombuil: any) {
@@ -57,6 +58,8 @@ export class UniversityUpdateComponent {
     );
 
     this.updateDialogRef.close();
+    window.location.reload();
+
   }
 
   onFileSelected(event: any) {
