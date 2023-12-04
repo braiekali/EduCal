@@ -5,9 +5,9 @@ import { FullComponent } from './layouts/full/full.component';
 import { FrontComponent } from './layouts/front/front.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-import {RoleListDashComponent} from './manage-user/role-list-dash/role-list-dash.component' ;
-import {AuthentificationGuard} from '../app/pages/authentication/auth.guard';
-import {roleGuard} from '../app/pages/authentication/role.guard';
+import { RoleListDashComponent } from './manage-user/role-list-dash/role-list-dash.component';
+import { AuthentificationGuard } from '../app/pages/authentication/auth.guard';
+import { roleGuard } from '../app/pages/authentication/role.guard';
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { AppSideLoginComponent } from './pages/authentication/login/login.component';
 import { resolverResolver } from './resolver.resolver';
@@ -68,7 +68,17 @@ const routes: Routes = [
           ),
       },
 
-    ],canActivate: [AuthentificationGuard,roleGuard]
+      //nabil_add
+      {
+        path: 'specialites',
+        loadChildren: () =>
+          import('./manage-specialite/specialite.module').then(
+            (m) => m.SpecialiteModule
+          ),
+      },
+      //nabil_add
+    ],
+    canActivate: [AuthentificationGuard, roleGuard],
   },
 
   //front-----------------------
@@ -131,8 +141,7 @@ const routes: Routes = [
             (m) => m.AuthenticationModule
           ),
       },
-
-    ]
+    ],
   },
   {
     path: '**',

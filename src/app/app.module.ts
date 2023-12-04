@@ -35,12 +35,14 @@ import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.comp
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
 import { FrontComponent } from './layouts/front/front.component';
-import {RecaptchaModule} from 'ng-recaptcha'
+import { RecaptchaModule } from 'ng-recaptcha';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {AppErrorModule} from "./app-error.module";
-
+import { AppErrorModule } from './app-error.module';
+import { LoadingService } from './services/loading.service';
+import { LoadingInterceptor } from './intercepter/loading.interceptor';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import {AppErrorModule} from "./app-error.module";
     NavbarComponent,
     FooterComponent,
     FrontComponent,
-
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,6 @@ import {AppErrorModule} from "./app-error.module";
     FormsModule,
     AppErrorModule,
 
-
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
@@ -83,7 +84,11 @@ import {AppErrorModule} from "./app-error.module";
     ClubModule,
   ],
 
-  exports: [TablerIconsModule ],
+  providers: [
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
+  exports: [TablerIconsModule],
 
   bootstrap: [AppComponent],
 })

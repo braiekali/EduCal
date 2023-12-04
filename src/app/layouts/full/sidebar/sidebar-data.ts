@@ -27,7 +27,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Spécialités',
     iconName: 'books',
-    route: '/',
+    route: '/dashboard/specialites/admin',
   },
   {
     displayName: 'Foyers',

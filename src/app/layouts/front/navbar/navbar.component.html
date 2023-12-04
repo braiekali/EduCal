@@ -21,7 +21,7 @@
                     <a routerLink="/universities">Universities</a>
                   </li>
                   <li>
-                    <a href="#">Specialities</a>
+                    <a [routerLink]="['/specialities']">Specialities</a>
                   </li>
                   <li>
                     <a routerLink="/foyers">Foyers</a>
@@ -53,54 +53,42 @@
             <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block" style="margin-left: 2rem;">
               <a routerLink="signup" class="e-btn">Sign Up</a>
             </div>
-            <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block" style="margin-left: 2rem; margin-right: 2rem;">
+            <div *ngIf="!isLoggedIn" class="header__btn ml-20 d-sm-block"
+              style="margin-left: 2rem; margin-right: 2rem;">
               <a routerLink="login" class="e-btn e-btn-border">Sign In</a>
             </div>
 
-            <button *ngIf="isLoggedIn"
-            mat-icon-button
-            [matMenuTriggerFor]="profilemenu"
-            aria-label="Notifications"
-          >
-            <img
-              src="/assets/images/profile/user.png"
-              class="rounded-circle object-cover"
-              style="width: 50px; height: 50px; transform: translate(-30%, -30%)"
-              alt="avatar"
-            />
-          </button>
-          <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
-            <button   mat-menu-item (click)="openProfileDialog()">
-              <mat-icon class="d-flex align-items-center">
-                <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
-              </mat-icon>
-              My Profile
+            <button *ngIf="isLoggedIn" mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
+              <img src="/assets/images/profile/user.png" class="rounded-circle object-cover"
+                style="width: 50px; height: 50px; transform: translate(-30%, -30%)" alt="avatar" />
             </button>
-            <button mat-menu-item>
-              <mat-icon class="d-flex align-items-center"
-                ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
-              >My Account
-            </button>
-            <button mat-menu-item>
-              <mat-icon class="d-flex align-items-center"
-                ><i-tabler
-                  name="list-check"
-                  class="icon-18 d-flex"
-                ></i-tabler></mat-icon
-              >My Task
-            </button>
+            <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
+              <button mat-menu-item (click)="openProfileDialog()">
+                <mat-icon class="d-flex align-items-center">
+                  <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+                </mat-icon>
+                My Profile
+              </button>
+              <button mat-menu-item>
+                <mat-icon class="d-flex align-items-center"><i-tabler name="mail"
+                    class="icon-18 d-flex"></i-tabler></mat-icon>My Account
+              </button>
+              <button mat-menu-item>
+                <mat-icon class="d-flex align-items-center"><i-tabler name="list-check"
+                    class="icon-18 d-flex"></i-tabler></mat-icon>My Task
+              </button>
 
-            <div class="p-x-12 m-t-12">
-              <button mat-stroked-button color="primary" class="w-100" (click)="onLogout()">Logout</button>
-            </div>
-          </mat-menu>
+              <div class="p-x-12 m-t-12">
+                <button mat-stroked-button color="primary" class="w-100" (click)="onLogout()">Logout</button>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-            </header>
+</header>
 
 <!-- cart mini area start -->
 <div class="cartmini__area">
