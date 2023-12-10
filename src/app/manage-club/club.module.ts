@@ -47,7 +47,7 @@ import { EventListFrontComponent } from './manage-events/event-list-front/event-
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  exports: [TablerIconsModule],
+    exports: [TablerIconsModule, ErrorFormHandlerComponent],
   providers: [
     DatePipe,
     // ...

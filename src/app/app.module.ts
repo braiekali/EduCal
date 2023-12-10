@@ -43,6 +43,7 @@ import { AppErrorModule } from './app-error.module';
 import { LoadingService } from './services/loading.service';
 import { LoadingInterceptor } from './intercepter/loading.interceptor';
 import { LoaderComponent } from './loader/loader.component';
+import {ManageEventsModule} from "./manage-events/manage-events.module";
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { LoaderComponent } from './loader/loader.component';
     ChambreModule,
     RestoModule,
     ClubModule,
+    ManageEventsModule,
   ],
 
   providers: [

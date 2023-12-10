@@ -56,6 +56,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'evenement',
+        loadChildren: () =>
+          import('./manage-events/manage-events.module').then(
+            (m) => m.ManageEventsModule
+          ),
+      },
+      {
         path: 'restaurants',
         loadChildren: () =>
           import('./manage-resto/resto.module').then((m) => m.RestoModule),
@@ -83,7 +90,7 @@ const routes: Routes = [
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
     ],
-    canActivate: [AuthentificationGuard, roleGuard],
+    //canActivate: [AuthentificationGuard, roleGuard],
   },
 
   //front-----------------------
@@ -114,6 +121,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'evenement',
+        loadChildren: () =>
+          import('./manage-events/manage-events.module').then(
+            (m) => m.ManageEventsModule
+          ),
+      },
+      {
         path: 'specialities',
         loadChildren: () =>
           import('./manage-specialite/specialite.module').then(
@@ -125,11 +139,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-resto/resto.module').then((m) => m.RestoModule),
       },
-      {
+      /**{
         path: 'events',
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
-      },
+      },**/
 
       {
         path: 'chambres',
