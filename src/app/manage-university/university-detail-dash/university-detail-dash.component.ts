@@ -2,13 +2,11 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AddNewsDialogDashComponent } from '../add-news-dialog-dash/add-news-dialog-dash.component';
 import {ActivatedRoute} from "@angular/router";
 import {UniversiteService} from "../services/universite.service";
 import {ActualiteService} from "../services/actualite.service";
 import Swal from "sweetalert2";
 import {UniversityUpdateComponent} from "../university-update/university-update.component";
-import {NewsUpdateComponent} from "../news-update/news-update.component";
 
 
 @Component({
@@ -60,61 +58,11 @@ export class UniversityDetailDashComponent implements AfterViewInit {
 
   }
 
-  deleteActualite(id: number) {
-    Swal.fire({
-      title: 'Êtes-vous sûr?',
-      text: 'Vous ne pourrez pas récupérer ces données après suppression!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Oui, supprimer!',
-      cancelButtonText: 'Annuler'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.serviceAct.deleteActualite(id).subscribe(
-          (data: any) => {
 
-            
-          },
-        );
-      }
-    });
-
-  }
- 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  openAddNewsDialog(id:number): void {
-    const dialogRef = this.addNewsDialog.open(AddNewsDialogDashComponent, {
-      width: '550px',
-      data: { idUniversite: id }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // Handle the result after the dialog is closed (if needed)
-      if (result) {
-        console.log('The dialog save pressed', result);
-      } else {
-        console.log('The dialog was closed', result);
-      }
-    });
-  }
-  openNewsUpdate(news: any,id:any) {
-    const dialogRef = this.updateNewsDialog.open(NewsUpdateComponent, {
-      width: '400px',
-      data: { news: news, id: id }
-    });
 
 
-    dialogRef.afterClosed().subscribe((result) => {
-      // Gérer le résultat après la fermeture du dialogue (si nécessaire)
-      if (result) {
-        console.log('Le dialogue a été fermé avec succès', result);
-      } else {
-        console.log('Le dialogue a été fermé', result);
-      }
-    });
-
-  }
 }

@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {AddNewsDialogDashComponent} from "../../manage-university/add-news-dialog-dash/add-news-dialog-dash.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RestoServiceService} from "../resto-service.service";
 import {Plat} from "../Model/Plat";
@@ -70,23 +69,6 @@ export class RestoDetailDashComponent implements OnInit{
         this.dataSource = data;
       })
 
-  }
-
-  openAddNewsDialog(): void {
-
-    const dialogRef = this.addUserDialog.open(AddNewsDialogDashComponent, {
-      width: '550px', // Set the width as per your design
-      // Add any other dialog configuration options here
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // Handle the result after the dialog is closed (if needed)
-      if (result) {
-        console.log('The dialog save pressed', result);
-      } else {
-        console.log('The dialog was closed', result);
-      }
-    });
   }
 
   openAddPlatsDialog(): void {

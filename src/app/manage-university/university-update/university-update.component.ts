@@ -45,10 +45,10 @@ export class UniversityUpdateComponent {
 
   });
   updateUniversite(frombuil: any) {
-    const data = this.frombuil.value;
-    this.serviceUniv.updateUniversite(data, this.imageFile).subscribe(
+    //const data = this.frombuil.value;
+    this.serviceUniv.updateUniversite(frombuil, this.imageFile).subscribe(
       () => {
-        console.log(data, this.imageFile);
+        console.log(frombuil, this.imageFile);
         alert('Ajouté avec succès');
         this.frombuil.reset();
       },

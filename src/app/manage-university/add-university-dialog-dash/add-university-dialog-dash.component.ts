@@ -15,7 +15,7 @@ export class AddUniversityDialogDashComponent implements OnInit {
   image: string | ArrayBuffer | null = './assets/images/profile/specDefaultImg.png';
   @ViewChild('fileInput') fileInput: any;
   imageFile: File;
-universites:any;
+  universites:any;
   constructor(
     public addDialogRef: MatDialogRef<AddUniversityDialogDashComponent>,
     private serviceUniv: UniversiteService,
@@ -28,18 +28,6 @@ universites:any;
         this.universites=data;
       }
     )
-    this.serviceUniv.getFoyers().subscribe(
-      (data: any) => {
-        if (this.universites.foyers==null){
-          this.foyers = data;
-          console.log('Foyers:', this.foyers);
-        }
-
-      },
-      (error: any) => {
-        console.error('Error fetching foyers:', error);
-      }
-    );
   }
 
   frombuil = this.fb.group({
@@ -49,18 +37,14 @@ universites:any;
     descriptionUniversite: ['', [Validators.required]],
     telUniversite: ['', [Validators.required, Validators.pattern(/^[0-9]{8}$/)]],
     emailUinversite: ['', [Validators.required, Validators.email]],
-    idFoyer: ['', [Validators.required]],
     image: ['', [Validators.required]],
   });
 
 
-  addUniversiteWithFoyer(frombuil: any) {
-    const data = this.frombuil.value;
-    const idFoyer = data.idFoyer;
-
-    this.serviceUniv.addUniversiteWithFoyer(data, idFoyer, this.imageFile).subscribe(
+  addUniversite(frombuil: any) {
+    //const data = this.frombuil.value;
+    this.serviceUniv.addUniversite(frombuil,this.imageFile).subscribe(
       () => {
-        console.log('Data:', data, 'Id:', idFoyer, this.imageFile);
         alert('Added Successfully');
         this.frombuil.reset();
       }

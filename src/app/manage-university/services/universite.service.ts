@@ -17,8 +17,17 @@ export class UniversiteService {
     return this.http.get("http://localhost:8082/universite/universites");
   }
 
-  addUniversite(data: any): Observable<Universite> {
-    return this.http.post<Universite>("http://localhost:8082/universite/adduniversite", data);
+  addUniversite(data: any, imageFile: File): Observable<Universite> {
+    const url = `http://localhost:8082/universite/adduniversite`;
+    const formData: FormData = new FormData();
+    formData.append('nomUniversite', data.nomUniversite);
+    formData.append('adresseUniversite', data.adresseUniversite);
+    formData.append('ville', data.ville);
+    formData.append('descriptionUniversite', data.descriptionUniversite);
+    formData.append('telUniversite', data.telUniversite);
+    formData.append('emailUinversite', data.emailUinversite);
+    formData.append('file', imageFile, imageFile.name);
+    return this.http.post<Universite>(url, formData);
   }
 
   deleteUniversite(id: number): Observable<Universite> {
@@ -62,7 +71,7 @@ export class UniversiteService {
     const url = `http://localhost:8082/universite/universite`;
     return this.http.patch<any>(url, formData);
   }
-  addUniversiteWithFoyer(data: any, id: string | null | undefined, imageFile: File): Observable<Universite> {
+ /** addUniversiteWithFoyer(data: any, id: string | null | undefined, imageFile: File): Observable<Universite> {
     const url = `http://localhost:8082/universite/adduniversitebyfoyer/${id}`;
     const formData: FormData = new FormData();
 
@@ -76,7 +85,7 @@ export class UniversiteService {
     formData.append('file', imageFile, imageFile.name);
 
     return this.http.post<Universite>(url, formData);
-  }
+  }**/
   getFoyers(){
     return  this.http.get<Foyer>("http://localhost:8082/foyer/foyers");
   }

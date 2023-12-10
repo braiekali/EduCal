@@ -21,7 +21,7 @@ export class UniversityListDashComponent implements AfterViewInit {
   nomUniversite: string = '';
   imageBasePath: string = 'http://localhost:8082/upload-directory/';
   dataSource: any;
-  displayedColumns: string[] = ['image','idUniversite', 'nomUniversite', 'adresseUniversite', 'ville', 'descriptionUniversite', 'telUniversite', 'emailUinversite','Foyer', 'action'];
+  displayedColumns: string[] = ['image','idUniversite', 'nomUniversite', 'adresseUniversite', 'ville', 'descriptionUniversite', 'telUniversite', 'emailUinversite', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 

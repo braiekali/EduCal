@@ -9,7 +9,7 @@
 <div mat-dialog-content>
     <!-- Your form or content for adding a user goes here -->
     <div class="contact__form">
-        <form [formGroup]="frombuil">
+      <form [formGroup]="frombuil">
           <div class="row">
             <div class="col-12 m-b-30">
               <div class="contact__form-input__image__container">
@@ -95,22 +95,15 @@
               <app-error [err]="frombuil.get('emailUinversite')"></app-error>
             </div>
             <div class="col-12">
-              <div class="contact__form-input">
-                <label for="foyer">Foyer</label>
-                <select  id="foyer" formControlName="idFoyer" >
-                <option *ngFor="let foyer of foyers " [value]="foyer.idFoyer"  >
-              {{foyer.nomFoyer}}
-                 </option>
-                </select>
-              </div>
-            </div>
+
                 <div class="col-12" style="margin-top: 1rem">
-                    <button type="submit" mat-flat-button color="primary" (click)="addUniversiteWithFoyer(frombuil.value)" [disabled]="frombuil.invalid" class="alert-danger">
+                    <button type="submit" mat-flat-button color="primary" (click)="addUniversite(frombuil.value)" [disabled]="frombuil.invalid" class="alert-danger">
                         Add
                     </button>
                 </div>
             </div>
-        </form>
+          </div>
+      </form>
     </div>
 </div>
 <!-- <div mat-dialog-actions>
