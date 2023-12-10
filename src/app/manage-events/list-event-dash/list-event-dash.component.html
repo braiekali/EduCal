@@ -1,7 +1,7 @@
 <div class="bg-light-primary rounded p-y-30 p-x-24 m-b-30 overflow-hidden ng-star-inserted">
   <div class="row">
     <div class="col-sm-8">
-      <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16">Universities list</h4>
+      <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16">Events list</h4>
       <div class="d-flex align-items-center overflow-hidden"><!----></div>
     </div>
     <div class="col-sm-4 text-right position-relative">
@@ -12,28 +12,24 @@
   </div>
 </div>
 
+  
 <mat-card class="cardWithShadow">
-  <mat-card class="cardWithShadow">
     <mat-card-content>
       <div class="row">
         <div class="col-sm-4">
           <div class="contact__form-input" style="display: flex">
-            <input
-              style="background-color: transparent"
-              type="text"
-              placeholder="Search"
-              id="search"
-              name="search"
-              [(ngModel)]="searchInput"
-            />
-            <i-tabler
-              style="margin: 1.5rem 0 0 -2.2rem; color: #cacaca"
-              class="routeIcon"
-              name="search"
-              matListItemIcon
-            ></i-tabler>
+            <button mat-icon-button (click)="getEventsSortedByDateAsc()">
+              <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <!-- Bouton de tri descendant -->
+            <button mat-icon-button (click)="getEventsSortedByDateDesc()">
+              <mat-icon>arrow_downward</mat-icon>
+            </button>
           </div>
+        
         </div>
+       
+  
         <div class="col-sm-8 text-right">
           <button
             type="button"
@@ -254,5 +250,5 @@
       </div>
       <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
     </mat-card-content>
-  </mat-card>
-</mat-card>
+
+

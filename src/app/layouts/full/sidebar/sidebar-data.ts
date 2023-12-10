@@ -54,6 +54,11 @@ export const navItems: NavItem[] = [
     iconName: 'users-group',
     route: '/dashboard/clubs',
   },
+  {
+    displayName: 'Events',
+    iconName: 'calendar',
+    route: '/dashboard/evenement/admin',
+  },
   // {
   //   navCap: 'Ui Components',
   // },

@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,21 +16,32 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./list-event-dash.component.scss']
 })
 export class ListEventDashComponent {
+applyFilter() {
+throw new Error('Method not implemented.');
+}
   uploadUrl = 'http://localhost:8087/upload-directory/';
 
   searchInput: string = '';
   dataSource: any;
+  events: Event[];
+
+
   displayedColumns: string[] = [ 'image','nom', 'dateDeb', 'dateFin', 'Description','Location',   'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+filterText: any;
   constructor(
     private addEventDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private eventService: EventService,
-    private updateEventDialog: MatDialog
+    private updateEventDialog: MatDialog,
+    private cdr: ChangeDetectorRef
+    
   ) {
   }
   ngOnInit(): void {
     this.refreshEventList();
+    this.getEvents();
+
   }
   refreshEventList(): void {
     this.eventService.getAllEvents().subscribe(
@@ -91,6 +102,40 @@ export class ListEventDashComponent {
       },
       (error) => {
         console.error('Error fetching club data:', error);
+      }
+    );
+  }
+
+  getEventsSortedByDateAsc(): void {
+    this.eventService.getAllEventsSortedByDateAsc().subscribe(
+      (events) => {
+        this.dataSource.data = events;
+
+      },
+      (error) => {
+        console.error('Error fetching events sorted by date asc', error);
+      }
+    );
+  }
+
+  getEventsSortedByDateDesc(): void {
+    this.eventService.getAllEventsSortedByDateDesc().subscribe(
+      (events) => {
+        this.dataSource.data = events;
+
+      },
+      (error) => {
+        console.error('Error fetching events sorted by date desc', error);
+      }
+    );
+  }
+  getEvents(): void {
+    this.eventService.getAllEvents().subscribe(
+      (events) => {
+        this.events = events;
+      },
+      (error) => {
+        console.error('Error fetching events', error);
       }
     );
   }

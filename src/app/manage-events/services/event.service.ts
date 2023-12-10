@@ -54,5 +54,12 @@ export class EventService {
     return this.http.get<Event[]>(`${this.baseUrl}/event/events`);
   }
 
+  getAllEventsSortedByDateAsc(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.baseUrl}/event/sortedByDateAsc`);
+  }
+
+  getAllEventsSortedByDateDesc(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.baseUrl}/event/sortedByDateDesc`);
+  }
 
 }
