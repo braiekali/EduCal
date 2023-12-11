@@ -15,7 +15,7 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
-import {RestoServiceService} from "../../manage-resto/resto-service.service";
+import {RestaurantService} from "../../manage-resto/restaurant.service";
 
 interface month {
   value: string;
@@ -222,7 +222,7 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor(private restoService: RestoServiceService) {
+  constructor(private restoService: RestaurantService) {
 
     // sales overview chart
     this.salesOverviewChart = {
@@ -404,7 +404,7 @@ export class AppDashboardComponent {
 
 
   ngOnInit(): void {
-    this.restoService.getSalesOverviewData().subscribe(
+   /* this.restoService.getSalesOverviewData().subscribe(
       (salesOverviewData) => {
         console.log('Sales Overview Data:', salesOverviewData);
 
@@ -419,7 +419,7 @@ export class AppDashboardComponent {
       },
       (error) => {
         console.error('Error fetching sales overview data:', error);
-      });
+      });*/
   }
 }
 

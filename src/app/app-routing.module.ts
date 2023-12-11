@@ -65,7 +65,9 @@ const routes: Routes = [
       {
         path: 'restaurants',
         loadChildren: () =>
-          import('./manage-resto/resto.module').then((m) => m.RestoModule),
+          import('./manage-resto/resto.module').then(
+            (m) => m.RestoModule
+          ),
       },
       {
         path: 'chambres',
@@ -137,7 +139,9 @@ const routes: Routes = [
       {
         path: 'restaurants',
         loadChildren: () =>
-          import('./manage-resto/resto.module').then((m) => m.RestoModule),
+          import('./manage-resto/resto.module').then(
+            (m) => m.RestoModule
+          ),
       },
       /**{
         path: 'events',

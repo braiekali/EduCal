@@ -2,73 +2,56 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RestoRoutingModule } from './resto-routing.module';
-import { RestoListComponent } from './resto-list/resto-list.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { RestoDetailsComponent } from './plats-details-dash/resto-details.component';
-import { AddRestoDialogDashComponent } from './add-resto-dialog-dash/add-resto-dialog-dash.component';
-import { AddPlatsDialogDashComponent } from './add-plats-dialog-dash/add-plats-dialog-dash.component';
-import { PlatsDetailsComponent } from './plats-details/plats-details.component';
-import { RestoDetailDashComponent } from './resto-detail-dash/resto-detail-dash.component';
 import { RestoListDashComponent } from './resto-list-dash/resto-list-dash.component';
+import { AddRestoDialogComponent } from './add-resto-dialog/add-resto-dialog.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
-import {MatListModule} from "@angular/material/list";
-import {TablerIconsModule} from "angular-tabler-icons";
-import {MatCardModule} from "@angular/material/card";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatTableModule} from "@angular/material/table";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { UpdateRestauComponent } from './update-restau/update-restau.component';
-import { UpdatePlatDashComponent } from './update-plat-dash/update-plat-dash.component';
-import { RestoDetailUserComponent } from './resto-detail-user/resto-detail-user.component';
-
-
-import { StatisticsComponentComponent } from './statistics-component/statistics-component.component';
-import {HighlightDirective} from "./highlight.directive";
+import {MatListModule} from "@angular/material/list";
+import {TablerIconsModule} from "angular-tabler-icons";
+// import {ErrorModule} from "./app/error.module";
 import {AppErrorModule} from "../app-error.module";
-import {ErrorComponent} from "../error/error.component";
-
+import {MatCardModule} from "@angular/material/card";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
+import { UpdateRestoDashComponent } from './update-resto-dash/update-resto-dash.component';
+import { RestaurantDetailDashComponent } from './restaurant-detail-dash/restaurant-detail-dash.component';
+import { UpdateRestoDialogComponent } from './update-resto-dialog/update-resto-dialog.component';
+import { ShowOneComponent } from './show-one/show-one.component';
+import { RestaurantListComponent } from './restaurant-list/restaurant-list.component';
+import { QrcodeDialogeComponent } from './qrcode-dialoge/qrcode-dialoge.component';
 
 
 @NgModule({
   declarations: [
-    RestoListComponent,
-    RestoDetailsComponent,
-    AddRestoDialogDashComponent,
-    AddPlatsDialogDashComponent,
-    PlatsDetailsComponent,
-    RestoDetailDashComponent,
     RestoListDashComponent,
-    UpdateRestauComponent,
-    UpdatePlatDashComponent,
-    RestoDetailUserComponent,
-
-    StatisticsComponentComponent,
-    HighlightDirective,
-
+    AddRestoDialogComponent,
+    UpdateRestoDashComponent,
+    RestaurantDetailDashComponent,
+    UpdateRestoDialogComponent,
+    ShowOneComponent,
+    RestaurantListComponent,
+    QrcodeDialogeComponent
   ],
   imports: [
     CommonModule,
-
     RestoRoutingModule,
     FormsModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatListModule,
     TablerIconsModule,
+    AppErrorModule,
     MatCardModule,
     MatPaginatorModule,
     MatTableModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    AppErrorModule,
-
+    ReactiveFormsModule
   ]
 })
-export class RestoModule {
-}
+export class RestoModule { }

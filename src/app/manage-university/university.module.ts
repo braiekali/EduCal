@@ -44,6 +44,6 @@ import {ZoomHoverDirective} from "./zoom-hover.directive";
         ReactiveFormsModule,
     ],
 
-  exports: [TablerIconsModule],
+    exports: [TablerIconsModule, ErrorComponent],
 })
 export class UniversityModule {}

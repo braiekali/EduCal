@@ -1,16 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {RestoListComponent} from "./resto-list/resto-list.component";
-import {PlatsDetailsComponent} from "./plats-details/plats-details.component";
-import {RestoDetailsComponent} from "./plats-details-dash/resto-details.component";
-import {UniversityListDashComponent} from "../manage-university/university-list-dash/university-list-dash.component";
-import {
-  UniversityDetailDashComponent
-} from "../manage-university/university-detail-dash/university-detail-dash.component";
+
 import {RestoListDashComponent} from "./resto-list-dash/resto-list-dash.component";
-import {RestoDetailDashComponent} from "./resto-detail-dash/resto-detail-dash.component";
-import {RestoDetailUserComponent} from "./resto-detail-user/resto-detail-user.component";
-import {RestaurantListResolverService} from "./restaurant-list-resolver.service";
+import {RestaurantDetailDashComponent} from "./restaurant-detail-dash/restaurant-detail-dash.component";
+import {RestaurantListComponent} from "./restaurant-list/restaurant-list.component";
 
 const routes: Routes = [
 
@@ -19,61 +12,20 @@ const routes: Routes = [
     children: [
       {
         path: '',
-
         component: RestoListDashComponent,
-        resolve:{
-          restaurantlistresolver : RestaurantListResolverService
-        }
       },
       {
         path: ':id',
-        component: RestoDetailDashComponent,
+        component: RestaurantDetailDashComponent,
       },
     ],
-  },{
-    path: 'listResto',
-    component: RestoListComponent,
+
+  } ,
+  {
+    path: '',
+    component: RestaurantListComponent,
   },
 
-  {
-    path: 'Plats-detail',
-    children: [
-      {
-        path: '',
-        component: PlatsDetailsComponent,
-      },
-      {
-        path: ':id',
-        component: PlatsDetailsComponent,
-      },
-    ],
-  },
-  {
-    path: 'plats',
-    children: [
-      {
-        path: '',
-        component: RestoDetailsComponent,
-      },
-      {
-        path: ':id',
-        component: RestoDetailsComponent,
-      },
-    ],
-  },
-  {
-    path: 'restodetail',
-    children: [
-      {
-        path: '',
-        component: RestoDetailUserComponent,
-      },
-      {
-        path: ':id',
-        component: RestoDetailUserComponent,
-      },
-    ],
-  },
 ];
 
 @NgModule({

@@ -39,16 +39,17 @@ export const navItems: NavItem[] = [
     iconName: 'bed',
     route: '/dashboard/chambres/admin',
   },
+  {
+    displayName: 'Restaurant',
+    iconName: 'grill-fork',
+    route: '/dashboard/restaurants/admin',
+  },
   // {
   //   displayName: 'Reservations',
   //   iconName: 'checkup-list',
   //   route: '/',
   // },
-  {
-    displayName: 'Resto',
-    iconName: 'grill-fork',
-    route: '/dashboard/restaurants/admin',
-  },
+
   {
     displayName: 'Clubs',
     iconName: 'users-group',
