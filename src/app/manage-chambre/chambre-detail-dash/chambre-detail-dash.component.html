@@ -1,0 +1,171 @@
+<main>
+
+  <section class="teacher__area pt-50 pb-110">
+    <div class="page__title-shape">
+      <img class="page-title-shape-5 d-none d-sm-block" src="assets/images/page-title/page-title-shape-1.png"
+           alt="">
+      <img class="page-title-shape-6" src="assets/images/page-title/page-title-shape-6.png" alt="">
+      <img class="page-title-shape-3" src="assets/images/page-title/page-title-shape-3.png" alt="">
+      <img class="page-title-shape-7" src="assets/images/page-title/page-title-shape-4.png" alt="">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+          <div class="teacher__details-thumb p-relative w-img pr-30">
+            <div class="uni__img__container">
+              <img class="uni__img" [src]="imageUrl" alt="Chambre">
+            </div>
+            <div class="teacher__details-shape">
+              <img class="teacher-details-shape-1" src="assets/images/teacher/details/shape/shape-1.png"
+                   alt="">
+              <img class="teacher-details-shape-2" src="assets/images/teacher/details/shape/shape-2.png"
+                   alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-8 col-xl-8 col-lg-8">
+          <div class="teacher__wrapper">
+            <div class="teacher__top d-md-flex align-items-end justify-content-between">
+              <div class="teacher__info">
+                <h4>Chambre Numero {{element_data.numeroChambre}}</h4>
+                <br>
+                <h2> Type Chambre : {{element_data.typeChambre}}</h2>
+              </div>
+
+            </div>
+            <div class="teacher__bio">
+              <h3>Bloc {{element_data.bloc.nomBloc}}</h3>
+              <h3>Foyer {{element_data.bloc.foyer.nomFoyer}}</h3>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="teacher__courses pt-55">
+          <div class="section__title-wrapper mb-30">
+            <h2 class="section__title">Chambre <span class="yellow-bg yellow-bg-big">Reservation<img
+              src="assets/images/shape/yellow-bg.png"
+              style="margin-bottom: -1.3rem; margin-left: .6rem;" alt=""></span></h2>
+          </div>
+          <div class="teacher__course-wrapper">
+            <div class="row">
+              <mat-card class="cardWithShadow">
+                <mat-card-content>
+                  <div class="col" style="margin-top: 2rem">
+                    <mat-card class="cardWithShadow">
+                      <div class="table-responsive m-t-16" *ngIf="element_data.reservation!=null">
+                        <table class="w-100">
+                          <thead>
+                          <tr>
+                            <th class="f-w-600 mat-subtitle-1 f-s-14">
+                              Id Reservation
+                            </th>
+
+                            <th class="f-w-600 mat-subtitle-1 f-s-14">
+                              Année universitaire
+                            </th>
+
+                            <th class="f-w-600 mat-subtitle-1 f-s-14">
+                              Etudiant
+                            </th>
+
+                            <th class="f-w-600 mat-subtitle-1 f-s-14">
+                              Validite
+                            </th>
+
+
+                            <th class="f-w-600 mat-subtitle-1 f-s-14">
+                              #action
+                            </th>
+
+                          </tr>
+
+                          </thead>
+                          <tbody>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div class="m-l-16">
+                                <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                                  {{ element_data.reservation.idReservation }}
+                                </h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="mat-body-1">
+                            {{ element_data.reservation.anneeUniv | date:'dd-MM-yyyy' }}
+                          </td>
+                          <td class="mat-body-1">
+                            {{element_data.reservation.user.email}}
+                          </td>
+                          <td>
+                            <div *ngIf="element_data.reservation !='null' && element_data.reservation.estValide == true ">
+                                    <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                                       Reservation valide
+                                    </span>
+                            </div>
+
+                            <div *ngIf="element_data.reservation !='null' && element_data.reservation.estValide == false ">
+                                    <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                                      Reservation n'est pas valide
+                                    </span>
+                            </div>
+
+
+                          </td>
+
+                          <td class="mat-body-1" style="display: flex;">
+
+                            <span class="m-x-1"></span>
+                            <a  mat-icon-button="" color="primary"
+                                class="d-flex mdc-icon-button mat-mdc-icon-button mat-primary mat-mdc-button-base"
+                                mat-button-is-fab="false" (click)="showForm(element_data.reservation)">
+                              <span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
+                              <i-tabler
+                                style="color: #87a7ff" name="edit" class="icon-20" _nghost-ng-c2034356942="">
+                              </i-tabler>
+                              <span class="mat-mdc-focus-indicator"></span>
+                              <span class="mat-mdc-button-touch-target"></span>
+                              <span class="mat-mdc-button-ripple"></span>
+                            </a>
+
+                            <span class="m-x-1"></span>
+
+                            <a  mat-icon-button="" color="primary" (click)="deleteReservation(element_data.reservation)"
+                               class="d-flex mdc-icon-button mat-mdc-icon-button mat-primary mat-mdc-button-base"
+                               mat-button-is-fab="false">
+                              <span class="mat-mdc-button-persistent-ripple mdc-icon-button__ripple"></span>
+                              <i-tabler
+                                style="color: #ff8e8e" name="trash" class="icon-20"
+                                _nghost-ng-c2034356942="">
+                              </i-tabler>
+                              <span
+                                class="mat-mdc-focus-indicator"></span><span
+                              class="mat-mdc-button-touch-target"></span><span
+                              class="mat-mdc-button-ripple"></span>
+                            </a>
+                          </td>
+                          </tbody>
+
+                        </table>
+                      </div>
+                      <div class="table-responsive m-t-16" *ngIf="element_data.reservation==null">
+                      <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                                      Aucune Reservation
+                                    </span>
+                      </div>
+
+                    </mat-card>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="Showupdate">
+      <app-update-reservation-dash [reservation_data]="reservationtoupdate"
+                                   (sendmsg)="afterrecieveData($event)"></app-update-reservation-dash>
+    </div>
+  </section>
+</main>
