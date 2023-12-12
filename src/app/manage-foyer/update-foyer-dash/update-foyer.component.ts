@@ -22,9 +22,9 @@ export class UpdateFoyerDashComponent {
   frombuil = this.fb.group({
     idFoyer: ['', [Validators.required]],
     nomFoyer: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-    capaciteFoyer: ['', [Validators.required, Validators.min(500), Validators.max(2000)]],
-    superficie: ['', [Validators.required]],
-    imageFoyer: [''],
+    capacityFoyer: ['', [Validators.required, Validators.min(500), Validators.max(2000)]],
+    // superficie: ['', [Validators.required]],
+     imageFoyer: [''],
     newImageFoyer: [''],
 
 
@@ -36,9 +36,9 @@ export class UpdateFoyerDashComponent {
       ...this.frombuil.value,
     };
 
-    if (form.newImageFoyer) {
-      formData.imageFoyer = this.img + form.newImageFoyer.replace("C:\\fakepath\\", "");
-    }
+     if (form.newImageFoyer) {
+       formData.imageFoyer = this.img + form.newImageFoyer.replace("C:\\fakepath\\", "");
+     }
 
     this.serviceFoyer.updateFoyer(formData).subscribe(
       () => {

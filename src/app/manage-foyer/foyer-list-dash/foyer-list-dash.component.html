@@ -20,7 +20,7 @@
                 <div class="contact__form-input" style="display: flex;">
 
                     <input style="background-color: transparent;" type="text" id="capaciteFoyer" name="capaciteFoyer"
-                        [(ngModel)]="capaciteFoyer" (input)="applyFilter()" />
+                        [(ngModel)]="capacityFoyer" (input)="applyFilter()" />
 
                     <i-tabler style="margin: 1.5rem 0 0 -2.2rem; color: #cacaca;" class="routeIcon" name="search"
                         matListItemIcon></i-tabler>
@@ -38,12 +38,6 @@
             </div>
         </div>
 
-
-        <p [ngClass]="{'couleur-rouge': sommeCapaciteTousLesFoyers > 1000, 'couleur-verte': sommeCapaciteTousLesFoyers <= 1000}">
-            La somme des capacités de tous les foyers est : {{ sommeCapaciteTousLesFoyers }}
-          </p>
-
-          
         <div class="col" style="margin-top: 2rem">
             <mat-card class="cardWithShadow">
                 <div class="table-responsive m-t-16">
@@ -58,23 +52,15 @@
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="capaciteFoyer">
+                        <ng-container matColumnDef="capacityFoyer">
                             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
                                 Capacite Foyer
                             </th>
                             <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                {{ element.capaciteFoyer }}
+                                {{ element.capacityFoyer }}
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="superficie">
-                            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
-                                Superficie de Foyer
-                            </th>
-                            <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                {{ element.superficie }}m²
-                            </td>
-                        </ng-container>
                         <!-- Weight Column -->
                         <ng-container matColumnDef="state">
                             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">

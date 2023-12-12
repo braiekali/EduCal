@@ -1,4 +1,4 @@
-<main>
+<main xmlns="http://www.w3.org/1999/html">
     <section class="course__area pt-120 pb-120">
         <div class="container">
             <div class="row">
@@ -74,11 +74,11 @@
                                             <div class="course__content">
                                                 <div
                                                     class="course__meta d-flex align-items-center justify-content-between">
-                                                    <div class="course__lesson">
-                                                        <span><i class="far fa-book-alt"></i>{{foyer.superficie}}</span>
-                                                    </div>
+<!--                                                    <div class="course__lesson">-->
+<!--                                                        <span><i class="far fa-book-alt"></i>{{foyer.superficie}}</span>-->
+<!--                                                    </div>-->
                                                     <div class="course__rating">
-                                                        <span><i class="icon_star"></i>{{foyer.capaciteFoyer}}</span>
+                                                        <span><i class="icon_star"></i>{{foyer.capacityFoyer}}</span>
                                                     </div>
                                                 </div>
 
@@ -86,8 +86,9 @@
                                             <div class="course__more d-flex justify-content-between align-items-center">
 
                                                 <div class="course__btn">
-                                                    
-                                                
+
+
+
                                                     <a [routerLink]="'' + foyer.idFoyer" class="link-btn mx-2">
                                                         Voir Details
                                                         <i class="far fa-arrow-right"></i>
@@ -228,16 +229,44 @@
                                             <label class="m-check-label" for="m-premium">Premium Courses (184)</label>
                                         </div>
                                     </li>
+                                  <h3 class="course__sidebar-title">Capacity Filter</h3>
+
+                                  <li *ngFor="let interval of capacityIntervals">
+                                    <div class="course__sidebar-check mb-10 d-flex align-items-center">
+                                      <input class="m-check-input" type="checkbox" [id]="'m-interval-' + interval[0] + '-' + interval[1]"
+                                             [(ngModel)]="selectedIntervals[interval[0] + '-' + interval[1]]" (change)="onCapacityFilterChange()" />
+                                      <label class="m-check-label" [for]="'m-interval-' + interval[0] + '-' + interval[1]">
+                                        Filter by Capacity {{ interval[0] }} - {{ interval[1] }}
+                                      </label>
+                                    </div>
+                                  </li>
                                 </ul>
                             </div>
+                          <div>
+                         <!--   <label *ngFor="let interval of capacityIntervals">
+                              <input type="checkbox" [(ngModel)]="selectedIntervals[interval[0] + '-' + interval[1]]" (change)="onCapacityFilterChange()">
+                              Filter by Capacity {{ interval[0] }} - {{ interval[1] }}
+                            </label>-->
+                          </div>
                         </div>
+                      <div>
+
+                      </div>
+
+                      <!-- Your existing code for displaying Foyer cards goes here -->
+
+                      <mat-paginator [length]="totalCards" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
                     </div>
                 </div>
 
 
 
+                  </div>
+
+
+
             </div>
-        </div>
+
     </section>
 
     <section class="cta__area mb--120">

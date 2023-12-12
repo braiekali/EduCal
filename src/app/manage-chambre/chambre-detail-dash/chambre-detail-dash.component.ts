@@ -1,10 +1,10 @@
-import {AfterViewInit, Component} from '@angular/core';
-import {Chambre} from "../model/chambre";
-import {Reservation} from "../model/reservation";
-import {MatDialog} from "@angular/material/dialog";
-import {ChambreService} from "../chambre.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {ActivatedRoute} from "@angular/router";
+import { AfterViewInit, Component } from '@angular/core';
+import { Chambre } from "../model/chambre";
+
+import { MatDialog } from "@angular/material/dialog";
+import { ChambreService } from "../chambre.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-chambre-detail-dash',
@@ -54,30 +54,4 @@ export class ChambreDetailDashComponent {
     this.Showupdate = true;
   }
 
-  afterrecieveData(e: any) {
-    this.Showupdate = false;
-    console.log(e);
-    if (e.estValide == 'Oui') {
-      e.estValide = 1;
-
-          this.s.sendEmail(e).subscribe(
-            () => {
-              this.s.updateReservation(e).subscribe();
-              alert("Email de validation envoyé avec succès !!");
-              console.log("email envoyer pour le reservation : ",e.idReservation);
-            }
-          )
-
-    } else {
-      e.estValide = 0;
-      this.s.updateReservation(e).subscribe(
-      )
-    }
-
-  }
-
-  deleteReservation(element: any) {
-    this.s.removeReservation(element.idReservation).subscribe();
-    console.log("supprimer reservation id : ", element.idReservation);
-  }
 }

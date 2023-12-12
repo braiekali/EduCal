@@ -14,8 +14,8 @@ export class FoyerFilterPipe implements PipeTransform {
     return foyers.filter(
       (foyer) =>
         foyer.nomFoyer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        foyer.capaciteFoyer.toString().includes(searchTerm) ||
-        foyer.superficie.toString().includes(searchTerm)
+        foyer.capacityFoyer.toString().includes(searchTerm)
+       // foyer.superficie.toString().includes(searchTerm)
     );
   }
 }

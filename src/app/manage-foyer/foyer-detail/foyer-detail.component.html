@@ -14,7 +14,7 @@
                 <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
                     <div class="teacher__details-thumb p-relative w-img pr-30">
                         <div class="uni__img__container">
-                            <img class="teacher-details-shape-1" [src]="foyerDetails.imageFoyer" alt="Image Foyer">
+                          <img class="teacher-details-shape-1" [src]="foyerDetails.imageFoyer" alt="Image Foyer">-->
                         </div>
                         <div class="teacher__details-shape">
                             <img class="teacher-details-shape-1" src="assets/images/teacher/details/shape/shape-1.png"
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="teacher__social-2 m-t-32">
-                    
+
                                 <ul>
                                     <li>
                                         <a href="#" mat-icon-button
@@ -67,10 +67,10 @@
                         <div class="teacher__bio">
 
 
-                            <h4 style="font-weight: normal;">La capacité de foyer est: {{ foyerDetails.capaciteFoyer }}
+                            <h4 style="font-weight: normal;">La capacité de foyer est: {{ foyerDetails.capacityFoyer }}
                             </h4>
-                            <h4 style="font-weight: normal;">Le superficie de foyer est: {{ foyerDetails.superficie }}
-                            </h4>
+<!--                            <h4 style="font-weight: normal;">Le superficie de foyer est: {{ foyerDetails.superficie }}-->
+<!--                            </h4>-->
 
                         </div>
 
@@ -78,51 +78,10 @@
 
                 </div>
                 <div class="teacher__courses pt-55">
-                    <div class="section__title-wrapper mb-30">
-                        <h2 class="section__title">Liste des blocs <span class="yellow-bg yellow-bg-big">de foyer<img
-                                    src="assets/images/shape/yellow-bg.png"
-                                    style="margin-bottom: -1.3rem; margin-left: .6rem;" alt=""></span></h2>
-                    </div>
+
                     <div class="teacher__course-wrapper">
                         <div class="teacher__course-wrapper">
                             <div class="row">
-                                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6" *ngFor="let bloc of blocs">
-                                    <div class="course__item white-bg mb-30 fix">
-                                        <div class="course__thumb w-img p-relative fix">
-                                            <a href="course-details.html">
-                                                <img [src]="bloc.imageBloc" alt="Image Bloc"
-                                                    style="width: 500px; height: 300px;">
-                                            </a>
-                                            <div class="course__tag">
-                                                <a href="#">{{bloc.nomBloc}}</a>
-                                            </div>
-                                        </div>
-                                        <div class="course__content">
-                                            <div class="course__meta d-flex align-items-center justify-content-between">
-                                                <div class="course__lesson">
-                                                    <span><i class="far fa-book-alt"></i>{{bloc.nombreEtage}}</span>
-                                                </div>
-                                                <div class="course__rating">
-                                                    <span><i class="icon_star"></i>{{bloc.capaciteBloc}}</span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="course__more d-flex justify-content-between align-items-center">
-                                            <div class="course__status">
-                                                <span>Free</span>
-                                            </div>
-                                            <div class="course__btn">
-                                                <a [routerLink]="''+ bloc.idBloc" class="link-btn">
-                                                    Voir Details
-                                                    <i class="far fa-arrow-right"></i>
-                                                    <i class="far fa-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
 

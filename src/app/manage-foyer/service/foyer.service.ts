@@ -8,7 +8,7 @@ import { environment } from 'app/environment/environment';
   providedIn: 'root'
 })
 export class FoyerService {
-  private baseUrl = environment.url+"/foyer";
+  private baseUrl = "http://localhost:8081/Foyer";
   private foyerIdSubject = new BehaviorSubject<number>(0);
   foyerId$ = this.foyerIdSubject.asObservable();
   idFoyer$: any;
@@ -27,13 +27,13 @@ export class FoyerService {
 
 
   addFoyer(foyer: Foyer): Observable<Foyer> {
-    return this.http.post<Foyer>(`${this.baseUrl}/addfoyer`, foyer);
+    return this.http.post<Foyer>(`${this.baseUrl}/add`, foyer);
   }
 
 
 
   deleteFoyer(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/foyer/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
 
 
@@ -46,16 +46,7 @@ export class FoyerService {
     return this.http.put<Foyer>(`${this.baseUrl}/foyer`, foyer);
   }
 
-  likeFoyer(foyerId: number): Observable<Foyer> {
-    return this.http.post<Foyer>(`${this.baseUrl}/like/${foyerId}`, {});
-  }
 
-  dislikeFoyer(foyerId: number): Observable<Foyer> {
-    return this.http.post<Foyer>(`${this.baseUrl}/dislike/${foyerId}`, {});
-  }
 
-  getSommeCapaciteTousLesFoyers(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/sommeCapaciteTousLesFoyers`);
-  }
 
 }

@@ -2,11 +2,13 @@
   <!-- --------------------------------------------------------------------------- -->
   <!-- Sales Overview -->
   <!-- --------------------------------------------------------------------------- -->
+
+
   <div class="col-lg-8">
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
         <div class="d-flex w-100">
-          <mat-card-title>Sales Overview</mat-card-title>
+          <mat-card-title>Statistique sur le nombre des chambres selon le type:</mat-card-title>
           <div class="m-l-auto">
             <mat-form-field class="theme-select" appearance="outline">
               <mat-select value="mar">
@@ -32,6 +34,16 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+
+
+
+
+
+
+
+
+
   <!-- --------------------------------------------------------------------------- -->
   <!-- end Sales overview -->
   <!-- --------------------------------------------------------------------------- -->
@@ -158,16 +170,16 @@
               <ng-template [ngIf]="stat.subtext">
                 <span class="mat-subtitle-1 f-s-14 lh-20">{{
                   stat.subtext
-                }}</span>
+                  }}</span>
               </ng-template>
               <ng-template [ngIf]="stat.title">
                 <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">{{
                   stat.title
-                }}</span>
+                  }}</span>
               </ng-template>
               <ng-template [ngIf]="stat.link">
                 <a href="#" class="text-primary text-decoration-none mat-body-1"
-                  >#ML-3467</a
+                >#ML-3467</a
                 >
               </ng-template>
             </div>

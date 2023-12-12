@@ -8,8 +8,8 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {Chambre} from "../model/chambre";
-import {ChambreService} from "../chambre.service";
+import { Chambre } from "../model/chambre";
+import { ChambreService } from "../chambre.service";
 
 @Component({
   selector: 'app-show-one',

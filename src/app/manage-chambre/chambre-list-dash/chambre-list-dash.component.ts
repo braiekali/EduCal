@@ -1,13 +1,14 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {AddChambreDialogDashComponent} from "../add-chambre-dialog-dash/add-chambre-dialog-dash.component";
-import {types} from "sass";
+import { Component, Injectable, ViewChild } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { AddChambreDialogDashComponent } from "../add-chambre-dialog-dash/add-chambre-dialog-dash.component";
+import { types } from "sass";
 import Null = types.Null;
-import {ChambreService} from "../chambre.service";
-import {Chambre} from "../model/chambre";
-import {Observable} from "rxjs";
+import { ChambreService } from "../chambre.service";
+import { Chambre } from "../model/chambre";
+import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chambre-list-dash',
@@ -15,35 +16,9 @@ import {Observable} from "rxjs";
   styleUrls: ['./chambre-list-dash.component.scss']
 })
 export class ChambreListDashComponent {
-  search='';
+  search = '';
 
-  ELEMENT_DATA: any; /*= [
-    {
-      id: 3,
-      numeroChambre: 'A8',
-      typeChambre: 'SIMPLE',
-      bloc: 'AAA',
-      reservation: 'null',
-      image: 'assets/images/profile/user-1.jpg',
-    },
-    {
-      id: 3,
-      numeroChambre: 'A8',
-      typeChambre: 'SIMPLE',
-      bloc: 'AAA',
-      reservation: '',
-      image: 'assets/images/profile/user-1.jpg',
-    },
-    {
-      id: 3,
-      numeroChambre: '9',
-      typeChambre: 'SIMPLE',
-      bloc: 'AAA',
-      reservation: 'null',
-      image: 'assets/images/profile/user-1.jpg',
-    },
-
-  ];*/
+  ELEMENT_DATA: any;
   Showupdate = false;
   chambretoupdate: any;
 
@@ -56,8 +31,8 @@ export class ChambreListDashComponent {
 
     console.log("id chambre bch nfasakheha", chambre.idChambre);
     this.s.removeChambre(chambre.idChambre).subscribe(() => {
-        this.refreshChambreList();
-      }
+      this.refreshChambreList();
+    }
     );
   }
 
@@ -73,16 +48,31 @@ export class ChambreListDashComponent {
   }
 
 
-  constructor(private addUserDialog: MatDialog, private s: ChambreService) {
+  constructor(private addUserDialog: MatDialog, private s: ChambreService, private http: HttpClient) {
   }
 
   dataSource: any;
-  displayedColumns: string[] = ['numeroChambre', 'typeChambre', 'bloc', 'reservation', 'action'];
+  displayedColumns: string[] = ['numeroChambre', 'typeChambre', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+  statistiqueChambres: any;
 
   ngOnInit(): void {
     this.refreshChambreList();
+
+    this.s.getStatistiqueNombreChambresParType().subscribe(
+      (data) => {
+        this.statistiqueChambres = data;
+        console.log('Statistique des chambres par type :', this.statistiqueChambres);
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de la statistique :', error);
+      }
+    );
+
   }
+
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -121,6 +111,7 @@ export class ChambreListDashComponent {
       }
     });
   }
+
 
 
 }

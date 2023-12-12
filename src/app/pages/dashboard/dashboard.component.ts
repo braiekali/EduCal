@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { ChambreService } from 'app/manage-chambre/chambre.service';
+import { Chambre } from 'app/manage-chambre/model/chambre';
 import {
   ApexChart,
   ChartComponent,
@@ -15,7 +18,6 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
-import {RestaurantService} from "../../manage-resto/restaurant.service";
 
 interface month {
   value: string;
@@ -138,6 +140,7 @@ export class AppDashboardComponent {
   public yearlyChart!: Partial<yearlyChart> | any;
   public monthlyChart!: Partial<monthlyChart> | any;
 
+
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
   dataSource = ELEMENT_DATA;
 
@@ -222,29 +225,26 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor(private restoService: RestaurantService) {
+  constructor(  private s: ChambreService,private http: HttpClient) {
+
+
+
 
     // sales overview chart
     this.salesOverviewChart = {
       series: [
         {
-          name: 'Total plats',
+          name: 'Eanings this month',
           data: [],
           color: '#5D87FF',
         },
         {
-          name: 'Prix Moyen des Plats',
+          name: 'Eanings this month',
           data: [],
-          color: '#49BEFF',
+          color: '#5D87FF',
         },
-        {
-          name: 'Total Restaurant',
-          data: [],
-          color: '#adb0bb',
-        },
-      ],
-      // ... other properties ...
 
+      ],
       chart: {
         type: 'bar',
         height: 390,
@@ -260,14 +260,14 @@ export class AppDashboardComponent {
       xaxis: {
         type: 'category',
         categories: [
-          '16/08',
-          '17/08',
-          '18/08',
-          '19/08',
-          '20/08',
-          '21/08',
-          '22/08',
-          '23/08',
+          '    ',
+          '    ',
+          '    ',
+          '   ',
+          '   ',
+          '   ',
+          '   ',
+          '   ',
         ],
         labels: {
           style: { cssClass: 'grey--text lighten-2--text fill-color' },
@@ -308,7 +308,7 @@ export class AppDashboardComponent {
 
     // yearly breakup chart
     this.yearlyChart = {
-      series: [],
+      series: [38, 40, 25],
 
       chart: {
         type: 'donut',
@@ -396,30 +396,50 @@ export class AppDashboardComponent {
         },
       },
     };
-
   }
 
 
 
 
-
+  statistiqueChambres: any;
+  chambre: Chambre[] = [];
   ngOnInit(): void {
-   /* this.restoService.getSalesOverviewData().subscribe(
-      (salesOverviewData) => {
+
+    this.s.getSalesOverviewData().subscribe(
+      (salesOverviewData: any) => {
         console.log('Sales Overview Data:', salesOverviewData);
 
-        // Update the salesOverviewChart series data
-        this.salesOverviewChart.series[0].data = [salesOverviewData.totalDishes];
-        this.salesOverviewChart.series[1].data = [salesOverviewData.averageDishPrice];
-        this.salesOverviewChart.series[2].data = [salesOverviewData.totalRestaurants];
-        // Update other series data if needed
+        // Extract unique room types from the API response
+        const roomTypes = Object.keys(salesOverviewData);
 
-        this.salesOverviewChart.chart.title.text = `Average Dish Price: ${salesOverviewData.averageDishPrice}`;
-        this.salesOverviewChart.chart.subtitle.text = `Total Restaurants: ${salesOverviewData.totalRestaurants}`;
+        // Map counts to each room type
+        const roomTypeData = roomTypes.map((type) => {
+          const count = salesOverviewData[type];
+          return {
+            name: type,
+            data: [count],
+            color: '#5D87FF', // You can set a specific color if needed
+          };
+        });
+
+        // Update the salesOverviewChart series data
+        this.salesOverviewChart.series = roomTypeData;
+
+
+        // Update other chart properties if needed
+        this.salesOverviewChart.chart.title.text = 'Nombre de chambres par type';
+
+
+        console.log('Updated chart:', this.salesOverviewChart);
       },
       (error) => {
         console.error('Error fetching sales overview data:', error);
-      });*/
+      });
   }
+
 }
+
+
+
+
 

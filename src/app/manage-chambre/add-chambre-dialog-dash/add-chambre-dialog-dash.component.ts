@@ -1,8 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
-import {ChambreService} from "../chambre.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Chambre} from "../model/chambre";
+import { Component, ViewChild } from '@angular/core';
+import { MatDialogRef } from "@angular/material/dialog";
+import { ChambreService } from "../chambre.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { Chambre } from "../model/chambre";
 
 @Component({
   selector: 'app-add-chambre-dialog-dash',
@@ -16,19 +16,14 @@ export class AddChambreDialogDashComponent {
   }
 
   ngOnInit(): void {
-    this.s.getBlocs().subscribe(
-      (result) => {
-        this.bloc = result
-        console.log("bloc:", this.bloc)
-      }
-    )
+
   }
 
   bloc: any;
 
-  type = ['STANDARD', 'DELUXE', 'ECONOMIQUE'];
-
-  imageUrl: string | ArrayBuffer | null ;
+  type = ['SIMPLE', 'DOUBLE', 'TRIPLE'];
+  //SIMPLE,DOUBLE,TRIPLE
+  imageUrl: string | ArrayBuffer | null;
   @ViewChild('fileInput') fileInput: any;
 
   onFileSelected(event: any): void {
@@ -39,10 +34,10 @@ export class AddChambreDialogDashComponent {
         this.imageUrl = e.target.result;
       };
       reader.readAsDataURL(file);
-      this.fileData=file;
+      this.fileData = file;
     }
   }
-fileData:any;
+  fileData: any;
   triggerFileInputClick(): void {
     this.fileInput.nativeElement.click();
   }
@@ -53,7 +48,7 @@ fileData:any;
     this.addDialogRef.close();
   }
 
-  uploadImage(file: File,id:any): void {
+  uploadImage(file: File, id: any): void {
     const formData = new FormData();
     formData.append('fileImage', file);
     this.s.uploadImage(id, formData).subscribe(
@@ -67,23 +62,20 @@ fileData:any;
       }
     );
   }
-  res:any;
+  res: any;
   submitForm(formData: any): void {
     console.log("form dataaa : ", formData)
     const newChambre: Chambre = {
       idChambre: null,
-      numeroChambre: formData.numero,
-      typeChambre: formData.type,
-      bloc: {
-        idBloc: formData.bloc
-      },
-      reservation: null
+      numeroChambre: formData.numeroChambre,
+      typeChambre: formData.typeChambre,
+      imageUrl: formData.imageUrl,
     };
     console.log("Chambreee : ", newChambre);
     this.s.addChambre(newChambre).subscribe(
       (result) => {
-        this.res=result;
-        this.uploadImage(this.fileData,this.res.idChambre);
+        this.res = result;
+        this.uploadImage(this.fileData, this.res.idChambre);
         console.log(' resultat apres ajout ', result);
         alert("Added Successfully");
       });
@@ -91,4 +83,6 @@ fileData:any;
 
     this.addDialogRef.close(formData);
   }
+
+  protected readonly FormData = FormData;
 }

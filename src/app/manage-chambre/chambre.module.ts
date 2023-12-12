@@ -18,13 +18,13 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { ChambreDetailDashComponent } from './chambre-detail-dash/chambre-detail-dash.component';
 import { UpdateChambreDashComponent } from './update-chambre-dash/update-chambre-dash.component';
-import { UpdateReservationDashComponent } from './update-reservation-dash/update-reservation-dash.component';
 import { ShowOneComponent } from './show-one/show-one.component';
-import { ReservationListComponent } from './reservation-list/reservation-list.component';
+
 import { ReserveButtonDirective } from './show-one/reserve-button.directive';
 import {QRCodeModule} from "angularx-qrcode";
-import { QrCodeComponent } from './qr-code/qr-code.component';
-import { AppErrorModule } from 'app/app-error.module';
+
+
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -34,11 +34,11 @@ import { AppErrorModule } from 'app/app-error.module';
     AddChambreDialogDashComponent,
     ChambreDetailDashComponent,
     UpdateChambreDashComponent,
-    UpdateReservationDashComponent,
+
     ShowOneComponent,
-    ReservationListComponent,
+
     ReserveButtonDirective,
-    QrCodeComponent
+
   ],
     imports: [
         CommonModule,
@@ -56,7 +56,8 @@ import { AppErrorModule } from 'app/app-error.module';
         MatInputModule,
         ReactiveFormsModule,
         QRCodeModule,
-        AppErrorModule
+        MatSelectModule,
+
     ]
 })
 export class ChambreModule { }

@@ -1,10 +1,9 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Chambre} from "../model/chambre";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatDialog} from "@angular/material/dialog";
-import {ChambreService} from "../chambre.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
-import {FormBuilder, Validators} from "@angular/forms";
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Chambre } from "../model/chambre";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatDialog } from "@angular/material/dialog";
+import { ChambreService } from "../chambre.service";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-update-chambre-dash',
@@ -22,7 +21,8 @@ export class UpdateChambreDashComponent {
 
   @Input() chambre_data: any;
   @Output() sendmsg = new EventEmitter();
-  type = ['STANDARD', 'DELUXE', 'ECONOMIQUE'];
+  type = ['SIMPLE', 'DOUBLE', 'TRIPLE'];
+
   image: string | ArrayBuffer | null;
 
   getImage(file: any) {

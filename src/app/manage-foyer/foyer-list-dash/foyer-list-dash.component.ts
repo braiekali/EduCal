@@ -6,9 +6,8 @@ import { FoyerService } from '../service/foyer.service';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { AddFoyerDialogDashComponent } from '../add-foyer-dialog-dash/add-foyer-dialog-dash.component';
 import { UpdateFoyerDashComponent } from '../update-foyer-dash/update-foyer.component';
-import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import Swal from 'sweetalert2';
+import {ActivatedRoute, Router} from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-foyer-list-dash',
@@ -16,71 +15,47 @@ import Swal from 'sweetalert2';
   styleUrls: ['./foyer-list-dash.component.scss']
 })
 export class FoyerListDashComponent implements AfterViewInit {
-  sommeCapaciteTousLesFoyers: number;
-  capaciteFoyer: number;
+
+  capacityFoyer: number;
   dataSource: any;
-  displayedColumns: string[] = [ 'nomFoyer', 'capaciteFoyer', 'superficie', 'action'];
+  displayedColumns: string[] = [ 'nomFoyer', 'capacityFoyer', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private addUserDialog: MatDialog, private foyerService: FoyerService,
-    private updateDialogRef: MatDialog,private route: ActivatedRoute
+    private updateDialogRef: MatDialog,private route: ActivatedRoute, private router: Router, private location: Location
+
   ) { }
 
 
 
   applyFilter(): void {
-    const filterValue = this.capaciteFoyer ? this.capaciteFoyer.toString() : '';
+    const filterValue = this.capacityFoyer ? this.capacityFoyer.toString() : '';
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  
+
   ngOnInit(): void {
     this.route.data.subscribe((data: any) => {
       this.dataSource = new MatTableDataSource(data.foyerList);
       this.dataSource.paginator = this.paginator;
     });
-    this.foyerService.getSommeCapaciteTousLesFoyers().subscribe(
-      (sommeCapacite: number) => {
-        this.sommeCapaciteTousLesFoyers = sommeCapacite;
-      },
-      (error) => {
-        console.error('Une erreur de la récupération de la somme des capacités des foyers:', error);
-      }
-    );
   }
+
   deleteFoyer(id: number): void {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce foyer ?')) {
       this.foyerService.deleteFoyer(id).subscribe(
         (data: any) => {
-          this.refreshData();
+          window.location.reload();
+
+          // Navigate to a specific route or perform any necessary updates
+          this.router.navigate(['/some-route']);
         },
-        (error: any) => {
-          // Check if the error status is 403 (Forbidden)
-          if (error instanceof HttpErrorResponse && error.status === 403) {
-            // Show Swal error message for forbidden operation
-            Swal.fire('Erreur!', 'Vous ne pouvez pas supprimer ce foyer. Il est utilisé.', 'error');
-          } else {
-            // Show a generic error message for other errors
-            Swal.fire('Erreur!', 'Une erreur s\'est produite lors de la suppression de ce foyer.', 'error');
-          }
+        (error) => {
+          console.error('Error deleting foyer:', error);
         }
       );
     }
   }
-
-
-  refreshData(): void {
-    this.foyerService.getListFoyer().subscribe(
-      (data: any) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-      },
-      (error) => {
-        console.error('An error occurred:', error);
-      }
-    );
-  }
-
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
 
@@ -91,12 +66,12 @@ export class FoyerListDashComponent implements AfterViewInit {
     const dialogRef = this.addUserDialog.open(
       AddFoyerDialogDashComponent,
       {
-        width: '550px', 
+        width: '550px',
       }
     );
 
     dialogRef.afterClosed().subscribe((result) => {
-      
+
       if (result) {
         console.log('The dialog save pressed', result);
       } else {
@@ -110,7 +85,7 @@ export class FoyerListDashComponent implements AfterViewInit {
       UpdateFoyerDashComponent,
       {
         data: foyer,
-        width: '550px', 
+        width: '550px',
       }
     );
 
@@ -126,7 +101,7 @@ export class FoyerListDashComponent implements AfterViewInit {
   }
 
 // Couleur de fond initiale
-  backgroundColor = '#FFFFFF'; 
+  backgroundColor = '#FFFFFF';
 
   onColorChanged(newColor: string) {
     console.log(`Nouvelle couleur : ${newColor}`);

@@ -26,43 +26,43 @@
 
         <div class="col-xxl-6 col-xl-6 col-md-6">
           <div class="contact__form-input">
-            <label class="contact__form-input-label" for="capaciteFoyer"> Capacite Foyer</label>
-            <input type="number" placeholder="capacite Foyer" id="capaciteFoyer" formControlName="capaciteFoyer" />
+            <label class="contact__form-input-label" for="capacityFoyer"> Capacite Foyer</label>
+            <input type="number" placeholder="capacite Foyer" id="capacityFoyer" formControlName="capacityFoyer" />
           </div>
         </div>
-        <div *ngIf="frombuil.get('capaciteFoyer')?.invalid && frombuil.get('capaciteFoyer')?.touched"
+        <div *ngIf="frombuil.get('capacityFoyer')?.invalid && frombuil.get('capacityFoyer')?.touched"
           [ngClass]="{'error-message': true}">
-          <div *ngIf="frombuil.get('capaciteFoyer')?.errors?.['required']">
+          <div *ngIf="frombuil.get('capacityFoyer')?.errors?.['required']">
             required.
           </div>
-          <div *ngIf="frombuil.get('capaciteFoyer')?.errors?.['min']">
+          <div *ngIf="frombuil.get('capacityFoyer')?.errors?.['min']">
             La capacité de foyer doit contenir minimum 500.
           </div>
-          <div *ngIf="frombuil.get('capaciteFoyer')?.errors?.['max']">
+          <div *ngIf="frombuil.get('capacityFoyer')?.errors?.['max']">
             La capacité de foyer doit contenir maximum 2000.
           </div>
         </div>
 
 
-        <div class="col-xxl-6 col-xl-6 col-md-6">
-          <div class="contact__form-input">
-            <label class="contact__form-input-label" for="superficie"> Superficie de Foyer</label>
-            <input type="number" placeholder="Superficie Foyer" id="superficie" formControlName="superficie" />
-          </div>
-        </div>
-        <div *ngIf="frombuil.get('superficie')?.invalid && frombuil.get('superficie')?.touched"
-          [ngClass]="{'error-message': true}">
-          <div *ngIf="frombuil.get('superficie')?.errors?.['required']">
-            required.
-          </div>
+<!--        <div class="col-xxl-6 col-xl-6 col-md-6">-->
+<!--          <div class="contact__form-input">-->
+<!--            <label class="contact__form-input-label" for="superficie"> Superficie de Foyer</label>-->
+<!--            <input type="number" placeholder="Superficie Foyer" id="superficie" formControlName="superficie" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div *ngIf="frombuil.get('superficie')?.invalid && frombuil.get('superficie')?.touched"-->
+<!--          [ngClass]="{'error-message': true}">-->
+<!--          <div *ngIf="frombuil.get('superficie')?.errors?.['required']">-->
+<!--            required.-->
+<!--          </div>-->
 
-        </div>
+<!--        </div>-->
 
         <div class="col-xxl-6 col-xl-6 col-md-6">
-          
+
             <label for="newImageFoyer">Nouvelle image de foyer</label>
             <input type="file" formControlName="newImageFoyer" id="newImageFoyer" />
-        
+
         </div>
 
         <div class="col-12" style="margin-top: 1rem">

@@ -4,8 +4,7 @@ import { Foyer } from '../model/Foyer';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { BlocService } from '../service/bloc.service';
-import { Bloc } from '../model/Bloc';
+
 
 @Component({
   selector: 'app-foyer-detail-dash',
@@ -15,13 +14,13 @@ import { Bloc } from '../model/Bloc';
 export class FoyerDetailDashComponent implements AfterViewInit {
   foyerDetails: Foyer;
   dataSource: any;
-  blocs: Bloc[] = [];
+
   idFoyer: number;
   displayedColumns: string[] = ['name', 'email', 'tel', 'state', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private foyerService: FoyerService, private addUserDialog: MatDialog,
-    private route: ActivatedRoute, private blocService: BlocService) { }
+    private route: ActivatedRoute) { }
 
 
   ngOnInit(): void {
@@ -38,7 +37,7 @@ export class FoyerDetailDashComponent implements AfterViewInit {
       this.foyerService.getFoyerById(foyerId).subscribe(
         (foyer) => {
           this.foyerDetails = foyer;
-          this.getBlocsByFoyerId(foyerId);
+
         },
 
         (error) => console.error('Error retrieving foyer by ID:', error)
@@ -50,22 +49,14 @@ export class FoyerDetailDashComponent implements AfterViewInit {
 
 
 
-  private getBlocsByFoyerId(foyerId: number): void {
-    this.blocService.getBlocsByFoyerId(foyerId).subscribe(
-      (blocs) => {
-        this.blocs = blocs;
 
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des blocs par foyer ID:', error);
-      }
-    );
-  }
 
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
+
+
 
 
 }

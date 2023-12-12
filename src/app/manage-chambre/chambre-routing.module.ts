@@ -4,7 +4,6 @@ import {ChambreListDashComponent} from "./chambre-list-dash/chambre-list-dash.co
 import {ChambreDetailDashComponent} from "./chambre-detail-dash/chambre-detail-dash.component";
 import {ChambreListComponent} from "./chambre-list/chambre-list.component";
 import {ShowOneComponent} from "./show-one/show-one.component";
-import {ReservationListComponent} from "./reservation-list/reservation-list.component";
 
 const routes: Routes = [
 
@@ -26,10 +25,10 @@ const routes: Routes = [
     path: '',
     component: ChambreListComponent,
   },
-  {
-    path: 'reservations',
-    component: ReservationListComponent,
-  },
+  // {
+  //   path: 'reservations',
+  //   component: ReservationListComponent,
+  // },
 
 ];
 

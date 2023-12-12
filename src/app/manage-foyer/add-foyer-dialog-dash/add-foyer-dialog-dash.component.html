@@ -8,8 +8,8 @@
 
         <div class="col-xxl-6 col-xl-6 col-md-6">
           <div class="contact__form-input">
-            <label class="contact__form-input-label" for="capaciteFoyer">Capacite foyer</label>
-            <input type="number" placeholder="Capacite Foyer" id="capaciteFoyer" name="capaciteFoyer" #t="ngModel"
+            <label class="contact__form-input-label" for="capacityFoyer">Capacite foyer</label>
+            <input type="number" placeholder="Capacite Foyer" id="capacityFoyer" name="capacityFoyer" #t="ngModel"
               ngModel required min="500" max="2000" />
             <div *ngIf="t.invalid">
               <app-error [err]="t"></app-error>
@@ -33,15 +33,15 @@
         </div>
 
         <div class="col-xxl-6 col-xl-6 col-md-6">
-          <div class="contact__form-input">
-            <label for="superficie">Superficie de foyer</label>
-            <input type="number" placeholder="Superficie Foyer" id="superficie" #s="ngModel" name="superficie" ngModel
-              pattern="[0-9]+" required />
-            <div *ngIf="s.invalid">
-              <app-error [err]="s"></app-error>
-            </div>
+<!--          <div class="contact__form-input">-->
+<!--            <label for="superficie">Superficie de foyer</label>-->
+<!--            <input type="number" placeholder="Superficie Foyer" id="superficie" #s="ngModel" name="superficie" ngModel-->
+<!--              pattern="[0-9]+" required />-->
+<!--            <div *ngIf="s.invalid">-->
+<!--              <app-error [err]="s"></app-error>-->
+<!--            </div>-->
 
-          </div>
+<!--          </div>-->
         </div>
         <div class="col-xxl-6 col-xl-6 col-md-6">
           <div class="">
