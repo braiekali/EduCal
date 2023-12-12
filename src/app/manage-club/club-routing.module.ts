@@ -5,6 +5,8 @@ import { ClubListDashComponent } from './club-list-dash/club-list-dash.component
 import { DeleteClubComponent } from './delete-club/delete-club.component';
 import { ClubDetailDashComponent } from './club-detail-dash/club-detail-dash.component';
 import { EventListFrontComponent } from './manage-events/event-list-front/event-list-front.component';
+import { ClubListFrontComponent } from './club-list-front/club-list-front.component';
+import { ClubDetailFrontComponent } from './club-detail-front/club-detail-front.component';
 
 const routes: Routes = [
   {
@@ -20,11 +22,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: EventListFrontComponent,
+        component: ClubListFrontComponent,
       },
       {
         path: 'detail/:id',
-        component: EventDetailsComponent,
+        component: ClubDetailFrontComponent,
       },
     ],
   },

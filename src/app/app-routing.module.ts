@@ -65,9 +65,7 @@ const routes: Routes = [
       {
         path: 'restaurants',
         loadChildren: () =>
-          import('./manage-resto/resto.module').then(
-            (m) => m.RestoModule
-          ),
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
       },
       {
         path: 'chambres',
@@ -139,15 +137,13 @@ const routes: Routes = [
       {
         path: 'restaurants',
         loadChildren: () =>
-          import('./manage-resto/resto.module').then(
-            (m) => m.RestoModule
-          ),
+          import('./manage-resto/resto.module').then((m) => m.RestoModule),
       },
-      /**{
-        path: 'events',
+      {
+        path: 'clubs',
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
-      },**/
+      },
 
       {
         path: 'chambres',

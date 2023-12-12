@@ -12,7 +12,7 @@ import { Subject, merge, take } from 'rxjs';
   styleUrls: ['./add-club-dialog-dash.component.scss'],
 })
 export class AddClubDialogDashComponent implements OnInit {
-  universites: any;
+  // universites: any;
   imageFile: File | undefined;
   @ViewChild('fileInput') fileInput: any;
   isFormSubmited = false;
@@ -27,9 +27,9 @@ export class AddClubDialogDashComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.universiteService.getAllUniversites().subscribe((universites: any) => {
-      this.universites = universites;
-    });
+    // this.universiteService.getAllUniversites().subscribe((universites: any) => {
+    //   this.universites = universites;
+    // });
   }
 
   onFileSelected(event: any): void {
@@ -50,6 +50,7 @@ export class AddClubDialogDashComponent implements OnInit {
 
   resetAvatarImage() {
     this.imageUrl = './assets/images/profile/specDefaultImg.png';
+    this.imageFile = undefined;
   }
 
   closeDialog(): void {
@@ -60,9 +61,9 @@ export class AddClubDialogDashComponent implements OnInit {
     console.log(formData);
     this.isFormSubmited = true;
     // if (formData.valid) {
-    if (!this.imageFile) {
-      formData.value.imageUrl = 'specDefaultImg.png';
-    }
+    // if (!this.imageFile) {
+    //   formData.value.imageUrl = 'specDefaultImg.png';
+    // }
 
     this.clubService.addClub(formData).subscribe({
       next: (res) => {
@@ -77,7 +78,7 @@ export class AddClubDialogDashComponent implements OnInit {
 
         if (this.imageFile) {
           this.clubService
-            .uploadImage(this.brandNewClub.idClub, this.imageFile)
+            .uploadImage(this.brandNewClub._id, this.imageFile)
             .subscribe({
               next: (res) => {
                 console.log('1_image upload********************');

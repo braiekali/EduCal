@@ -28,7 +28,7 @@ export class ClubListDashComponent implements AfterViewInit {
   ) {}
 
   dataSource: MatTableDataSource<Club> = new MatTableDataSource<Club>();
-  displayedColumns: string[] = ['name', 'description', 'universite', 'action'];
+  displayedColumns: string[] = ['name', 'description', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
@@ -112,8 +112,7 @@ export class ClubListDashComponent implements AfterViewInit {
     this.filtredClubsList = this.dataSource.data.filter(
       (spec) =>
         spec.nomClub.toLowerCase().includes(searchInput) ||
-        spec.descriptionClub.toLowerCase().includes(searchInput) ||
-        spec.universite.nomUniversite.toLowerCase().includes(searchInput)
+        spec.descriptionClub.toLowerCase().includes(searchInput)
     );
     this.dataSource = new MatTableDataSource(this.filtredClubsList);
     this.dataSource.paginator = this.paginator;

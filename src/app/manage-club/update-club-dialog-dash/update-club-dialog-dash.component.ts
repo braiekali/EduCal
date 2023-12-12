@@ -15,7 +15,7 @@ import { User } from 'app/manage-user/model/user';
 export class UpdateClubDialogDashComponent implements OnInit {
   clubData: any;
   clubId: any;
-  universites: any;
+  // universites: any;
   imageFile: File | undefined;
   @ViewChild('fileInput') fileInput: any;
   isFormSubmited = false;
@@ -35,13 +35,13 @@ export class UpdateClubDialogDashComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('tesssssst', this.data);
-    this.universiteService.getAllUniversites().subscribe((universites: any) => {
-      this.universites = universites;
-    });
+    // console.log('tesssssst', this.data);
+    // this.universiteService.getAllUniversites().subscribe((universites: any) => {
+    //   this.universites = universites;
+    // });
   }
 
-  uploadUrl = 'http://localhost:8082/upload-directory';
+  uploadUrl = 'http://localhost:3000/upload-directory';
   imageUrl = `${this.uploadUrl}/${this.data.imageClub}`;
 
   onFileSelected(event: any): void {
@@ -74,46 +74,47 @@ export class UpdateClubDialogDashComponent implements OnInit {
 
     console.log(formData.value);
     this.isFormSubmited = true;
-    // if (formData.valid) {
-    if (!this.imageFile) {
-      formData.value.imageClub = 'specDefaultImg.png';
+    if (formData.valid) {
+      if (!this.imageFile) {
+        formData.value.imageClub = 'specDefaultImg.png';
+      }
+
+      formData.value._id = this.data._id;
+      this.clubService.updateClub(formData.value).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.brandNewClub = res;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          let imageUploadCompleted = new Subject();
+
+          if (this.imageFile) {
+            this.clubService
+              .uploadImage(this.brandNewClub._id, this.imageFile)
+              .subscribe({
+                next: (res) => {
+                  console.log('1_image upload********************');
+                  console.log(res);
+                },
+                error: (err) => {
+                  // console.log(err);
+                },
+                complete: () => {
+                  imageUploadCompleted.next(null);
+                  imageUploadCompleted.complete();
+                },
+              });
+          } else {
+            imageUploadCompleted.next(null);
+            imageUploadCompleted.complete();
+          }
+          this.updateDialogRef.close(formData);
+        },
+      });
+      // }
     }
-
-    formData.value.idClub = this.data.idClub;
-    this.clubService.updateClub(formData.value).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.brandNewClub = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        let imageUploadCompleted = new Subject();
-
-        if (this.imageFile) {
-          this.clubService
-            .uploadImage(this.brandNewClub.idClub, this.imageFile)
-            .subscribe({
-              next: (res) => {
-                console.log('1_image upload********************');
-                console.log(res);
-              },
-              error: (err) => {
-                // console.log(err);
-              },
-              complete: () => {
-                imageUploadCompleted.next(null);
-                imageUploadCompleted.complete();
-              },
-            });
-        } else {
-          imageUploadCompleted.next(null);
-          imageUploadCompleted.complete();
-        }
-        this.updateDialogRef.close(formData);
-      },
-    });
-    // }
   }
 }

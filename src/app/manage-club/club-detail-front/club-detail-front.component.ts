@@ -2,20 +2,19 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Club } from '../models/club';
-import { Event } from '../models/events';
 import { ActivatedRoute } from '@angular/router';
-import { ClubService } from '../services/club.service';
 import { AddEventDialogDashComponent } from '../manage-events/add-event-dialog-dash/add-event-dialog-dash.component';
-import { EventService } from '../services/event.service';
 import { UpdateEventDialogDashComponent } from '../manage-events/update-event-dialog-dash/update-event-dialog-dash.component';
+import { Club } from '../models/club';
+import { ClubService } from '../services/club.service';
+import { EventService } from '../services/event.service';
 
 @Component({
-  selector: 'app-club-detail-dash',
-  templateUrl: './club-detail-dash.component.html',
-  styleUrls: ['./club-detail-dash.component.scss'],
+  selector: 'app-club-detail-front',
+  templateUrl: './club-detail-front.component.html',
+  styleUrls: ['./club-detail-front.component.scss'],
 })
-export class ClubDetailDashComponent {
+export class ClubDetailFrontComponent {
   dataSource: any;
   displayedColumns: string[] = [
     'nom',

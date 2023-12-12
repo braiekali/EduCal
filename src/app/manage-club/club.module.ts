@@ -22,6 +22,8 @@ import { UpdateEventDialogDashComponent } from './manage-events/update-event-dia
 import { ShowDescriptionDialogComponent } from './manage-events/show-description-dialog/show-description-dialog.component';
 import { ShowDescriptionDialogDirective } from './manage-events/directives/show-description-dialog.directive';
 import { EventListFrontComponent } from './manage-events/event-list-front/event-list-front.component';
+import { ClubListFrontComponent } from './club-list-front/club-list-front.component';
+import { ClubDetailFrontComponent } from './club-detail-front/club-detail-front.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { EventListFrontComponent } from './manage-events/event-list-front/event-
     ShowDescriptionDialogComponent,
     ShowDescriptionDialogDirective,
     EventListFrontComponent,
+    ClubListFrontComponent,
+    ClubDetailFrontComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,7 @@ import { EventListFrontComponent } from './manage-events/event-list-front/event-
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-    exports: [TablerIconsModule, ErrorFormHandlerComponent],
+  exports: [TablerIconsModule, ErrorFormHandlerComponent],
   providers: [
     DatePipe,
     // ...

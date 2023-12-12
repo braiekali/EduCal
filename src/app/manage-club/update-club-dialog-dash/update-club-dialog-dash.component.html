@@ -7,52 +7,23 @@
       <div class="row">
         <div class="col-12 m-b-30">
           <div class="contact__form-input__image__container">
-            <img
-              class="contact__form-input__image"
-              [src]="imageUrl"
-              alt="Image Preview"
-            />
+            <img class="contact__form-input__image" [src]="imageUrl" alt="Image Preview" />
           </div>
           <div class="contact__form-input contact__form-input__image__btns">
-            <input
-              type="file"
-              accept="image/*"
-              id="Image"
-              name="imageClub"
-              ngModel
-              #fileInput
-              style="display: none"
-              (change)="onFileSelected($event)"
-            />
+            <input type="file" accept="image/*" id="Image" #fileInput style="display: none"
+              (change)="onFileSelected($event)" />
             <!-- Button to trigger file input click -->
-            <button
-              type="button"
-              mat-flat-button
-              class="Extended-Fab"
-              (click)="triggerFileInputClick()"
-            >
+            <button type="button" mat-flat-button class="Extended-Fab" (click)="triggerFileInputClick()">
               <span class="Extended-Fab__container">
-                <i-tabler
-                  class="routeIcon Extended-Fab__icon"
-                  name="cloud-upload"
-                  matListItemIcon
-                ></i-tabler>
+                <i-tabler class="routeIcon Extended-Fab__icon" name="cloud-upload" matListItemIcon></i-tabler>
                 <span class="Extended-Fab__text">Select Image</span>
               </span>
             </button>
 
-            <button
-              type="button"
-              mat-flat-button
-              class="Extended-Fab Extended-Fab--2 m-l-16"
-              (click)="resetAvatarImage()"
-            >
+            <button type="button" mat-flat-button class="Extended-Fab Extended-Fab--2 m-l-16"
+              (click)="resetAvatarImage()">
               <span class="Extended-Fab__container">
-                <i-tabler
-                  class="routeIcon Extended-Fab__icon"
-                  name="photo-cancel"
-                  matListItemIcon
-                ></i-tabler>
+                <i-tabler class="routeIcon Extended-Fab__icon" name="photo-cancel" matListItemIcon></i-tabler>
                 <span class="Extended-Fab__text">Reset Image</span>
               </span>
             </button>
@@ -61,18 +32,12 @@
         <div class="col-12">
           <div class="contact__form-input">
             <label class="contact__form-input-label" for="nom">Name</label>
-            <input
-              #nomField="ngModel"
-              type="text"
-              placeholder="Club Name"
-              id="nom"
-              name="nomClub"
-              [(ngModel)]="data.nomClub"
-            />
+            <input #nomField="ngModel" type="text" placeholder="Club Name" id="nom" name="nomClub"
+              [(ngModel)]="data.nomClub" />
           </div>
         </div>
 
-        <div class="col-12" style="margin-bottom: 8px">
+        <!-- <div class="col-12" style="margin-bottom: 8px">
           <div
             class="contact__form-input"
             style="display: flex; flex-direction: column"
@@ -102,17 +67,13 @@
               </mat-select>
             </mat-form-field>
           </div>
-        </div>
+        </div> -->
 
         <div class="col-12">
           <div class="contact__form-input">
             <label for="Description">Description</label>
-            <textarea
-              placeholder="Enter Your Description"
-              id="Description"
-              name="descriptionClub"
-              [(ngModel)]="data.descriptionClub"
-            ></textarea>
+            <textarea placeholder="Enter Your Description" id="Description" name="descriptionClub"
+              [(ngModel)]="data.descriptionClub"></textarea>
           </div>
         </div>
         <div class="col-12" style="margin-top: 1rem">
