@@ -14,10 +14,10 @@ export class UpdateSpecialiteDialogDashComponent {
   constructor(
     public updateDialogRef: MatDialogRef<UpdateSpecialiteDialogDashComponent>,
     private specialiteService: SpecialiteService,
-    private universiteService: UniversiteTempService,
+    // private universiteService: UniversiteTempService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  uploadUrl = 'http://localhost:8082/upload-directory';
+  uploadUrl = 'http://localhost:8083/upload-directory';
   imageUrl = `${this.uploadUrl}/${this.data.imageUrl}`;
   @ViewChild('fileInput') fileInput: any;
   brandNewSpecialite: Specialite;
@@ -25,7 +25,7 @@ export class UpdateSpecialiteDialogDashComponent {
   imageFile: File | undefined;
   pdfFile: File | undefined;
   isFormSubmited = false;
-  universites: any;
+  // universites: any;
 
   ngOnInit(): void {
     // this.universiteService.getAll().subscribe({
@@ -36,7 +36,7 @@ export class UpdateSpecialiteDialogDashComponent {
     //     console.log(err);
     //   },
     // });
-    this.universites = this.data.universites;
+    // this.universites = this.data.universites;
 
     if (!this.data.planEtudePdf) {
       this.data.planEtudePdf = 'No File Choosen';

@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <div class="col-12" style="margin-bottom: 8px;">
+                <!-- <div class="col-12" style="margin-bottom: 8px;">
                     <div class="contact__form-input" style="display: flex; flex-direction: column;">
                         <label for="University" style="margin-bottom: .5rem;">University</label>
 
@@ -72,14 +72,13 @@
                                     [value]="universite.nomUniversite">{{universite.nomUniversite.charAt(0).toUpperCase()
                                     + universite.nomUniversite.slice(1).toLowerCase()}}</mat-option>
                             </mat-select>
-                            <!-- <app-error-form-handler [fieldIn]="uniField" [isFormSubmitedIn]="isFormSubmited">
-                            </app-error-form-handler> -->
+                          
                             <mat-error *ngIf="uniField.invalid && (uniField.dirty || uniField.touched)">
                                 <span *ngIf="uniField.errors?.['required']">University is required.</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="col-12" style="margin-bottom: 22px;">

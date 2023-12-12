@@ -26,13 +26,13 @@
                 <div class="col-xxl-8 col-xl-8 col-lg-8">
                     <div class="teacher__wrapper">
                         <div class="teacher__top d-md-flex align-items-end justify-content-between">
-                            <div class="teacher__info">
+                            <!-- <div class="teacher__info">
                                 <h4 style="margin-bottom: 1.2rem;">{{currentSpecialite?.nom | uppercase}}</h4>
                                 <span><strong>Diplome:</strong> {{currentSpecialite?.diplome}}</span>
                                 <div style="margin-top: .3rem;"></div>
                                 <span><strong>Universite:</strong>
                                     {{currentSpecialite?.universite.nomUniversite}}</span>
-                            </div>
+                            </div> -->
 
                             <div class="teacher__social-2 m-t-32">
                                 <h4>Plan d'etude</h4>
@@ -64,7 +64,7 @@
                     </div>
 
                 </div>
-                <div class="teacher__courses pt-55">
+                <!-- <div class="teacher__courses pt-55">
                     <div class="section__title-wrapper mb-30">
                         <h2 class="section__title">Speciality <span class="yellow-bg yellow-bg-big">subjects<img
                                     src="assets/images/shape/yellow-bg.png"
@@ -100,7 +100,7 @@
                                     <mat-card class="cardWithShadow">
                                         <div class="table-responsive m-t-16">
                                             <table mat-table [dataSource]="dataSource" class="w-100">
-                                                <!-- nom Column -->
+                                           
                                                 <ng-container matColumnDef="nom">
                                                     <th mat-header-cell *matHeaderCellDef
                                                         class="f-w-600 mat-subtitle-1 f-s-14">
@@ -118,15 +118,13 @@
                                                                 <h6 class="mat-subtitle-1 f-s-14 f-w-600">
                                                                     {{ element.nom }}
                                                                 </h6>
-                                                                <!-- <span class="mat-body-1 f-s-12">
-                                                                    #1
-                                                                </span> -->
+                                                               
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </ng-container>
 
-                                                <!-- ects Column -->
+                                              
                                                 <ng-container matColumnDef="ects">
                                                     <th mat-header-cell *matHeaderCellDef
                                                         class="f-w-600 mat-subtitle-1 f-s-14">
@@ -137,7 +135,6 @@
                                                     </td>
                                                 </ng-container>
 
-                                                <!-- description Column -->
                                                 <ng-container matColumnDef="description">
                                                     <th mat-header-cell *matHeaderCellDef
                                                         class="f-w-600 mat-subtitle-1 f-s-14">
@@ -149,7 +146,7 @@
                                                     </td>
                                                 </ng-container>
 
-                                                <!-- action Column -->
+                                             
                                                 <ng-container matColumnDef="action">
                                                     <th mat-header-cell *matHeaderCellDef
                                                         class="f-w-600 mat-subtitle-1 f-s-14">
@@ -202,7 +199,7 @@
                             </mat-card-content>
                         </mat-card>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

@@ -13,12 +13,11 @@ import { Subject, merge, take } from 'rxjs';
 export class AddSpecialiteDialogDashComponent implements OnInit {
   constructor(
     public addDialogRef: MatDialogRef<AddSpecialiteDialogDashComponent>,
-    private specialiteService: SpecialiteService,
-    private universiteService: UniversiteTempService,
-    @Inject(MAT_DIALOG_DATA) public universites: any
-  ) {}
+    private specialiteService: SpecialiteService // private universiteService: UniversiteTempService,
+  ) // @Inject(MAT_DIALOG_DATA) public universites: any
+  {}
   // universites: any;
-  uploadUrl = 'http://localhost:8082/upload-directory/';
+  uploadUrl = 'http://localhost:8083/upload-directory/';
   imageUrl = '/assets/images/profile/specDefaultImg.png';
   @ViewChild('fileInput') fileInput: any;
   brandNewSpecialite: Specialite;

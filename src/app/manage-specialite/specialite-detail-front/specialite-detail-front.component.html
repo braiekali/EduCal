@@ -27,7 +27,7 @@
                             <h5 class="page__title-3"> {{currentSpecialite.nom}} </h5>
                         </div>
                         <div class="course__meta-2 d-sm-flex mb-30">
-                            <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
+                            <!-- <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
                                 <div class="course__teacher-thumb-3 mr-15">
                                     <img src="../../../../assets/images/teacher/esprit.jpg" alt="">
                                 </div>
@@ -35,7 +35,7 @@
                                     <h5>University</h5>
                                     <p><a href="#"> {{currentSpecialite.universite.nomUniversite}} </a></p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="course__update mr-80 mb-30">
                                 <h5>Diplome</h5>
                                 <p> {{currentSpecialite.diplome}} </p>
@@ -127,7 +127,7 @@
                                     <div class="course__review">
                                         <h3>Matieres</h3>
 
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div *ngFor="let matiere of matiereList,let i = index"
                                                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                                                 <div class="course__item white-bg mb-30 fix" style="height: 95%;">
@@ -147,26 +147,9 @@
                                                         </h3>
                                                         <div
                                                             style="display: flex; justify-content: space-between; align-items: center;">
-                                                            <!-- <div class="course__teacher d-flex align-items-center">
-                                                                <div class="course__teacher-thumb mr-15">
-                                                                    <img style="width: 60px;height: 60px;"
-                                                                        src="../../../../assets/images/teacher/esprit.jpg"
-                                                                        alt="" />
-                                                                </div>
-                                                                <h6>
-                                                                    <p style="margin-bottom: -.06rem;">Universite</p>
-                                                                    <a href="instructor-details.html">
-                                                                        {{matiere.nom}} </a>
-                                                                </h6>
-                                                            </div> -->
-
+                                                        
                                                             <div class="course__teacher d-flex align-items-center">
-                                                                <!-- <h6>
-                                                                    <p style="margin-bottom: -.06rem;">Diplome</p>
-                                                                    <p
-                                                                        style="margin-bottom: 0; font-weight: 600; text-transform: capitalize;">
-                                                                        {{matiere.nom}}</p>
-                                                                </h6> -->
+                                                        
                                                                 <p appShowDescriptionDialog class="matiere-desc">
                                                                     {{matiere.description}} </p>
                                                             </div>
@@ -196,7 +179,7 @@
                                         </div>
                                         <mat-paginator [length]="totalCards" [pageSize]="pageSize"
                                             [pageSizeOptions]="pageSizeOptions"
-                                            (page)="onPageChange($event)"></mat-paginator>
+                                            (page)="onPageChange($event)"></mat-paginator> -->
                                     </div>
                                 </div>
 
@@ -238,7 +221,7 @@
                                 </div> -->
                                 <div class="course__video-content mb-35">
                                     <ul>
-                                        <li class="d-flex align-items-center">
+                                        <!-- <li class="d-flex align-items-center">
                                             <div class="course__video-icon">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -253,8 +236,8 @@
                                                 <h5><span>Universite
                                                         :</span>{{currentSpecialite.universite.nomUniversite}}</h5>
                                             </div>
-                                        </li>
-                                        <li class="d-flex align-items-center">
+                                        </li> -->
+                                        <!-- <li class="d-flex align-items-center">
                                             <div class="course__video-icon">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -269,7 +252,7 @@
                                             <div class="course__video-info">
                                                 <h5><span>Matieres :</span>{{matiereCount}}</h5>
                                             </div>
-                                        </li>
+                                        </li> -->
                                         <!-- <li class="d-flex align-items-center">
                                             <div class="course__video-icon">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"

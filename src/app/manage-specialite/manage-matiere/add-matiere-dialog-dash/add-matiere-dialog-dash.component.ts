@@ -39,7 +39,7 @@ export class AddMatiereDialogDashComponent {
 
     this.addForm = formBuilder.group(formControls);
   }
-  uploadUrl = 'http://localhost:8082/upload-directory/';
+  uploadUrl = 'http://localhost:8083/upload-directory/';
   imageUrl = '/assets/images/profile/specDefaultImg.png';
   @ViewChild('fileInput') fileInput: any;
   brandNewSpecialite: Matiere;

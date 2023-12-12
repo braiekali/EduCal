@@ -8,8 +8,8 @@ import { Specialite } from '../models/specialite';
 })
 export class SpecialiteCardFrontComponent {
   @Input() specialite: Specialite;
-  @Input() currentCount: number[];
+  // @Input() currentCount: number[];
   @Input() i: number;
 
-  uploadUrl = 'http://localhost:8082/upload-directory/';
+  uploadUrl = 'http://localhost:8083/upload-directory/';
 }

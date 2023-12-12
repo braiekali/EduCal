@@ -18,9 +18,9 @@ export class SpecialiteListFrontComponent implements OnInit {
   filtredSpecialiteList: Specialite[];
   filtredSpecialiteListByDiplome: Specialite[];
   searchInput: string = '';
-  uploadUrl = 'http://localhost:8082/upload-directory/';
-  countMatiere: number;
-  currentCount: any[] = [];
+  uploadUrl = 'http://localhost:8083/upload-directory/';
+  // countMatiere: number;
+  // currentCount: any[] = [];
 
   cards: Specialite[] = [];
   pagedCards = [];
@@ -28,9 +28,9 @@ export class SpecialiteListFrontComponent implements OnInit {
   pageSize: number = 4;
   pageSizeOptions: number[] = [4, 10, 25, 100];
 
-  getMatiereCount(id: any): Observable<number> {
-    return this.matiereService.countBySpec(id);
-  }
+  // getMatiereCount(id: any): Observable<number> {
+  //   return this.matiereService.countBySpec(id);
+  // }
 
   updatePaginator() {
     this.cards = this.filtredSpecialiteListByDiplome;
@@ -54,15 +54,15 @@ export class SpecialiteListFrontComponent implements OnInit {
       error: (err) => {
         console.log(err);
       },
-      complete: () => {
-        const countObservables = this.specialiteList.map((spec) =>
-          this.getMatiereCount(spec.id)
-        );
+      // complete: () => {
+      //   const countObservables = this.specialiteList.map((spec) =>
+      //     this.getMatiereCount(spec.id)
+      //   );
 
-        forkJoin(countObservables).subscribe((counts) => {
-          this.currentCount = counts;
-        });
-      },
+      //   forkJoin(countObservables).subscribe((counts) => {
+      //     this.currentCount = counts;
+      //   });
+      // },
     });
   }
 

@@ -22,22 +22,21 @@ export class SpecialiteListDashComponent {
     private addSpecialiteDialog: MatDialog,
     private deleteSpecialiteDialog: MatDialog,
     private updateSpecialiteDialog: MatDialog,
-    private specialiteService: SpecialiteService,
-    private universiteService: UniversiteTempService
+    private specialiteService: SpecialiteService // private universiteService: UniversiteTempService
   ) {}
 
   dataSource: any;
   displayedColumns: string[] = [
     'nom',
     'diplome',
-    'universite',
+    // 'universite',
     'planEtude',
     'action',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   brandNewSpecialite: any;
-  uploadUrl = 'http://localhost:8082/upload-directory/';
-  universites: any;
+  uploadUrl = 'http://localhost:8083/upload-directory/';
+  // universites: any;
   showDeleteDialog: boolean = false;
   toDeleteSpec: Specialite;
 
@@ -77,14 +76,14 @@ export class SpecialiteListDashComponent {
       },
     });
 
-    this.universiteService.getAll().subscribe({
-      next: (res) => {
-        this.universites = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    // this.universiteService.getAll().subscribe({
+    //   next: (res) => {
+    //     this.universites = res;
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
   }
 
   openAddSpecialiteDialog(): void {
@@ -92,7 +91,7 @@ export class SpecialiteListDashComponent {
       AddSpecialiteDialogDashComponent,
       {
         width: '550px',
-        data: this.universites,
+        // data: this.universites,
       }
     );
 
@@ -112,21 +111,21 @@ export class SpecialiteListDashComponent {
   }
 
   openDeleteSpecialiteDialog(deletedSpecialite: Specialite): void {
-    this.showDeleteDialog = true;
-    this.toDeleteSpec = deletedSpecialite;
-    // const deleteDialogRef = this.deleteSpecialiteDialog.open(
-    //   DeleteSpecialiteDialogDashComponent,
-    //   {
-    //     width: '400px',
-    //     // data: deletedSpecialite,
-    //   }
-    // );
+    // this.showDeleteDialog = true;
+    // this.toDeleteSpec = deletedSpecialite;
+    const deleteDialogRef = this.deleteSpecialiteDialog.open(
+      DeleteSpecialiteDialogDashComponent,
+      {
+        width: '400px',
+        data: deletedSpecialite,
+      }
+    );
 
-    // deleteDialogRef.afterClosed().subscribe((res) => {
-    //   if (res) {
-    //     this.updateList(res);
-    //   }
-    // });
+    deleteDialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.updateList(res);
+      }
+    });
   }
 
   openUpdateSpecialiteDialog(updatedSpecialite: Specialite): void {
@@ -134,7 +133,8 @@ export class SpecialiteListDashComponent {
       UpdateSpecialiteDialogDashComponent,
       {
         width: '550px',
-        data: { ...updatedSpecialite, universites: this.universites },
+        // data: { ...updatedSpecialite, universites: this.universites },
+        data: updatedSpecialite,
       }
     );
 

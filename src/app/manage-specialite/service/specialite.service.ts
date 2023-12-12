@@ -13,7 +13,7 @@ export class SpecialiteService {
 
   addSpecialite(data: any): Observable<Specialite> {
     return this.http.post<Specialite>(
-      this._baseLocalUrl + '/specialites/' + data.university,
+      this._baseLocalUrl + '/specialites',
       data
     );
   }
@@ -49,10 +49,7 @@ export class SpecialiteService {
   }
 
   updateSpecialite(data: any): Observable<Specialite> {
-    return this.http.put<Specialite>(
-      this._baseLocalUrl + '/specialites/' + data.university,
-      data
-    );
+    return this.http.put<Specialite>(this._baseLocalUrl + '/specialites', data);
   }
 
   getById(id: any): Observable<Specialite> {

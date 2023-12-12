@@ -14,7 +14,7 @@ export class DeleteSpecialiteDialogDashComponent {
     @Inject(MAT_DIALOG_DATA) public data: Specialite,
     private specialiteService: SpecialiteService
   ) {}
-  uploadUrl = 'http://localhost:8082/upload-directory/';
+  uploadUrl = 'http://localhost:8083/upload-directory/';
 
   deleteSpecialite(): void {
     this.specialiteService.deleteById(this.data.id).subscribe({

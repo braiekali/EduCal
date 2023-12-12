@@ -64,11 +64,11 @@
                         <div class="tab-content" id="courseTabContent">
                             <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                                 <div class="row">
-                                    <div *ngFor="let specialite of filtredSpecialiteListByDiplome,let i = index"
+                                    <div *ngFor="let specialite of filtredSpecialiteListByDiplome"
                                         class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
 
-                                        <app-specialite-card-front [currentCount]="currentCount"
-                                            [specialite]="specialite" [i]="i"></app-specialite-card-front>
+                                        <app-specialite-card-front
+                                            [specialite]="specialite"></app-specialite-card-front>
                                     </div>
 
                                     <mat-paginator [length]="totalCards" [pageSize]="pageSize"
@@ -81,77 +81,7 @@
                             <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                                 <div class="row">
 
-                                    <div *ngFor="let specialite of filtredSpecialiteList,let i = index"
-                                        class="col-xxl-12">
-                                        <div class="course__item white-bg mb-30 fix">
-                                            <div class="row gx-0">
-                                                <div class="col-xxl-4 col-xl-4 col-lg-4">
-                                                    <div
-                                                        class="course__thumb course__thumb-list w-img p-relative fix front-card__img--2__container">
-                                                        <a [routerLink]="['/specialities',specialite.id]"
-                                                            class="front-card__img--2">
-                                                            <img style="height: 100%; width: 100%; object-fit: cover;"
-                                                                [src]="uploadUrl+specialite.imageUrl" alt="" />
-                                                        </a>
-                                                        <!-- <div class="course__tag">
-                                                            <a href="#">Art & Design</a>
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                                <div class="col-xxl-8 col-xl-8 col-lg-8">
-                                                    <div class="course__right">
-                                                        <div class="course__content course__content-4">
 
-                                                            <h3 class="course__title">
-                                                                <a href="course-details.html">{{specialite.nom}}</a>
-                                                            </h3>
-                                                            <div
-                                                                style="display: flex; justify-content: space-between; align-items: center;">
-                                                                <div class="course__teacher d-flex align-items-center">
-                                                                    <div class="course__teacher-thumb mr-15">
-                                                                        <img style="width: 60px;height: 60px;"
-                                                                            src="../../../../assets/images/teacher/esprit.jpg"
-                                                                            alt="" />
-                                                                    </div>
-                                                                    <h6>
-                                                                        <p style="margin-bottom: -.06rem;">Universite
-                                                                        </p>
-                                                                        <a href="instructor-details.html">
-                                                                            {{specialite.universite.nomUniversite}} </a>
-                                                                    </h6>
-                                                                </div>
-                                                                <div class="course__teacher d-flex align-items-center">
-                                                                    <h6>
-                                                                        <p style="margin-bottom: -.06rem;">Diplome</p>
-                                                                        <p
-                                                                            style="margin-bottom: 0; font-weight: 600; text-transform: capitalize;">
-                                                                            {{specialite.diplome}}</p>
-                                                                    </h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center">
-                                                            <div class="course__lesson">
-                                                                <span style="font-size: .8rem;"><i
-                                                                        class="far fa-book-alt"></i>
-                                                                    {{currentCount[i] ?? 0}}
-                                                                    Matieres</span>
-                                                            </div>
-                                                            <div class="course__btn">
-                                                                <a [routerLink]="['/specialities',specialite.id]"
-                                                                    class="link-btn">
-                                                                    Show Details
-                                                                    <i class="far fa-arrow-right"></i>
-                                                                    <i class="far fa-arrow-right"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <!-- <mat-paginator [length]="totalCards" [pageSize]="pageSize"
                                     [pageSizeOptions]="pageSizeOptions"
@@ -208,9 +138,9 @@
                                     <li>
                                         <div class="course__sidebar-check mb-10 d-flex align-items-center">
                                             <input class="m-check-input" type="checkbox" id="m-ingenierie"
-                                                (change)="onCheckboxChange('ingenierie')" />
+                                                (change)="onCheckboxChange('ingenieurie')" />
                                             <label class="m-check-label" for="m-ingenierie">Ingénierie
-                                                ({{countSpecByDiplomeFn('ingenierie')}})</label>
+                                                ({{countSpecByDiplomeFn('ingenieurie')}})</label>
                                         </div>
                                     </li>
                                 </ul>

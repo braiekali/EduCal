@@ -29,33 +29,33 @@ export class SpecialiteDetailDashComponent {
     private matiereService: MatiereService
   ) {}
 
-  dataSource: any;
+  // dataSource: any;
   displayedColumns: string[] = ['nom', 'ects', 'description', 'action'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   brandNewSpecialite: any;
-  uploadUrl = 'http://localhost:8082/upload-directory/';
+  uploadUrl = 'http://localhost:8083/upload-directory/';
   currentSpecialite: Specialite | null;
   matiereList: Matiere[];
   filtredmatiereList: Matiere[];
   searchInput: string = '';
 
-  updateList(data: any) {
-    if (data[1].action === 'delete') {
-      let index = this.matiereList.indexOf(data[0]);
-      this.matiereList.splice(index, 1);
-      this.dataSource = new MatTableDataSource(this.matiereList);
-      this.dataSource.paginator = this.paginator;
-    } else if (data[1].action === 'add') {
-      this.matiereList.push(data[0]);
-      this.dataSource = new MatTableDataSource(this.matiereList);
-      this.dataSource.paginator = this.paginator;
-    } else if (data[1].action === 'update') {
-      let index = this.matiereList.findIndex((spec) => data[0].id == spec.id);
-      this.matiereList[index].imageUrl = data[0].imageUrl;
-      this.dataSource = new MatTableDataSource(this.matiereList);
-      this.dataSource.paginator = this.paginator;
-    }
-  }
+  // updateList(data: any) {
+  //   if (data[1].action === 'delete') {
+  //     let index = this.matiereList.indexOf(data[0]);
+  //     this.matiereList.splice(index, 1);
+  //     this.dataSource = new MatTableDataSource(this.matiereList);
+  //     this.dataSource.paginator = this.paginator;
+  //   } else if (data[1].action === 'add') {
+  //     this.matiereList.push(data[0]);
+  //     this.dataSource = new MatTableDataSource(this.matiereList);
+  //     this.dataSource.paginator = this.paginator;
+  //   } else if (data[1].action === 'update') {
+  //     let index = this.matiereList.findIndex((spec) => data[0].id == spec.id);
+  //     this.matiereList[index].imageUrl = data[0].imageUrl;
+  //     this.dataSource = new MatTableDataSource(this.matiereList);
+  //     this.dataSource.paginator = this.paginator;
+  //   }
+  // }
 
   ngOnInit(): void {
     this.specialiteService
@@ -67,21 +67,21 @@ export class SpecialiteDetailDashComponent {
         error: (err) => {
           console.log(err);
         },
-        complete: () => {
-          this.matiereService
-            .getAllBySpec(this.currentSpecialite?.id)
-            .subscribe({
-              next: (res) => {
-                this.matiereList = res;
-                this.filtredmatiereList = res;
-                this.dataSource = new MatTableDataSource(this.matiereList);
-                this.dataSource.paginator = this.paginator;
-              },
-              error: (err) => {
-                console.log(err);
-              },
-            });
-        },
+        // complete: () => {
+        //   this.matiereService
+        //     .getAllBySpec(this.currentSpecialite?.id)
+        //     .subscribe({
+        //       next: (res) => {
+        //         this.matiereList = res;
+        //         this.filtredmatiereList = res;
+        //         this.dataSource = new MatTableDataSource(this.matiereList);
+        //         this.dataSource.paginator = this.paginator;
+        //       },
+        //       error: (err) => {
+        //         console.log(err);
+        //       },
+        //     });
+        // },
       });
   }
 
@@ -89,60 +89,60 @@ export class SpecialiteDetailDashComponent {
   //   this.updateList();
   // }
 
-  openAddMatiereDialog(): void {
-    const addDialogRef = this.addSpecialiteDialog.open(
-      AddMatiereDialogDashComponent,
-      {
-        width: '550px',
-        data: this.currentSpecialite,
-      }
-    );
+  // openAddMatiereDialog(): void {
+  //   const addDialogRef = this.addSpecialiteDialog.open(
+  //     AddMatiereDialogDashComponent,
+  //     {
+  //       width: '550px',
+  //       data: this.currentSpecialite,
+  //     }
+  //   );
 
-    addDialogRef.afterClosed().subscribe((res) => {
-      this.updateList(res);
-    });
-  }
+  //   addDialogRef.afterClosed().subscribe((res) => {
+  //     this.updateList(res);
+  //   });
+  // }
 
-  openDeleteMatiereDialog(deletedSpecialite: Specialite): void {
-    const deleteDialogRef = this.deleteSpecialiteDialog.open(
-      DeleteMatiereDialogDashComponent,
-      {
-        width: '400px',
-        data: deletedSpecialite,
-      }
-    );
+  // openDeleteMatiereDialog(deletedSpecialite: Specialite): void {
+  //   const deleteDialogRef = this.deleteSpecialiteDialog.open(
+  //     DeleteMatiereDialogDashComponent,
+  //     {
+  //       width: '400px',
+  //       data: deletedSpecialite,
+  //     }
+  //   );
 
-    deleteDialogRef.afterClosed().subscribe((res) => {
-      this.updateList(res);
-    });
-  }
+  //   deleteDialogRef.afterClosed().subscribe((res) => {
+  //     this.updateList(res);
+  //   });
+  // }
 
-  openUpdateMatiereDialog(updatedMatiere: Matiere): void {
-    const updateDialogRef = this.updateSpecialiteDialog.open(
-      UpdateMatiereDialogComponent,
-      {
-        width: '550px',
-        data: updatedMatiere,
-      }
-    );
+  // openUpdateMatiereDialog(updatedMatiere: Matiere): void {
+  //   const updateDialogRef = this.updateSpecialiteDialog.open(
+  //     UpdateMatiereDialogComponent,
+  //     {
+  //       width: '550px',
+  //       data: updatedMatiere,
+  //     }
+  //   );
 
-    updateDialogRef.afterClosed().subscribe((res) => {
-      this.updateList(res);
-    });
-  }
+  //   updateDialogRef.afterClosed().subscribe((res) => {
+  //     this.updateList(res);
+  //   });
+  // }
 
-  onSearchChange(searchInput: string) {
-    if (!searchInput) {
-      this.filtredmatiereList = this.matiereList;
-      this.dataSource = new MatTableDataSource(this.filtredmatiereList);
-      this.dataSource.paginator = this.paginator;
-      return;
-    }
+  // onSearchChange(searchInput: string) {
+  //   if (!searchInput) {
+  //     this.filtredmatiereList = this.matiereList;
+  //     this.dataSource = new MatTableDataSource(this.filtredmatiereList);
+  //     this.dataSource.paginator = this.paginator;
+  //     return;
+  //   }
 
-    this.filtredmatiereList = this.matiereList.filter((matiere) =>
-      matiere.nom.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    this.dataSource = new MatTableDataSource(this.filtredmatiereList);
-    this.dataSource.paginator = this.paginator;
-  }
+  //   this.filtredmatiereList = this.matiereList.filter((matiere) =>
+  //     matiere.nom.toLowerCase().includes(searchInput.toLowerCase())
+  //   );
+  //   this.dataSource = new MatTableDataSource(this.filtredmatiereList);
+  //   this.dataSource.paginator = this.paginator;
+  // }
 }
