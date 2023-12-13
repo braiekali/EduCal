@@ -43,7 +43,8 @@ import { AppErrorModule } from './app-error.module';
 import { LoadingService } from './services/loading.service';
 import { LoadingInterceptor } from './intercepter/loading.interceptor';
 import { LoaderComponent } from './loader/loader.component';
-import {ManageEventsModule} from "./manage-events/manage-events.module";
+import { ManageEventsModule } from './manage-events/manage-events.module';
+import { ManageActualiteModule } from './manage-actualite/manage-actualite.module';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {ManageEventsModule} from "./manage-events/manage-events.module";
     RestoModule,
     ClubModule,
     ManageEventsModule,
+    ManageActualiteModule,
   ],
 
   providers: [

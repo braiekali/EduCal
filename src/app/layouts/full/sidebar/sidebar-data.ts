@@ -60,6 +60,11 @@ export const navItems: NavItem[] = [
     iconName: 'calendar',
     route: '/dashboard/evenement/admin',
   },
+  {
+    displayName: 'News',
+    iconName: 'news',
+    route: '/dashboard/clubs',
+  },
   // {
   //   navCap: 'Ui Components',
   // },

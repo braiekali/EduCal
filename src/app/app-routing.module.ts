@@ -74,6 +74,13 @@ const routes: Routes = [
             (m) => m.ChambreModule
           ),
       },
+      {
+        path: 'news',
+        loadChildren: () =>
+          import('./manage-actualite/manage-actualite.module').then(
+            (m) => m.ManageActualiteModule
+          ),
+      },
 
       //nabil_add
       {
@@ -125,6 +132,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./manage-events/manage-events.module').then(
             (m) => m.ManageEventsModule
+          ),
+      },
+      {
+        path: 'news',
+        loadChildren: () =>
+          import('./manage-actualite/manage-actualite.module').then(
+            (m) => m.ManageActualiteModule
           ),
       },
       {
